@@ -1,0 +1,167 @@
+{"content":
+[
+    
+    {
+        "titleColorOne":"ESCOLHA",
+        "titleColorTwo":"SEU IDIOMA",
+        "langOne":"PORTUGUÊS",
+        "langTwo":"ENGLISH",
+        "skip":["SKIP INTRO","SALTAR INTRO"],
+        "loadingOne":["LOADING,","A CARREGAR,"],
+        "loadingTwo":["PLEASE WAIT...","AGUARDE UM POUCO..."],
+        "animations":["animation/loading.png"],
+        "frames":[
+    [0, 0, 128, 128, 0, -4, -5],
+    [128, 0, 128, 128, 0, -4, -5],
+    [256, 0, 128, 128, 0, -4, -5],
+    [384, 0, 128, 128, 0, -4, -5],
+    [512, 0, 128, 128, 0, -4, -5],
+    [640, 0, 128, 128, 0, -4, -5],
+    [768, 0, 128, 128, 0, -4, -5],
+    [0, 128, 128, 128, 0, -4, -5],
+    [128, 128, 128, 128, 0, -4, -5],
+    [256, 128, 128, 128, 0, -4, -5],
+    [384, 128, 128, 128, 0, -4, -5],
+    [512, 128, 128, 128, 0, -4, -5],
+    [640, 128, 128, 128, 0, -4, -5],
+    [768, 128, 128, 128, 0, -4, -5],
+    [0, 256, 128, 128, 0, -4, -5],
+    [128, 256, 128, 128, 0, -4, -5],
+    [256, 256, 128, 128, 0, -4, -5],
+    [384, 256, 128, 128, 0, -4, -5],
+    [512, 256, 128, 128, 0, -4, -5]
+],
+        "viewsNavigator":["CHANGE BUILDINGS VIEWS","VER OUTRAS VISTAS"],
+        "labelTour":["EXPLORE ROOM","EXPLORAR VISTA"],
+        "labelFeatureVideo":["EXPLORE OUTSIDE","EXPLORAR EXTERIOR"],
+        "labelFeatureImage":["EXPLORE TOP VIEW","EXPLORAR VISTA DE CIMA"],
+        "quickNavigator":[["VISIT LIVING ROOM","VISIT KITCHEN","VISIT ROOM","VISIT BATHROOM"],["VISITAR SALA","VISITAR COZINHA","VISITAR QUARTO","VISITAR QUARTO BANHO"]],
+        "cloudsPng":"images/clouds.png",
+        "cloudsPngtwo":"images/cloudsTwo.png",
+        "cloudsBg":"images/cloudsBg.jpg",
+        "logo":"images/logox2.png",
+        "logoVector":"M114.922,14.019 C118.020,8.506 102.803,0.154 94.756,17.232 L81.585,17.232 C90.154,2.368 99.565,0.404 105.913,0.777 C113.783,1.240 120.879,8.907 114.922,14.019 ZM90.093,30.983 C83.438,30.082 79.289,28.043 72.086,26.891 C69.656,26.503 67.384,26.264 65.236,26.147 L62.956,20.350 L76.665,20.350 L78.590,25.085 L80.536,20.350 L94.276,20.350 L90.093,30.983 ZM68.140,14.464 L66.962,17.232 L59.880,17.232 L64.939,5.135 L71.318,5.135 L76.397,17.232 L69.331,17.232 L68.140,14.464 ZM68.649,10.966 L67.627,10.966 C67.234,10.966 67.234,11.553 67.627,11.553 L68.649,11.553 C69.043,11.553 69.043,10.966 68.649,10.966 ZM42.585,28.819 L45.917,20.350 L59.156,20.350 L61.402,26.062 C54.349,26.134 48.564,27.477 42.585,28.819 ZM53.419,17.232 L51.143,14.478 L51.143,17.232 L45.832,17.233 L45.832,5.135 L55.183,5.135 C59.867,5.135 60.165,12.970 56.113,13.645 C57.111,14.773 59.053,17.231 59.053,17.231 L53.419,17.232 ZM52.445,9.171 L51.423,9.171 C51.029,9.171 51.029,9.758 51.423,9.758 L52.445,9.758 C52.838,9.758 52.838,9.171 52.445,9.171 ZM38.744,17.232 L36.459,14.484 L36.459,17.232 L31.148,17.233 L31.148,5.135 L40.479,5.135 C45.163,5.135 45.461,13.038 41.429,13.654 C42.543,15.024 44.357,17.231 44.357,17.231 L38.744,17.232 ZM37.412,9.171 L36.390,9.171 C35.996,9.171 35.996,9.758 36.390,9.758 L37.412,9.758 C37.805,9.758 37.805,9.171 37.412,9.171 ZM21.834,14.472 L20.670,17.232 L13.573,17.232 L18.634,5.135 L25.012,5.135 L30.091,17.232 L23.039,17.232 L21.834,14.472 ZM22.343,10.966 L21.322,10.966 C20.928,10.966 20.928,11.553 21.322,11.553 L22.343,11.553 C22.737,11.553 22.737,10.966 22.343,10.966 ZM10.356,17.233 L0.520,17.233 L0.520,5.135 L9.964,5.135 C13.486,5.158 13.702,10.801 10.356,11.120 C13.983,11.454 13.684,17.202 10.356,17.233 ZM6.651,8.170 L5.629,8.170 C5.236,8.170 5.236,8.757 5.629,8.757 L6.651,8.757 C7.044,8.757 7.044,8.170 6.651,8.170 ZM6.651,13.364 L5.629,13.364 C5.236,13.364 5.236,13.951 5.629,13.951 L6.651,13.951 C7.044,13.951 7.044,13.364 6.651,13.364 ZM16.046,25.085 L17.931,20.350 L24.557,20.350 L26.446,25.085 L28.298,20.350 L42.116,20.350 L38.428,29.725 C29.570,31.562 19.609,32.791 4.160,29.604 L0.520,20.350 L14.162,20.350 L16.046,25.085 ZM35.724,36.598 L33.116,43.229 L23.086,43.229 L21.193,38.544 L19.274,43.229 L9.519,43.229 L4.425,30.279 C19.519,35.546 28.655,36.841 35.724,36.598 ZM64.215,33.211 L68.155,43.229 L54.447,43.229 L52.539,38.544 L50.629,43.229 L36.916,43.229 L39.642,36.299 C47.438,35.387 53.299,32.901 64.215,33.211 ZM68.363,33.450 C76.208,34.118 81.468,35.909 88.057,36.159 L85.276,43.229 L71.956,43.229 L68.101,33.428 L68.363,33.450 ZM109.658,31.151 C103.291,32.278 99.877,31.902 93.744,31.354 L98.077,20.350 L109.658,20.350 L109.658,25.608 L105.100,27.740 L109.658,29.635 L109.658,31.151 ZM94.784,35.855 C101.102,35.061 103.861,33.581 109.658,31.607 L109.658,34.002 L105.100,35.768 L109.658,37.901 L109.658,43.229 L89.069,43.229 L91.866,36.123 C92.801,36.070 93.771,35.982 94.784,35.855 Z",
+        "video":"video/barra_wave_final_3.mp4",
+        "arrow":"M10.610,0.956 C10.325,1.321 10.325,1.913 10.610,2.279 L11.953,4.001 L2.000,4.000 C1.597,4.000 1.000,4.484 1.000,5.000 C1.000,5.516 1.597,6.000 2.000,6.000 L12.000,6.000 L10.610,7.594 C10.325,7.959 10.325,8.552 10.610,8.917 C10.753,9.100 10.940,9.191 11.126,9.191 C11.313,9.191 11.500,9.100 11.642,8.917 L15.000,5.000 L11.642,0.956 C11.357,0.590 10.895,0.590 10.610,0.956 Z",
+        "arrowBack":"M4.390,0.956 C4.675,1.321 4.675,1.913 4.390,2.279 L3.047,4.001 L13.517,4.001 C13.920,4.001 14.247,4.420 14.247,4.936 C14.247,5.452 13.920,5.872 13.517,5.872 L3.047,5.872 L4.390,7.594 C4.675,7.959 4.675,8.552 4.390,8.917 C4.247,9.100 4.061,9.191 3.874,9.191 C3.687,9.191 3.500,9.100 3.358,8.917 L0.254,4.936 L3.358,0.956 C3.643,0.590 4.105,0.590 4.390,0.956 Z",
+        "views":"M0.000,15.000 L0.000,5.000 L20.000,5.000 L20.000,15.000 L0.000,15.000 ZM1.000,-0.000 L19.000,-0.000 L19.000,4.000 L1.000,4.000 L1.000,-0.000 ZM19.000,20.000 L1.000,20.000 L1.000,16.000 L19.000,16.000 L19.000,20.000 Z",
+        "close":"M18.886,17.084 L17.084,18.886 L9.875,11.677 L2.666,18.886 L0.864,17.084 L8.073,9.875 L0.864,2.666 L2.666,0.864 L9.875,8.073 L17.084,0.864 L18.886,2.666 L11.677,9.875 L18.886,17.084 Z",
+        "eye":"M12.125,0.006 C16.982,-0.115 19.770,2.261 22.500,4.284 C23.225,4.822 24.998,6.129 25.000,7.261 C24.379,7.888 23.897,8.712 23.187,9.245 C22.340,9.882 21.559,10.624 20.687,11.229 C19.140,12.303 17.480,12.982 15.437,13.585 C13.688,14.102 10.978,14.175 9.188,13.585 C7.251,12.948 5.625,12.027 4.125,10.981 C2.961,10.169 1.983,9.352 1.000,8.377 C0.545,7.925 0.003,7.676 0.000,6.765 C0.666,6.099 1.181,5.225 1.937,4.656 C3.609,3.401 5.197,2.158 7.187,1.184 C8.128,0.724 9.233,0.465 10.312,0.192 C10.741,0.083 11.810,0.203 12.125,0.006 ZM11.937,2.238 C11.492,2.509 10.827,2.448 10.375,2.672 C9.256,3.227 8.298,4.286 7.875,5.524 C7.211,7.467 8.148,9.790 9.250,10.609 C9.762,10.990 10.220,11.213 10.875,11.477 C11.470,11.717 12.691,11.990 13.562,11.725 C15.040,11.276 16.238,10.398 16.875,9.121 C18.359,6.145 16.233,3.176 14.000,2.424 C13.403,2.223 12.709,2.230 11.937,2.238 ZM12.125,5.462 C14.473,5.384 14.653,8.088 12.875,8.563 C11.797,8.851 10.625,7.717 10.937,6.641 C11.139,5.947 11.614,5.843 12.125,5.462 Z",
+        "mouse":"M10.500,-0.000 C16.299,-0.000 21.000,4.701 21.000,10.500 L21.000,20.500 C21.000,26.299 16.299,31.000 10.500,31.000 C4.701,31.000 0.000,26.299 0.000,20.500 L0.000,10.500 C0.000,4.701 4.701,-0.000 10.500,-0.000 Z",
+        "backFirstFrame":"images/views/back_view_frame_1.png",
+        "poolFirstFrame":"images/views/pool_view_frame_1_00000.png"
+    },
+
+    {
+        "title":["BUY A HOME","COMPRAR CASA"],
+        "titleClose":["CLOSE","FECHAR"],
+        "desc":["If you’re interested in buying a home in BarraWave, please send us an email and we will provide you more information about the buildings, surroundings and pricing.","Se você estiver interessado em comprar uma casa em BarraWave, envie-nos um e-mail e lhe forneceremos mais informações sobre os edifícios, os arredores e os preços."],
+        "form":[["NAME","EMAIL","PHONE NUMBER","MESSAGE"],["NOME","EMAIL","TELEFONE","MENSAGEM"]],
+        "buttonForm":["SEND MESSAGE","ENVIAR MENSAGEM"],
+        "finalMessage":["Email Sent, thank you.","Email enviado, obrigado."],
+        "buttonMore":["Next","Seguinte"]
+    },
+
+    {
+        "title":"MENU",
+        "listItem":[["ABOUT US","BUY A HOME","GALLERY"],["SOBRE","COMPRAR CASA","GALERIA"]],
+        "titles":[["Address", "Google Maps","Email","Phone"],["Morada","Google Maps","Email","Telefone"]],
+        "content":["Av. João Corte Real nº 180 3830-751 - Praia da Barra - Ílhavo PORTUGAL","40.6372748, -8.7472732","info@barrawave.com","(+351) 234 068 979"],
+        "downloadTitle":["Download da Brochura em Português","Download Brochure Français","Download Booklet English"],
+        "downloadLink":["download/Empreendimento_Barrawave_PT.pdf","download/Entreprise_Barrawave_FR.pdf","download/Development_Barrawave_EN.pdf"],
+        "downloadButtonTitle":["DOWNLOAD","DESCARREGAR"],
+        "galleryData":"data/gallery.json",
+        "aboutData":"data/about.json"
+    },
+
+    {
+        "imageParallax":"images/views/Vista_frente_parallax.jpg",
+        "imageNavigator":"images/views/Vista_frente.jpg",
+        "titleOne":["BUILDINGS","APARTAMENTOS"],
+        "titleTwo":["FRONT VIEW","VISTA FRONTAL"],
+        "parallaxOne":["images/views/streetLight.png","60*ratio","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/plant_right.png","stage.canvas.width+100*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-stage.canvas.width/4","stage.canvas.height/2-130*ratio","data/hotSpotOneFrontView.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2-stage.canvas.width/5","stage.canvas.height/2+stage.canvas.height/12","data/hotSpotTwoFrontView.json","down"],
+        "hotSpotThree":["stage.canvas.width/2+stage.canvas.width/3.3","stage.canvas.height/2-50*ratio","data/hotSpotThreeFrontView.json","down"]
+    },
+
+    {
+        "imageParallax":"images/views/Vista_tras_parallax.jpg",
+        "imageNavigator":"images/views/Vista_tras.jpg",
+        "titleOne":["BUILDINGS","APARTAMENTOS"],
+        "titleTwo":["REAR VIEW","VISTA TRÁS"],
+        "parallaxOne":["images/views/dune_left.png","imageOne.getBounds().width/5","stage.canvas.height-stage.canvas.height/2"],
+        "parallaxTwo":["images/views/plant_center.png","stage.canvas.width/2","stage.canvas.height/2"],
+        "hotSpotOne":["stage.canvas.width/2-stage.canvas.width/4+40*ratio","stage.canvas.height/2-130*ratio","data/hotSpotOneBackView.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2-stage.canvas.width/4-35*ratio","stage.canvas.height/2+50*ratio","data/hotSpotTwoBackView.json","down"],
+        "hotSpotThree":["stage.canvas.width/2+190*ratio","stage.canvas.height/2","data/hotSpotThreeBackView.json","down"]
+    },
+
+    {
+        "imageParallax":"images/views/living_room_parallax.jpg",
+        "imageNavigator":"images/views/living_room_1.png",
+        "titleOne":["LIVING ROOM","SALA"],
+        "titleTwo":["MODEL VIEW","VISTA MODELO"],
+        "parallaxOne":["images/views/ghost.png","-imageOne.getBounds().width","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/ghost.png","stage.canvas.width+200*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-stage.canvas.width/4","stage.canvas.height/2-stage.canvas.height/6-30*ratio","data/hotSpotOneLivingView.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2-stage.canvas.width/5","stage.canvas.height-125*ratio","data/hotSpotTwoLivingView.json","up"],
+        "hotSpotThree":["stage.canvas.width/2+125*ratio","stage.canvas.height/2-stage.canvas.height/3","data/hotSpotThreeLivingView.json","down"],
+        "hotSpotTour":["stage.canvas.width-200*ratio","stage.canvas.height/2","data/hotSpotTour_livingroom.json"],
+        "hotSpotFeature":["stage.canvas.width/2-stage.canvas.width/3","stage.canvas.height/2-130*ratio","video/balcony_final_2.mp4"]
+    },
+
+    {
+        "imageParallax":"images/views/kitchen_parallax.jpg",
+        "imageNavigator":"images/views/kitchen.jpg",
+        "titleOne":["KITCHEN","COZINHA"],
+        "titleTwo":["MODEL VIEW","VISTA MODELO"],
+        "parallaxOne":["images/views/ghost.png","-imageOne.getBounds().width","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/ghost.png","stage.canvas.width+200*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-stage.canvas.width/3","stage.canvas.height/2-stage.canvas.height/4","data/hotSpotOneKitchen.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2+170*ratio","stage.canvas.height/2-stage.canvas.height/3","data/hotSpotTwoKitchen.json","down"],
+        "hotSpotThree":["stage.canvas.width/2-stage.canvas.width/5","stage.canvas.height-125*ratio","data/hotSpotThreeKitchen.json","up"],
+        "hotSpotTour":["stage.canvas.width-200*ratio","stage.canvas.height/2","data/hotSpotTour_kitchen.json"]
+    },
+
+    {
+        "imageParallax":"images/views/room_parallax.jpg",
+        "imageNavigator":"images/views/room.jpg",
+        "titleOne":["BEDROOM","QUARTO"],
+        "titleTwo":["MODEL VIEW","VISTA MODELO"],
+        "parallaxOne":["images/views/ghost.png","-imageOne.getBounds().width","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/ghost.png","stage.canvas.width+200*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-200*ratio","stage.canvas.height/2-stage.canvas.height/2.6","data/hotSpotOneRoomView.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2-300*ratio","stage.canvas.height-125*ratio","data/hotSpotTwoRoomView.json","up"],
+        "hotSpotThree":["stage.canvas.width/2+stage.canvas.width/2.8","stage.canvas.height/2-stage.canvas.height/2.8","data/hotSpotThreeRoomView.json","down"],
+        "hotSpotTour":["stage.canvas.width-200*ratio","stage.canvas.height/2","data/hotSpotTour_room.json"]
+    },
+
+    {
+        "imageParallax":"images/views/wc_parallax.jpg",
+        "imageNavigator":"images/views/wc.jpg",
+        "titleOne":["WC","QUARTO BANHO"],
+        "titleTwo":["MODEL VIEW","VISTA MODELO"],
+        "parallaxOne":["images/views/ghost.png","-imageOne.getBounds().width","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/ghost.png","stage.canvas.width+200*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-200*ratio","stage.canvas.height/2-100*ratio","data/hotSpotOneWcView.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2-300*ratio","stage.canvas.height-50*ratio","data/hotSpotTwoWcView.json","up"],
+        "hotSpotThree":["stage.canvas.width/2+stage.canvas.width/3.5","stage.canvas.height/2+stage.canvas.height/5.5","data/hotSpotThreeWcView.json","up"],
+        "hotSpotTour":["stage.canvas.width-200*ratio","stage.canvas.height/2","data/hotSpotTour_wc.json"]
+    },
+
+    {
+        "imageParallax":"images/views/pool_parallax.jpg",
+        "imageNavigator":"images/views/pool.jpg",
+        "titleOne":["POOL","PISCINA"],
+        "titleTwo":["VIEW","VISTA EXTERIOR"],
+        "parallaxOne":["images/views/ghost.png","-imageOne.getBounds().width","stage.canvas.height/2"],
+        "parallaxTwo":["images/views/ghost.png","stage.canvas.width+200*ratio","stage.canvas.height-imageTwo.getBounds().height/2.5"],
+        "hotSpotOne":["stage.canvas.width/2-stage.canvas.width/5","stage.canvas.height/2-130*ratio","data/hotSpotOnePool.json","down"],
+        "hotSpotTwo":["stage.canvas.width/2","stage.canvas.height/2+150*ratio","data/hotSpotTwoPool.json","up"],
+        "hotSpotThree":["stage.canvas.width/2+stage.canvas.width/4","stage.canvas.height/2-150*ratio","data/hotSpotThreePool.json","down"],
+        "hotSpotFeature":["180*ratio","100*ratio","images/views/pool_balcony_view.jpg"]
+    }
+]
+}

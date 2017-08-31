@@ -1,0 +1,9 @@
+{"content":
+[
+    
+    {
+        "img":["images/views/tour/kitchen_cam2.jpg","images/views/tour/kitchen_cam3.jpg"],
+        "hotSpotPos":[["stage.canvas.width/2","stage.canvas.height/2+200*ratio"],["200*ratio","stage.canvas.height/2"]]
+    }
+]
+}
