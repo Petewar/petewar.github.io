@@ -1,0 +1,118 @@
+{"news":
+[
+
+    {
+        "title":"Peninsular\nPort Services",
+        "image":"images/peninsular_feature.jpg",
+        "bg":"images/peninsular_bg.jpg",
+        "parallax1":"images/peninsular_icon0.png",
+        "parallax2":"images/peninsular_icon1.png",
+        "parallax3":"images/peninsular_icon2.png",
+        "parallax4":"images/peninsular_icon3.png",
+        "content":"Peninsular Port Services make sure your cargo reaches the right place, at the right time and at the lowest cost!",
+        "shape":"M460.556,90.137 C453.554,72.369 443.039,56.768 429.046,43.381 C415.074,30.013 397.666,19.436 376.860,11.647 C356.100,3.875 332.268,0.000 305.369,0.000 L5.810,0.000 L2.904,0.000 L-0.001,0.000 L-0.001,2.901 L-0.001,5.801 L-0.001,15.826 L-0.001,18.437 L-0.001,21.048 L2.600,21.322 L5.201,21.595 C14.164,22.537 20.093,24.087 21.365,25.358 C22.761,26.751 23.428,28.474 23.428,30.862 L23.428,145.644 L25.272,145.644 L32.994,145.680 L32.994,142.770 L35.899,142.770 L144.331,142.770 L147.237,142.770 L147.237,145.680 L147.237,151.926 L340.750,151.393 L345.143,147.617 L345.898,147.081 L415.144,147.081 L423.386,147.081 L416.966,152.257 L377.057,183.043 L377.057,194.539 L377.057,197.449 L374.151,197.449 L25.272,197.449 L23.428,197.449 L23.428,420.138 C23.428,422.525 22.761,424.249 21.365,425.642 C20.093,426.913 14.164,428.463 5.201,429.405 L2.600,429.678 L-0.001,429.952 L-0.001,432.563 L-0.001,435.174 L-0.001,445.199 L-0.001,448.099 L-0.001,451.000 L2.904,451.000 L5.810,451.000 L178.182,451.000 L181.087,451.000 L183.993,451.000 L183.993,448.099 L183.993,445.199 L183.993,435.174 L183.993,432.563 L183.993,429.952 L181.391,429.678 L178.790,429.405 C169.828,428.463 163.899,426.913 162.627,425.642 C161.231,424.249 160.564,422.525 160.564,420.138 L160.564,303.170 L160.564,289.776 L305.369,289.776 C332.268,289.776 356.100,285.901 376.860,278.129 C397.646,270.348 415.036,259.926 429.000,246.857 C443.016,233.739 453.546,218.261 460.556,200.475 C467.517,182.812 471.001,164.410 471.001,145.306 C471.001,126.202 467.517,107.800 460.556,90.137 ZM115.765,92.381 L117.864,92.381 L145.129,92.381 L146.637,92.381 L146.637,94.901 L146.637,106.657 L146.637,109.177 L143.731,109.177 L107.966,109.177 L115.765,92.381 ZM147.638,114.887 L147.638,136.602 L147.638,139.511 L144.732,139.511 L47.157,139.511 L41.937,139.511 L49.871,126.698 L50.723,125.321 L52.340,125.321 L68.378,125.321 L72.448,113.895 L73.142,111.977 L75.180,111.977 L144.732,111.977 L147.638,111.977 L147.638,114.887 Z",
+        "color1":"#1E94B8",
+        "color2":"#143483",
+        "menuPos":"BL",
+        "buttonTittle":"View Website",
+        "link":"http://www.petewar.com/projects/peninsular/",
+        "width":"451",
+        "height":"500"
+    },
+
+    {
+        "title":"Be Explorer\nEverywhere\nEveryday",
+        "image":"images/oxa_feature.jpg",
+        "bg":"images/oxa_bg.jpg",
+        "parallax1":"images/oxa_parallax1.png",
+        "parallax2":"images/oxa_parallax2.png",
+        "parallax3":"images/oxa_parallax3.png",
+        "parallax4":"images/oxa_parallax4.png",
+        "content":"OXA APP is a prototype project, it was thought to help you when you are exploring the outdoors.",
+        "shape":"M196.000,476.177 C195.876,476.722 195.812,477.000 195.812,477.000 C195.812,477.000 144.861,439.025 93.176,382.204 C41.490,325.382 20.649,284.430 20.649,284.430 C7.434,258.008 0.000,228.198 0.000,196.652 C0.000,89.016 86.557,1.577 193.922,0.021 C194.334,0.007 194.748,-0.000 195.165,-0.000 C195.444,-0.000 195.722,0.001 196.000,0.002 C196.278,0.001 196.556,-0.000 196.834,-0.000 C197.252,-0.000 197.666,0.007 198.078,0.021 C305.443,1.577 392.000,89.016 392.000,196.652 C392.000,228.198 384.565,258.008 371.351,284.430 C371.351,284.430 350.511,325.382 298.824,382.204 C247.138,439.025 196.187,477.000 196.187,477.000 C196.187,477.000 196.124,476.722 196.000,476.177 L196.000,476.177 Z",
+        "color1":"#BE62AF",
+        "color2":"#F1596C",
+        "menuPos":"BL",
+        "buttonTittle":"View At Behance",
+        "link":"https://www.behance.net/gallery/34799571/OffroadXplorer-App",
+        "width":"418",
+        "height":"510"
+    },
+
+    {
+        "title":"The\nPrivacy\nCompany",
+        "image":"images/mega_conversation.jpg",
+        "bg":"images/mega_black.jpg",
+        "parallax1":"images/mega_parallax1.png",
+        "parallax2":"images/mega_parallax2.png",
+        "parallax3":"images/mega_parallax3.png",
+        "parallax4":"images/mega_parallax4.png",
+        "content":"Improving Interface design for Mega Products, mainly for Android APPS.",
+        "shape":"M495.000,247.500 C495.000,384.191 384.191,495.000 247.500,495.000 C110.809,495.000 -0.000,384.191 -0.000,247.500 C-0.000,110.809 110.809,-0.000 247.500,-0.000 C384.191,-0.000 495.000,110.809 495.000,247.500 Z",
+        "color1":"#01BFA5",
+        "color2":"#D90110",
+        "menuPos":"BL",
+        "buttonTittle":"View At Behance",
+        "link":"https://www.behance.net/gallery/34799133/Megachat-App",
+        "width":"495",
+        "height":"495"
+    },
+
+    {
+        "title":"Megabox\nYour Mega\nMusic Box",
+        "image":"images/megabox_app.jpg",
+        "bg":"images/megabox_bg.jpg",
+        "parallax1":"images/megabox_parallax1.png",
+        "parallax2":"images/megabox_parallax2.png",
+        "parallax3":"images/megabox_parallax3.png",
+        "parallax4":"images/megabox_parallax4.png",
+        "content":"Designing custom UI components for Megabox. Listen to your favourite music and Discover popular artists.",
+        "shape":"M495.000,247.500 C495.000,384.191 384.191,495.000 247.500,495.000 C110.809,495.000 -0.000,384.191 -0.000,247.500 C-0.000,110.809 110.809,-0.000 247.500,-0.000 C384.191,-0.000 495.000,110.809 495.000,247.500 Z",
+        "color1":"#0AA6D7",
+        "color2":"#08C6F3",
+        "menuPos":"BL",
+        "buttonTittle":"View At Behance",
+        "link":"https://www.behance.net/gallery/34799253/Megabox",
+        "width":"495",
+        "height":"495"
+    },
+
+    {
+    	"title":"When\nBlack Meets\nWhite",
+    	"image":"images/bw_5.jpg",
+    	"bg":"images/bw_bg.jpg",
+        "parallax1":"images/bw_parallax1.png",
+        "parallax2":"images/bw_parallax2.png",
+        "parallax3":"images/bw_parallax3.png",
+        "parallax4":"images/bw_parallax4.png",
+    	"content":"Bwcolors is my side project, but in this case a music project. Electronic music with details of psychedelic rock.",
+        "shape":"M-0.000,-0.000 L310.000,500.000 L600.000,-0.000 L-0.000,-0.000 Z",
+        "color1":"#F3C6B6",
+        "color2":"#81906C",
+        "menuPos":"BL",
+        "buttonTittle":"Listen at Soundcloud",
+        "link":"https://soundcloud.com/bwcolors/sets/bwcolors-unknown-path",
+        "width":"600",
+        "height":"500"
+    },
+
+    {
+        "title":"Love\nat first\nTaste",
+        "image":"images/feature douro.jpg",
+        "bg":"images/gourmet_lover_bg.jpg",
+        "parallax1":"images/gourmet_lovers_parallax1.png",
+        "parallax2":"images/gourmet_lovers_parallax2.png",
+        "parallax3":"images/gourmet_lovers_parallax3.png",
+        "parallax4":"images/gourmet_lovers_parallax4.png",
+        "content":"Gourtmet Lovers, design the Salt and Wine menu, fine products from Aveiro.",
+        "shape":"M-0.000,540.000 L432.000,261.000 L-0.000,0.000 L-0.000,540.000 Z",
+        "color1":"#FCCB00",
+        "color2":"#F3754D",
+        "menuPos":"TR",
+        "buttonTittle":"View At Behance",
+        "link":"https://www.behance.net/gallery/34799869/Gourmet-Lovers",
+        "width":"432",
+        "height":"540"
+    }
+]
+}

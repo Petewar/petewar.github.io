@@ -1,0 +1,113 @@
+<html>
+<head>
+	
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+	<title>Pete War - Interface Designer</title>
+
+	<style type="text/css">
+
+		/* Remove margins and HTML scrollbars */
+		BODY, HTML  {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #EFEFEF;
+		}
+
+	</style>
+
+    <!--Import libraries and project classes -->
+	
+    <script src="lib/easejs/lib/easeljs-0.8.1.min.js"></script>
+	<script src="lib/tweenjs/lib/tweenjs-0.6.1.min.js"></script>
+    <script src="lib/preloadjs/lib/preloadjs-0.6.1.min.js"></script>
+    <script src="lib/soundjs/lib/soundjs-0.6.1.min.js"></script>
+    <script src="lib/txtjs/dist/txt.js"></script>
+    <script src="lib/TweenMax.min.js"></script>
+
+    <script src="Main.js"></script>
+
+	<script>
+        
+        var stage;
+        var main;
+
+        function init(){
+            
+            //create hdpi canvas
+            canvas_HTML = document.createElement("canvas");
+            canvas = setPixelDensity(canvas_HTML,window.innerWidth , window.innerHeight);
+            document.body.appendChild(canvas);
+
+            // new canvas stage
+            stage = new createjs.Stage(canvas);
+            main = new Main(getPixelRatio(canvas_HTML));
+            stage.addChild(main);
+            
+            // stage properties
+            stage.enableMouseOver();
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+            createjs.Ticker.addEventListener("tick", stage);
+            
+            // Focus, Resize event listener
+            window.addEventListener('resize', resizeStage, false);
+            window.addEventListener('focus', focusStage, false);
+            window.addEventListener('blur', blurStage, false);
+            window.addEventListener('devicemotion', deviceMotion);
+        }
+        //
+        function deviceMotion() {
+            main.posX(event.acceleration.x, event.acceleration.y,event.acceleration.z)
+        };
+        /**
+         *  Aspect Ratio Canvas
+         */
+        function setPixelDensity(iCanvas,w, h, ratio){
+            if (!ratio) { ratio = getPixelRatio(iCanvas); }
+            iCanvas.width = w * ratio;
+            iCanvas.height = h * ratio;
+            iCanvas.style.width = w + "px";
+            iCanvas.style.height = h + "px";
+            iCanvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+            //console.log("W:"+iCanvas.width,"H:"+iCanvas.height,"R:"+getPixelRatio(iCanvas))
+            return iCanvas
+        }
+
+        function getPixelRatio(iCanvas){
+            var ctx = iCanvas.getContext("2d"),
+            dpr = window.devicePixelRatio || 1,
+            bsr = ctx.webkitBackingStorePixelRatio ||
+            ctx.mozBackingStorePixelRatio ||
+            ctx.msBackingStorePixelRatio ||
+            ctx.oBackingStorePixelRatio ||
+            ctx.backingStorePixelRatio || 1;
+            return dpr / bsr;
+        }
+
+        /**
+         *  event handlers
+         */
+
+        function resizeStage(e){
+            
+            canvas = setPixelDensity(canvas_HTML,window.innerWidth , window.innerHeight)
+            main.resize();
+            
+        }
+
+        function focusStage(e){
+           createjs.Ticker.setPaused(false);
+        }
+
+        function blurStage(e){
+           createjs.Ticker.setPaused(true);
+        }
+
+	</script>
+    
+</head>
+<body onLoad="init()">
+</body>
+</html>
