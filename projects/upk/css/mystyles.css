@@ -1,0 +1,16 @@
+@font-face {
+  font-family: BwModelica-Bold;
+  src: url(../fonts/BwModelica-Bold.otf);
+}
+
+@font-face {
+  font-family: BwModelica-ExtraBold;
+  src: url(../fonts/BwModelica-ExtraBold.otf);
+}
+
+html, body  {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #8EC640;
+}
