@@ -1,0 +1,15 @@
+@font-face {
+  font-family: BebasNeueBook;
+  src: url(../fonts/BebasNeueBook.otf);
+}
+@font-face {
+  font-family: BebasNeueBold;
+  src: url(../fonts/BebasNeueBold.otf);
+}
+
+html, body  {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #141313;
+}
