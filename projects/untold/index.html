@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+	<title>Untold Interactive</title>
+
+	<style type="text/css">
+
+		/* Remove margins and HTML scrollbars */
+		BODY, HTML  {
+            font-family: 'Abril Fatface', cursive;
+            font-family: 'Montserrat', sans-serif;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #000000;
+		}
+
+	</style>
+
+    <!--Import libraries and project classes -->
+	
+    <script src="lib/easejs/lib/easeljs-0.8.1.min.js"></script>
+	<script src="lib/tweenjs/lib/tweenjs-0.6.1.min.js"></script>
+    <script src="lib/preloadjs/lib/preloadjs-0.6.1.min.js"></script>
+    <script src="lib/soundjs/lib/soundjs-0.6.1.min.js"></script>
+    <script src="lib/txtjs/dist/txt.js"></script>
+    <script src="https://d309knd7es5f10.cloudfront.net/zim_3.js"></script>
+    <script src="lib/TextInput.js"></script>
+
+    <script src="sense/Main.js"></script>
+    <script src="sense/Home.js"></script>
+    <script src="sense/Video.js"></script>
+    <script src="sense/Loader.js"></script>
+    <script src="sense/FullDrag.js"></script>
+    <script src="sense/AspectRatio.js"></script>
+    <script src="sense/Contact.js"></script>
+    <script src="sense/Menu.js"></script>
+    <script src="sense/Projects.js"></script>
+    <script src="sense/Sound.js"></script>
+    <script src="sense/ScrollBar.js"></script>
+    <script src="sense/Step1.js"></script>
+    <script src="sense/Step2.js"></script>
+    <script src="sense/Step3.js"></script>
+    <script src="sense/Step4.js"></script>
+    <script src="sense/Step5.js"></script>
+    <script src="sense/Step6.js"></script>
+
+	<script>
+        
+        var stage;
+        var main;
+        var minWidth = 1024;
+        var minHeight = 768;
+
+        function init(){
+            
+            //create hdpi canvas
+            canvas_HTML = document.createElement("canvas");
+            canvas = setPixelDensity(canvas_HTML,window.innerWidth , window.innerHeight);
+            document.body.appendChild(canvas);
+
+            // new canvas stage
+            stage = new createjs.Stage(canvas);
+            
+            main = new Main(getPixelRatio(canvas_HTML));
+            stage.addChild(main);
+            
+            // stage properties
+            stage.enableMouseOver();
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
+            createjs.Ticker.addEventListener("tick", stage);
+            
+            // Focus, Resize event listener
+            window.addEventListener('resize', resizeStage, false);
+            window.addEventListener('focus', focusStage, false);
+            window.addEventListener('blur', blurStage, false);
+
+        }
+
+        /**
+         *  Aspect Ratio Canvas
+         */
+
+        function setPixelDensity(iCanvas,w, h, ratio){
+            if (!ratio) { ratio = getPixelRatio(iCanvas); }
+            iCanvas.width = w * ratio;
+            iCanvas.height = h * ratio;
+            iCanvas.style.width = w + "px";
+            iCanvas.style.height = h + "px";
+            iCanvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+            console.log("W:"+iCanvas.width,"H:"+iCanvas.height,"R:"+getPixelRatio(iCanvas))
+            return iCanvas
+        }
+
+        function getPixelRatio(iCanvas){
+            var ctx = iCanvas.getContext("2d"),
+            dpr = window.devicePixelRatio || 1,
+            bsr = ctx.webkitBackingStorePixelRatio ||
+            ctx.mozBackingStorePixelRatio ||
+            ctx.msBackingStorePixelRatio ||
+            ctx.oBackingStorePixelRatio ||
+            ctx.backingStorePixelRatio || 1;
+            return dpr / bsr;
+        }
+
+        /**
+         *  event handlers
+         */
+
+        function resizeStage(e){
+            
+            canvas = setPixelDensity(canvas_HTML,window.innerWidth , window.innerHeight)
+            main.resize();
+
+           if((window.innerWidth>minWidth)||(window.innerHeight>minHeight)){
+                    if(main.visible==0)main.visible=1; 
+                }else{
+                    if(main.visible==1)main.visible=0;
+            } 
+        }
+
+        function focusStage(e){
+           createjs.Ticker.setPaused(false);
+        }
+
+        function blurStage(e){
+           createjs.Ticker.setPaused(true);
+        }
+
+	</script>
+    
+</head>
+<body onLoad="init()">
+</body>
+</html>
