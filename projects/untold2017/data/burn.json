@@ -1,0 +1,18 @@
+{"project":
+[
+    
+    {
+      "projectDescription":"Jemimah Barnett is an independent property advisor & acquisition specialist, sourcing homes & investments for private clients from across the globe. We designed a website that looks like a big poster, promoting Jemimah Barnett services and work.",
+      "projectClient":"Monster Energy Client",
+      "projectRole":"Creative, Design, Animation, Development",
+      "projectIndustry":"Real Estate",
+      "visit":"V I S I T    P R O J E C T",
+      "awardsLogos":["images/aawards.png","images/cssawards.png"],
+      "projectFeature":"images/Monster_bw_1600.jpg",
+      "projectBackgrond":"images/Jemimah_bg.jpg",
+      "projectSheme":["Text","Footer"],
+      "projectShemeData":["data/jemimahText.json","data/footer.json"],
+      "bgColor":"#e6e8f0"
+    }
+]
+}

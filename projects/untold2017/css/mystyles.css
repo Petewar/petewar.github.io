@@ -1,0 +1,46 @@
+@font-face {
+  font-family: BebasNeueLight;
+  src: url(../fonts/BebasNeueLight.otf);
+}
+
+@font-face {
+  font-family: BebasNeueBook;
+  src: url(../fonts/BebasNeueBook.otf);
+}
+
+@font-face {
+  font-family: BebasNeueRegular;
+  src: url(../fonts/BebasNeueRegular.otf);
+}
+
+@font-face {
+  font-family: BebasNeueBold;
+  src: url(../fonts/BebasNeueBold.otf);
+}
+
+@font-face {
+  font-family: BwModelicaLight;
+  src: url(../fonts/BwModelicaLight.otf);
+}
+
+@font-face {
+  font-family: AbrilFatfaceRegular;
+  src: url(../fonts/AbrilFatfaceRegular.otf);
+}
+
+html, body  {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #171820;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#canvasPerlinNoise {
+  pointer-events: none;
+}

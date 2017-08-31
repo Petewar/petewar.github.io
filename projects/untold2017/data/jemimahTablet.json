@@ -1,0 +1,11 @@
+{"tablet":
+[
+     {
+      "title":"TABLET",
+      "bg":"images/jemimah_tablet_bg.jpg",
+      "ipad":"images/ipad_2x.png",
+      "gallery":["images/jemimah_tablet_1.jpg","images/jemimah_tablet_2.jpg","images/jemimah_tablet_3.jpg"],
+      "extra":"images/jemimah_tablet_extra.png"
+    }
+]
+}
