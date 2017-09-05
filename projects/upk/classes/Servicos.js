@@ -1,6 +1,6 @@
 (function () {
 
-    function Homepage(IdispatchInstance,Iratio) {
+    function Servicos(IdispatchInstance,Iratio) {
         this.Container_constructor();
         this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
@@ -11,14 +11,14 @@
     var ratio;
     var dispatchInstance;
 
-    var p = createjs.extend(Homepage, createjs.Container);
+    var p = createjs.extend(Servicos, createjs.Container);
 
     p.setup = function() {
 
         instance = this;
         ratio = this.ratio;
         dispatchInstance = this.dispatchInstance;
-        
+
     };
 
     p.init = function() {
@@ -53,5 +53,5 @@
     } ; 
 
 
-window.Homepage = createjs.promote(Homepage, "Container");
+window.Servicos = createjs.promote(Servicos, "Container");
 }());

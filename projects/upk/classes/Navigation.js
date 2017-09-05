@@ -1,7 +1,8 @@
 (function () {
 
-    function Navigation(Iratio,Isvg) {
+    function Navigation(IdispatchInstance,Iratio,Isvg) {
         this.Container_constructor();
+        this.dispatchInstance = IdispatchInstance;
         this.ratio = Iratio;
         this.svg = Isvg;
         this.setup();
@@ -10,9 +11,11 @@
     var instance;
     var ratio;
     var svg;
+    var dispatchInstance;
 
     var preloadData;
     var data;
+    var nav=0;
 
     var p = createjs.extend(Navigation, createjs.Container);
 
@@ -21,6 +24,7 @@
         instance = this;
         ratio = this.ratio;
         svg = this.svg;
+        dispatchInstance = this.dispatchInstance
 
         if(data==null){
             preloadDataJson("data/navigation.json")
@@ -47,6 +51,9 @@
         
         addElements();
         addAnimation();
+        
+        var customEvent = new createjs.Event("init");
+        dispatchInstance.dispatchEvent(customEvent);
 
     }
 
@@ -109,6 +116,44 @@
         hitCalendar.y = stage.canvas.height-122*ratio;
         instance.addChild(hitCalendar);
 
+        var containerQuickMenu = new createjs.Container();
+        containerQuickMenu.name = "containerQuickMenu"
+        containerQuickMenu.x = stage.canvas.width/2+100*ratio;
+        containerQuickMenu.y = 60*ratio;
+        instance.addChild(containerQuickMenu);
+
+        for (var i=0;i<data.menu.length;i++){
+            
+            var titleQuickMenu = new createjs.Text();
+            titleQuickMenu.name = "titleQuickMenu"+i;
+            titleQuickMenu.font = "14px BwModelica-Bold";
+            titleQuickMenu.textBaseline = "alphabetic";
+            titleQuickMenu.color = "#333333";
+            titleQuickMenu.text = data.menu[i];
+            titleQuickMenu.scaleX = ratio;
+            titleQuickMenu.scaleY = ratio;
+            titleQuickMenu.x = (titleQuickMenu.getBounds().width*ratio+50*ratio)*i;
+            containerQuickMenu.addChild(titleQuickMenu);
+                
+            var strokeQuickMenu = new createjs.Shape();
+            strokeQuickMenu.name = "strokeQuickMenu"+i;
+            strokeQuickMenu.graphics.beginFill("#8EC640").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio, 4*ratio);
+            strokeQuickMenu.x = (titleQuickMenu.getBounds().width*ratio+50*ratio)*i;
+            strokeQuickMenu.y = titleQuickMenu.getBounds().height/2*ratio-3*ratio;
+            strokeQuickMenu.scaleX = 0;
+            containerQuickMenu.addChild(strokeQuickMenu);
+
+            var hitQuickMenu = new createjs.Shape();
+            hitQuickMenu.name = "hitQuickMenu"+i;
+            hitQuickMenu.instance = i+1;
+            hitQuickMenu.graphics.beginFill("#ffffff").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio+25*ratio, titleQuickMenu.getBounds().height*ratio+25*ratio);
+            hitQuickMenu.alpha = 0.01;
+            hitQuickMenu.x = ((titleQuickMenu.getBounds().width*ratio+50*ratio)*i)-12*ratio;
+            hitQuickMenu.y = -titleQuickMenu.getBounds().height*ratio
+            containerQuickMenu.addChild(hitQuickMenu);
+
+        }
+
     }
 
     function addAnimation(){
@@ -117,7 +162,8 @@
         TweenMax.from(instance.getChildByName("bgCalendar"), 1, {delay:0.5,scaleX:0,ease:Expo.easeInOut});
         TweenMax.from(instance.getChildByName("calendarIcon"), 1, {delay:1,alpha:0,ease:Expo.easeInOut});
         TweenMax.from(instance.getChildByName("titleCalendar"), 1, {delay:1.25,alpha:0,ease:Expo.easeInOut});
-        TweenMax.from(instance.getChildByName("containerBurger"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut,onComplete:addHits()});
+        TweenMax.from(instance.getChildByName("containerBurger"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
+        TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut,onComplete:addHits()});
 
     }
 
@@ -135,12 +181,25 @@
         instance.getChildByName("hitCalendar").addEventListener("mouseout", handlerOut)
         instance.getChildByName("hitCalendar").addEventListener("click", handlerClick);
 
+        for (var i=0;i<data.menu.length;i++){
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).cursor = "pointer";
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).type = "hitQuickMenu";
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).name = "hitQuickMenu"+i;
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).addEventListener("mouseover", handlerOver);
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).addEventListener("mouseout", handlerOut)
+            instance.getChildByName("containerQuickMenu").getChildByName("hitQuickMenu"+i).addEventListener("click", handlerClick);   
+        }
+
     }
 
     function handlerOver(event){
 
         switch(event.target.type){
             case "menu":
+                
+            break;
+
+            case "hitQuickMenu":
                 
             break;
 
@@ -156,6 +215,10 @@
         switch(event.target.type){
             case "menu":
             
+            break;
+
+            case "hitQuickMenu":
+                
             break;
 
             case "calendar":
@@ -175,8 +238,35 @@
             case "calendar":
                 SWFAddress.setValue("/calendar");
             break;
+            case "hitQuickMenu":
+                 switch(event.target.name){
+                    case "hitQuickMenu"+0:
+                        SWFAddress.setValue("/home");
+                    break;
+                    case "hitQuickMenu"+1:
+                        SWFAddress.setValue("/servicos");
+                    break;
+                    case "hitQuickMenu"+2:
+                        SWFAddress.setValue("/contatos");
+                    break;
+                }
+            break;
         }
+    }
 
+     p.setValue = function(Inav) {
+        instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav).scaleX = 0;
+        nav = Inav;
+        TweenMax.to(instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav), 1, {scaleX:1,ease:Expo.easeInOut})
+    }
+
+    p.hide = function() {
+        instance.getChildByName("containerQuickMenu").visible = false;
+    }
+
+    p.show = function() {
+        instance.getChildByName("containerQuickMenu").visible = true;
+        TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
     }
 
     p.animate = function() {
@@ -205,6 +295,9 @@
 
         instance.getChildByName("containerBurger").x = 50*ratio-28/2*ratio
         instance.getChildByName("containerBurger").y = 66*ratio
+
+        instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2;
+        instance.getChildByName("containerQuickMenu").y = 60*ratio;
 
     } ; 
 
