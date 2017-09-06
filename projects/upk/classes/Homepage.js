@@ -1,9 +1,10 @@
 (function () {
 
-    function Homepage(IdispatchInstance,Iratio) {
+    function Homepage(IdispatchInstance,Iratio,Isvg) {
         this.Container_constructor();
         this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
+        this.svg = Isvg;
         this.setup();
     }
     
@@ -11,6 +12,7 @@
     var instanceRefresh;
     var ratio;
     var dispatchInstance;
+    var svg;
 
     var preloadData;
     var loader;
@@ -26,6 +28,7 @@
         instanceRefresh = instance;
         ratio = this.ratio;
         dispatchInstance = this.dispatchInstance;
+        svg = this.svg;
     
     };
 
@@ -95,7 +98,7 @@
         bg.graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.addChild(bg);
         
-        var slider = new Slider(ratio,imageData);
+        var slider = new Slider(ratio,imageData,svg.createSvg(data.shapePlay,"#333333"));
         slider.name = "slider";
         instance.addChild(slider);
 
@@ -108,6 +111,8 @@
     p.kill = function() {
         instance.getChildByName("bg").graphics.clear();
         instance.removeChild(instance.getChildByName("bg"));
+
+        instance.getChildByName("slider").kill();
     } ; 
 
     p.resize = function() {

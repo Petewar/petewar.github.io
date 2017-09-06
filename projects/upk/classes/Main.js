@@ -34,7 +34,7 @@
         menu = new Menu(ratio,svg,aspectRatio);
         calendar = new Calendar(ratio,svg);
         contatos = new Contatos(ratio,svg);
-        homepage = new Homepage(instance,ratio);
+        homepage = new Homepage(instance,ratio,svg);
         servicos = new Servicos(instance,ratio);
 
         var content = new createjs.Container();

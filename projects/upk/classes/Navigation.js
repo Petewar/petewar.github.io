@@ -118,7 +118,7 @@
 
         var containerQuickMenu = new createjs.Container();
         containerQuickMenu.name = "containerQuickMenu"
-        containerQuickMenu.x = stage.canvas.width/2+100*ratio;
+        containerQuickMenu.x = stage.canvas.width/2+100*ratio+70*ratio;
         containerQuickMenu.y = 60*ratio;
         instance.addChild(containerQuickMenu);
 
@@ -296,7 +296,7 @@
         instance.getChildByName("containerBurger").x = 50*ratio-28/2*ratio
         instance.getChildByName("containerBurger").y = 66*ratio
 
-        instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2;
+        instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2+100*ratio+70*ratio;
         instance.getChildByName("containerQuickMenu").y = 60*ratio;
 
     } ; 
