@@ -92,8 +92,9 @@
 
         if(currentView!=null){
             currentView.kill();
-            instance.getChildByName("navigation").hide();
         }
+
+        instance.getChildByName("navigation").hide();
         
 
         switch(SWFAddress.getValue()){
