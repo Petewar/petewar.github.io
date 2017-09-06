@@ -1,0 +1,10 @@
+{"homepage":
+[
+    {
+      "imagesSlider":["images/imageSlider1.jpg","images/imageSlider2.jpg","images/imageSlider3.jpg"],
+      "headerSlider":["Destaque / #Gestão e Manutenção","Destaque / #Gestão e Manutenção 2","Destaque / #Gestão e Manutenção 3"],
+      "titleSlider":["Sustentável consciência ambiental","Sustentável consciência ambiental 2","Sustentável consciência ambiental 3"],
+      "button":"Ver Mais"
+    }
+]
+}
