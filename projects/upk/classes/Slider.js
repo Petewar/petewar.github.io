@@ -1,9 +1,11 @@
 (function () {
 
-    function Slider(Iratio,Images,IshapePlay) {
+    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay) {
         this.Container_constructor();
         this.images = Images
         this.ratio = Iratio;
+        this.titles = Ititles;
+        this.headers = Iheaders;
         this.shapePlay = IshapePlay;
         this.setup();
     }
@@ -11,7 +13,9 @@
     var instance;
     var ratio;
     var images;
-    var currentImage;
+    var titles;
+    var headers;
+    var nav;
     var shapePlay;
 
     var p = createjs.extend(Slider, createjs.Container);
@@ -21,6 +25,8 @@
         instance = this;
         ratio = this.ratio;
         images = this.images;
+        titles = this.titles;
+        headers = this.headers;
         shapePlay = this.shapePlay;
 
         addElements();
@@ -88,21 +94,83 @@
         playIcon.y = 17*ratio
         containerNavigationSlider.addChild(playIcon);
 
-        addSliderImage(images[0]);
+        var containerNavigationCircleSlider = new createjs.Container();
+        containerNavigationCircleSlider.x = 75*ratio+40*ratio
+        containerNavigationCircleSlider.y = 31*ratio
+        containerNavigationCircleSlider.name = "containerNavigationCircleSlider";
+        containerNavigationSlider.addChild(containerNavigationCircleSlider);
+
+        for(var i=0;i<images.length;i++){
+            var strokeCircle = new createjs.Shape();
+            strokeCircle.name = "strokeCircle"
+            strokeCircle.graphics.setStrokeStyle(1*ratio).beginStroke("#333333").drawCircle(0,0,5*ratio);
+            strokeCircle.alpha = 0.25
+            strokeCircle.x = (10*ratio+14*ratio)*i
+            containerNavigationCircleSlider.addChild(strokeCircle);
+
+            var fillCircle = new createjs.Shape();
+            fillCircle.name = "fillCircle"
+            fillCircle.graphics.beginFill("#8EC640").drawCircle(0,0,5*ratio);
+            fillCircle.x = (10*ratio+14*ratio)*i
+            containerNavigationCircleSlider.addChild(fillCircle);
+        }
+
+        var headerSlider = new createjs.Text();
+        headerSlider.name = "headerSlider";
+        headerSlider.font = "16px BwModelica-ExtraBold";
+        headerSlider.textBaseline = "alphabetic";
+        headerSlider.color = "#333333";
+        headerSlider.lineWidth = stage.canvas.width/2-100*ratio
+        headerSlider.lineHeight = 30;
+        headerSlider.scaleX = ratio;
+        headerSlider.scaleY = ratio;
+        instance.addChild(headerSlider);
+
+        var titleSlider = new createjs.Text();
+        titleSlider.name = "titleSlider";
+        titleSlider.font = "58px BwModelica-ExtraBold";
+        titleSlider.textBaseline = "alphabetic";
+        titleSlider.color = "#333333";
+        titleSlider.lineWidth = stage.canvas.width/2-100*ratio
+        titleSlider.lineHeight = 70;
+        titleSlider.scaleX = ratio;
+        titleSlider.scaleY = ratio;
+        instance.addChild(titleSlider);
+
+        addContentSlider(0);
     }
 
     function addAnimation(){
+
         TweenMax.from(instance.getChildByName("bg"), 1, {delay:0.5,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("bgMask"), 1, {delay:1,scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:1,scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("containerNavigationSlider"), 1, {delay:1.5,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:1.25,scaleX:0,ease:Expo.easeInOut})
+
+        TweenMax.from(instance.getChildByName("headerSlider"), 1, {delay:1,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("titleSlider"), 1, {delay:1.25,alpha:0,ease:Expo.easeInOut})
+
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider"), 1, {delay:1.5,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
+
 
     }
 
-    function addSliderImage(Image){
-        if(currentImage) instance.getChildByName("containerImgSlider").removeChild(currentImage);
-        currentImage = Image;
-        instance.getChildByName("containerImgSlider").addChild(Image);
+    function addContentSlider(Ivalue){
+        if(nav) instance.getChildByName("containerImgSlider").removeChild(images[nav]);
+        nav = Ivalue;
+        instance.getChildByName("containerImgSlider").addChild(images[nav]);
+
+        instance.getChildByName("headerSlider").text = headers[nav]
+        instance.getChildByName("headerSlider").x = 100*ratio+80*ratio
+        instance.getChildByName("headerSlider").y = 172*ratio+instance.getChildByName("headerSlider").getBounds().height*ratio+60*ratio;
+
+        instance.getChildByName("titleSlider").text = titles[nav]
+        instance.getChildByName("titleSlider").x = 100*ratio+75*ratio
+        instance.getChildByName("titleSlider").y = instance.getChildByName("headerSlider").y+instance.getChildByName("titleSlider").getBounds().height*ratio-100*ratio;
+        
     }
 
     p.kill = function() {
@@ -125,6 +193,8 @@
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"));
 
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"));
+
+        instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"));
 
         instance.removeChild(instance.getChildByName("containerNavigationSlider"));
         instance.removeChild(instance.getChildByName("containerImgSlider"));

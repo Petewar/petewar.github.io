@@ -37,6 +37,7 @@
         if(data==null){
             preloadDataJson("data/homepage.json")
         }else{
+            
             addElements();
             addAnimation();
 
@@ -98,7 +99,7 @@
         bg.graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.addChild(bg);
         
-        var slider = new Slider(ratio,imageData,svg.createSvg(data.shapePlay,"#333333"));
+        var slider = new Slider(ratio,imageData,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"));
         slider.name = "slider";
         instance.addChild(slider);
 
