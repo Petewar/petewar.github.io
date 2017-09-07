@@ -8,6 +8,11 @@
   src: url(../fonts/BwModelica-ExtraBold.otf);
 }
 
+@font-face {
+  font-family: BwModelica-Regular;
+  src: url(../fonts/BwModelica-Regular.otf);
+}
+
 html, body  {
     margin: 0;
     padding: 0;

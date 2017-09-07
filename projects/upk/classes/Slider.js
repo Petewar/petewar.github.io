@@ -117,7 +117,7 @@
 
         var headerSlider = new createjs.Text();
         headerSlider.name = "headerSlider";
-        headerSlider.font = "16px BwModelica-ExtraBold";
+        headerSlider.font = "16px BwModelica-Regular";
         headerSlider.textBaseline = "alphabetic";
         headerSlider.color = "#333333";
         headerSlider.lineWidth = stage.canvas.width/2-100*ratio
@@ -146,8 +146,8 @@
         TweenMax.from(instance.getChildByName("bgMask"), 1, {delay:1,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:1.25,scaleX:0,ease:Expo.easeInOut})
 
-        TweenMax.from(instance.getChildByName("headerSlider"), 1, {delay:1,alpha:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("titleSlider"), 1, {delay:1.25,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {delay:1,alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:1.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
 
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider"), 1, {delay:1.5,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
@@ -195,6 +195,9 @@
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"));
 
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"));
+
+        instance.removeChild(instance.getChildByName("headerSlider"));
+        instance.removeChild(instance.getChildByName("titleSlider"));
 
         instance.removeChild(instance.getChildByName("containerNavigationSlider"));
         instance.removeChild(instance.getChildByName("containerImgSlider"));
