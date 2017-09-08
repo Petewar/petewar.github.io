@@ -1,12 +1,13 @@
 (function () {
 
-    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay) {
+    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay,IaspectRatio) {
         this.Container_constructor();
         this.images = Images
         this.ratio = Iratio;
         this.titles = Ititles;
         this.headers = Iheaders;
         this.shapePlay = IshapePlay;
+        this.aspectRatio = IaspectRatio;
         this.setup();
     }
     
@@ -17,6 +18,7 @@
     var headers;
     var nav;
     var shapePlay;
+    var aspectRatio;
 
     var p = createjs.extend(Slider, createjs.Container);
 
@@ -28,6 +30,7 @@
         titles = this.titles;
         headers = this.headers;
         shapePlay = this.shapePlay;
+        aspectRatio = this.aspectRatio
 
         addElements();
         addAnimation();
@@ -38,7 +41,7 @@
 
         var bg = new createjs.Shape();
         bg.name = "bg";
-        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width/2-100*ratio, stage.canvas.height-172*ratio-122/2*ratio);
+        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width/2-100*ratio, 500*ratio);
         bg.x = 100*ratio;
         bg.y = 172*ratio
         instance.addChild(bg);
@@ -51,7 +54,7 @@
 
         var bgMask = new createjs.Shape();
         bgMask.name = "bgMask";
-        bgMask.graphics.beginFill("#8EC640").drawRect(0, 0, stage.canvas.width/2, stage.canvas.height-172*ratio-122/2*ratio+60*ratio);
+        bgMask.graphics.beginFill("#8EC640").drawRect(0, 0, stage.canvas.width/2, 560*ratio);
         bgMask.x = stage.canvas.width/2;
         bgMask.y = 172*ratio-30*ratio
         bgMask.alpha =0.01
@@ -68,7 +71,7 @@
         var containerNavigationSlider = new createjs.Container();
         containerNavigationSlider.name = "containerNavigationSlider";
         containerNavigationSlider.x = stage.canvas.width-256*ratio;
-        containerNavigationSlider.y = stage.canvas.height-62*ratio
+        containerNavigationSlider.y = 672*ratio
         instance.addChild(containerNavigationSlider);
 
         var bgNavigationSlider = new createjs.Shape();
@@ -120,10 +123,13 @@
         headerSlider.font = "16px BwModelica-Regular";
         headerSlider.textBaseline = "alphabetic";
         headerSlider.color = "#333333";
-        headerSlider.lineWidth = stage.canvas.width/2-100*ratio
+        headerSlider.lineWidth = stage.canvas.width/2-100*ratio-100*ratio
         headerSlider.lineHeight = 30;
+        headerSlider.text = "."
         headerSlider.scaleX = ratio;
         headerSlider.scaleY = ratio;
+        headerSlider.x = 100*ratio+80*ratio
+        headerSlider.y = 172*ratio+headerSlider.getBounds().height*ratio+60*ratio;
         instance.addChild(headerSlider);
 
         var titleSlider = new createjs.Text();
@@ -131,10 +137,13 @@
         titleSlider.font = "58px BwModelica-ExtraBold";
         titleSlider.textBaseline = "alphabetic";
         titleSlider.color = "#333333";
-        titleSlider.lineWidth = stage.canvas.width/2-100*ratio
+        titleSlider.lineWidth = stage.canvas.width/2-100*ratio-100*ratio
         titleSlider.lineHeight = 70;
+        titleSlider.text = "."
         titleSlider.scaleX = ratio;
         titleSlider.scaleY = ratio;
+        titleSlider.x = 100*ratio+75*ratio
+        titleSlider.y = headerSlider.y+headerSlider.getBounds().height*2*ratio+50*ratio;
         instance.addChild(titleSlider);
 
         addContentSlider(0);
@@ -161,15 +170,14 @@
     function addContentSlider(Ivalue){
         if(nav) instance.getChildByName("containerImgSlider").removeChild(images[nav]);
         nav = Ivalue;
+        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
         instance.getChildByName("containerImgSlider").addChild(images[nav]);
 
         instance.getChildByName("headerSlider").text = headers[nav]
-        instance.getChildByName("headerSlider").x = 100*ratio+80*ratio
-        instance.getChildByName("headerSlider").y = 172*ratio+instance.getChildByName("headerSlider").getBounds().height*ratio+60*ratio;
+        instance.getChildByName("titleSlider").text = titles[nav]
 
         instance.getChildByName("titleSlider").text = titles[nav]
-        instance.getChildByName("titleSlider").x = 100*ratio+75*ratio
-        instance.getChildByName("titleSlider").y = instance.getChildByName("headerSlider").y+instance.getChildByName("titleSlider").getBounds().height*ratio-100*ratio;
+        
         
     }
 
@@ -207,14 +215,16 @@
     p.resize = function() {
 
         instance.getChildByName("bg").graphics.clear();
-        instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width/2-100*ratio, stage.canvas.height-172*ratio-122/2*ratio);
+        instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width/2-100*ratio, 500*ratio);
         instance.getChildByName("bg").x = 100*ratio;
         instance.getChildByName("bg").y = 172*ratio
 
         instance.getChildByName("bgMask").graphics.clear();
-        instance.getChildByName("bgMask").graphics.beginFill("#8EC640").drawRect(0, 0, stage.canvas.width/2, stage.canvas.height-172*ratio-122/2*ratio+60*ratio);
+        instance.getChildByName("bgMask").graphics.beginFill("#8EC640").drawRect(0, 0, stage.canvas.width/2, 560*ratio);
         instance.getChildByName("bgMask").x = stage.canvas.width/2;
         instance.getChildByName("bgMask").y = 172*ratio-30*ratio
+
+        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
 
         instance.getChildByName("strokeBgMask").graphics.beginFill("#8EC640").drawRect(0, 0, stage.canvas.width/2, 4*ratio);
         instance.getChildByName("strokeBgMask").x = stage.canvas.width/2
@@ -224,7 +234,10 @@
         instance.getChildByName("containerImgSlider").y = 172*ratio-30*ratio
 
         instance.getChildByName("containerNavigationSlider").x = stage.canvas.width-256*ratio;
-        instance.getChildByName("containerNavigationSlider").y = stage.canvas.height-62*ratio
+        instance.getChildByName("containerNavigationSlider").y = 672*ratio
+
+        instance.getChildByName("headerSlider").lineWidth = stage.canvas.width/2-100*ratio-100*ratio
+        instance.getChildByName("titleSlider").lineWidth = stage.canvas.width/2-100*ratio-100*ratio
 
     } ; 
 

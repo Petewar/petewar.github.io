@@ -61,7 +61,7 @@
 
         var bgSideBar = new createjs.Shape();
         bgSideBar.name = "bgSideBar";
-        bgSideBar.graphics.beginFill("#8EC640").drawRect(0, 0, 100*ratio, stage.canvas.height);
+        bgSideBar.graphics.beginFill("#8EC640").drawRect(0, 0, 100*ratio, 732*ratio);
         instance.addChild(bgSideBar);
 
         var containerBurger = new createjs.Container();
@@ -87,13 +87,13 @@
         var bgCalendar = new createjs.Shape();
         bgCalendar.name = "bgCalendar";
         bgCalendar.graphics.beginFill("#FFFFFF").drawRect(0, 0, 100*ratio, 122*ratio);
-        bgCalendar.y = stage.canvas.height-122*ratio;
+        bgCalendar.y = 732*ratio-122*ratio;
         instance.addChild(bgCalendar);
 
         var calendarIcon = svg.createSvg(data.shapeCalendar,"#333333");
         calendarIcon.name="calendarIcon";
         calendarIcon.x = Math.floor(50*ratio-45/2*ratio);
-        calendarIcon.y = Math.floor(stage.canvas.height-122*ratio+30*ratio);
+        calendarIcon.y = Math.floor(732*ratio-122*ratio+30*ratio);
         instance.addChild(calendarIcon);
 
         var titleCalendar = new createjs.Text();
@@ -106,14 +106,14 @@
         titleCalendar.scaleX = ratio;
         titleCalendar.scaleY = ratio;
         titleCalendar.x = 50*ratio-titleCalendar.getBounds().width/2*ratio
-        titleCalendar.y = stage.canvas.height-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio;
+        titleCalendar.y = 732*ratio-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio;
         instance.addChild(titleCalendar);
 
         var hitCalendar = new createjs.Shape();
         hitCalendar.name = "hitCalendar";
         hitCalendar.alpha = 0.01
         hitCalendar.graphics.beginFill("#FFFFFF").drawRect(0, 0, 100*ratio, 122*ratio);
-        hitCalendar.y = stage.canvas.height-122*ratio;
+        hitCalendar.y = 732*ratio-122*ratio;
         instance.addChild(hitCalendar);
 
         var containerQuickMenu = new createjs.Container();
@@ -281,17 +281,6 @@
 
     p.resize = function() {
 
-        instance.getChildByName("bgSideBar").graphics.clear();
-        instance.getChildByName("bgSideBar").graphics.beginFill("#8EC640").drawRect(0, 0, 100*ratio, stage.canvas.height);
-
-        instance.getChildByName("bgCalendar").y = stage.canvas.height-122*ratio;
-        instance.getChildByName("hitCalendar").y = stage.canvas.height-122*ratio;
-
-        instance.getChildByName("calendarIcon").x = Math.floor(50*ratio-45/2*ratio);
-        instance.getChildByName("calendarIcon").y = Math.floor(stage.canvas.height-122*ratio+30*ratio);
-
-        instance.getChildByName("titleCalendar").x = 50*ratio-instance.getChildByName("titleCalendar").getBounds().width/2*ratio
-        instance.getChildByName("titleCalendar").y = stage.canvas.height-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio;
 
         instance.getChildByName("containerBurger").x = 50*ratio-28/2*ratio
         instance.getChildByName("containerBurger").y = 66*ratio

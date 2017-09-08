@@ -1,9 +1,10 @@
 (function () {
 
-    function Homepage(IdispatchInstance,Iratio,Isvg) {
+    function Homepage(IdispatchInstance,Iratio,IaspectRatio,Isvg) {
         this.Container_constructor();
         this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
+        this.aspectRatio = IaspectRatio;
         this.svg = Isvg;
         this.setup();
     }
@@ -13,6 +14,7 @@
     var ratio;
     var dispatchInstance;
     var svg;
+    var aspectRatio;
 
     var preloadData;
     var loader;
@@ -27,6 +29,7 @@
         instance = this;
         instanceRefresh = instance;
         ratio = this.ratio;
+        aspectRatio = this.aspectRatio;
         dispatchInstance = this.dispatchInstance;
         svg = this.svg;
     
@@ -99,7 +102,7 @@
         bg.graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.addChild(bg);
         
-        var slider = new Slider(ratio,imageData,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"));
+        var slider = new Slider(ratio,imageData,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"),aspectRatio);
         slider.name = "slider";
         instance.addChild(slider);
 
