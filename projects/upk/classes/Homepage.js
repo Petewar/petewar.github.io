@@ -102,7 +102,7 @@
         bg.graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.addChild(bg);
         
-        var slider = new Slider(ratio,imageData,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"),aspectRatio);
+        var slider = new Slider(ratio,imageData,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"),svg.createSvg(data.shapePause,"#333333"),aspectRatio);
         slider.name = "slider";
         instance.addChild(slider);
 

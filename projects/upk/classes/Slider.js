@@ -1,12 +1,13 @@
 (function () {
 
-    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay,IaspectRatio) {
+    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay,IshapePause,IaspectRatio) {
         this.Container_constructor();
         this.images = Images
         this.ratio = Iratio;
         this.titles = Ititles;
         this.headers = Iheaders;
         this.shapePlay = IshapePlay;
+        this.shapePause = IshapePause;
         this.aspectRatio = IaspectRatio;
         this.setup();
     }
@@ -18,7 +19,9 @@
     var headers;
     var nav;
     var shapePlay;
+    var shapePause;
     var aspectRatio;
+    var playSlider = true;
 
     var p = createjs.extend(Slider, createjs.Container);
 
@@ -30,10 +33,13 @@
         titles = this.titles;
         headers = this.headers;
         shapePlay = this.shapePlay;
+        shapePause = this.shapePause;
         aspectRatio = this.aspectRatio
 
         addElements();
         addAnimation();
+        addContentSlider(0);
+        addContenSliderAnimation();
 
     };
 
@@ -86,6 +92,7 @@
         containerNavigationSlider.addChild(strokeNavigationSliderDark);
 
         var strokeNavigationSliderLight = new createjs.Shape();
+        strokeNavigationSliderLight.scaleX = 0;
         strokeNavigationSliderLight.name = "strokeNavigationSliderLight";
         strokeNavigationSliderLight.graphics.beginFill("#8EC640").drawRect(0, 0, 256*ratio, 2*ratio);
         strokeNavigationSliderLight.y = 60*ratio
@@ -95,7 +102,22 @@
         playIcon.name="playIcon";
         playIcon.x = 45*ratio
         playIcon.y = 17*ratio
+        playIcon.visible = false;
         containerNavigationSlider.addChild(playIcon);
+
+        var pauseIcon = shapePause;
+        pauseIcon.name="pauseIcon";
+        pauseIcon.x = 45*ratio
+        pauseIcon.y = 17*ratio
+        containerNavigationSlider.addChild(pauseIcon);
+
+        var hitPlayPause = new createjs.Shape();
+        hitPlayPause.name = "hitPlayPause"
+        hitPlayPause.graphics.beginFill("#ffffff").drawRect(0, 0, 26*ratio, 26*ratio);
+        hitPlayPause.alpha = 0.01;
+        hitPlayPause.x = 45*ratio
+        hitPlayPause.y = 17*ratio
+        containerNavigationSlider.addChild(hitPlayPause);
 
         var containerNavigationCircleSlider = new createjs.Container();
         containerNavigationCircleSlider.x = 75*ratio+40*ratio
@@ -103,19 +125,29 @@
         containerNavigationCircleSlider.name = "containerNavigationCircleSlider";
         containerNavigationSlider.addChild(containerNavigationCircleSlider);
 
-        for(var i=0;i<images.length;i++){
+        for(var j=0;j<images.length;j++){
+
             var strokeCircle = new createjs.Shape();
-            strokeCircle.name = "strokeCircle"
+            strokeCircle.name = "strokeCircle"+j
             strokeCircle.graphics.setStrokeStyle(1*ratio).beginStroke("#333333").drawCircle(0,0,5*ratio);
             strokeCircle.alpha = 0.25
-            strokeCircle.x = (10*ratio+14*ratio)*i
+            strokeCircle.x = (10*ratio+14*ratio)*j
             containerNavigationCircleSlider.addChild(strokeCircle);
 
             var fillCircle = new createjs.Shape();
-            fillCircle.name = "fillCircle"
+            fillCircle.name = "fillCircle"+j
             fillCircle.graphics.beginFill("#8EC640").drawCircle(0,0,5*ratio);
-            fillCircle.x = (10*ratio+14*ratio)*i
+            fillCircle.visible = 0;
+            fillCircle.x = (10*ratio+14*ratio)*j
             containerNavigationCircleSlider.addChild(fillCircle);
+
+            var hitCircle = new createjs.Shape();
+            hitCircle.name = "hitCircle"+j
+            hitCircle.graphics.beginFill("#FFFFFF").drawCircle(0,0,10*ratio);
+            hitCircle.x = (10*ratio+14*ratio)*j
+            hitCircle.alpha = 0.01;
+            containerNavigationCircleSlider.addChild(hitCircle);
+
         }
 
         var headerSlider = new createjs.Text();
@@ -146,42 +178,165 @@
         titleSlider.y = headerSlider.y+headerSlider.getBounds().height*2*ratio+50*ratio;
         instance.addChild(titleSlider);
 
-        addContentSlider(0);
     }
 
     function addAnimation(){
 
         TweenMax.from(instance.getChildByName("bg"), 1, {delay:0.5,scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("bgMask"), 1, {delay:1,scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:1.25,scaleX:0,ease:Expo.easeInOut})
-
-        TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {delay:1,alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:1.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
-
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider"), 1, {delay:1.5,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("pauseIcon"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"), 1, {delay:2,alpha:0,ease:Expo.easeInOut,onComplete:addHits})
+        
+        TweenMax.from(instance.getChildByName("bgMask"), 1, {delay:1,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:1.25,scaleX:0,ease:Expo.easeInOut})
+        
+        TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {delay:1,alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:1.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
+    }
 
+    function addHits(){
+
+        for(var i=0;i<images.length;i++){
+
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).cursor = "pointer";
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).type = "navigationSlider";
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).instance = i;
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).addEventListener("mouseover", handlerOver);
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).addEventListener("mouseout", handlerOut)
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).addEventListener("click", handlerClick);
+
+        }
+
+        instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").cursor = "pointer";
+        instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").type = "playPause";
+        instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("mouseover", handlerOver);
+        instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("mouseout", handlerOut)
+        instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("click", handlerClick);
+
+        addTimerSlider();
+    }
+
+    function handlerOver(event){
+
+        switch(event.target.type){
+            case "navigationSlider":
+                
+            break;
+
+            case "playPause":
+                
+            break;
+        }
 
     }
 
+    function handlerOut(event){
+
+        switch(event.target.type){
+            case "navigationSlider":
+            
+            break;
+
+            case "playPause":
+                
+            break;
+        }
+
+    }
+
+    function handlerClick(event){
+
+        switch(event.target.type){
+            case "navigationSlider":
+
+                if(nav!=event.target.instance){
+
+                    if(playSlider){
+                        TweenMax.killAll();
+                        addTimerSlider();
+                    }
+
+                    instance.getChildByName("containerImgSlider").removeChild(images[nav]);
+                    instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("fillCircle"+nav).visible = false;
+                    addContentSlider(event.target.instance);
+                    addContenSliderAnimation();
+
+                }
+
+            break;
+
+            case "playPause":
+                
+                if(playSlider){
+                    TweenMax.pauseAll(true, true)
+                    playSlider = false
+                    instance.getChildByName("containerNavigationSlider").getChildByName("playIcon").visible = true
+                    instance.getChildByName("containerNavigationSlider").getChildByName("pauseIcon").visible = false
+                }else {
+                    TweenMax.resumeAll(true, true)
+                    playSlider = true
+                    instance.getChildByName("containerNavigationSlider").getChildByName("playIcon").visible = false
+                    instance.getChildByName("containerNavigationSlider").getChildByName("pauseIcon").visible = true
+                }
+
+            break;
+        }
+    }
+
     function addContentSlider(Ivalue){
-        if(nav) instance.getChildByName("containerImgSlider").removeChild(images[nav]);
+
         nav = Ivalue;
         aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
         instance.getChildByName("containerImgSlider").addChild(images[nav]);
+        instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("fillCircle"+nav).visible = true;
 
         instance.getChildByName("headerSlider").text = headers[nav]
         instance.getChildByName("titleSlider").text = titles[nav]
 
         instance.getChildByName("titleSlider").text = titles[nav]
-        
-        
+
+    }
+
+    function addContenSliderAnimation(){
+
+        TweenMax.from(instance.getChildByName("bgMask"), 1, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:0.25,scaleX:0,ease:Expo.easeInOut})
+
+        TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:0.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
+
+    }
+
+    function addTimerSlider(){
+    
+            instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight").scaleX = 0;
+            TweenMax.to(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"), 5, {scaleX:1,onComplete:addAutomaticNavSlider})
+    }
+
+    function addAutomaticNavSlider(){
+
+            instance.getChildByName("containerImgSlider").removeChild(images[nav]);
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("fillCircle"+nav).visible = false;
+            
+            if(nav==images.length-1){
+                nav=0
+            }else{
+                nav++;
+            }
+
+            addContentSlider(nav);
+            addContenSliderAnimation();
+            addTimerSlider();
+
     }
 
     p.kill = function() {
+
+        TweenMax.killAll();
+        playSlider = true
+
         instance.getChildByName("bg").graphics.clear();
         instance.removeChild(instance.getChildByName("bg"));
 
@@ -191,16 +346,26 @@
         instance.getChildByName("strokeBgMask").graphics.clear();
         instance.removeChild(instance.getChildByName("strokeBgMask"));
 
+        for(var i=0;i<images.length;i++){
+
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).cursor = "auto";
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).removeEventListener("mouseover", handlerOver);
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).removeEventListener("mouseout", handlerOut)
+            instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("hitCircle"+i).removeEventListener("click", handlerClick);
+
+        }
+
         instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider").graphics.clear();
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider"));
-
-        instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark").graphics.clear();
-        instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"));
 
         instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight").graphics.clear();
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"));
 
+        instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark").graphics.clear();
+        instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"));
+
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"));
+        instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("pauseIcon"));
 
         instance.getChildByName("containerNavigationSlider").removeChild(instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider"));
 
