@@ -82,8 +82,8 @@
             width:scrollW,
             height:viewerH/contentScrollY*viewerH, /// note the proportion of viewable height / total height (then * viewable height)
             label:"",
-            color:"#4b7ea3",
-            rollColor:"#000000",
+            color:"#333333",
+            rollColor:"#8EC640",
             corner:scrollW*.1,
             shadowBlur:false,
         })

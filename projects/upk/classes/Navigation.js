@@ -59,6 +59,12 @@
 
     function addElements(){
 
+        var bgQuickMenu = new createjs.Shape();
+        bgQuickMenu.name = "bgQuickMenu";
+        bgQuickMenu.visible = false;
+        bgQuickMenu.graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, 142*ratio);
+        instance.addChild(bgQuickMenu);
+
         var bgSideBar = new createjs.Shape();
         bgSideBar.name = "bgSideBar";
         bgSideBar.graphics.beginFill("#8EC640").drawRect(0, 0, 100*ratio, 732*ratio);
@@ -262,11 +268,14 @@
 
     p.hide = function() {
         instance.getChildByName("containerQuickMenu").visible = false;
+        instance.getChildByName("bgQuickMenu").visible = false;
     }
 
     p.show = function() {
         instance.getChildByName("containerQuickMenu").visible = true;
+        instance.getChildByName("bgQuickMenu").visible = true;
         TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:1,alpha:0,ease:Expo.easeInOut})
     }
 
     p.animate = function() {

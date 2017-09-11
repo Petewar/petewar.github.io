@@ -377,6 +377,10 @@
 
     } ; 
 
+    p.getHeight = function() {
+        return instance.getChildByName("containerNavigationSlider").y
+    }
+
     p.resize = function() {
 
         instance.getChildByName("bg").graphics.clear();
