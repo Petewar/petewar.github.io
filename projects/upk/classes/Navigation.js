@@ -129,6 +129,20 @@
         containerQuickMenu.y = 77*ratio;
         instance.addChild(containerQuickMenu);
 
+        var containerLogo = new createjs.Container();
+        containerLogo.name = "containerLogo";
+        containerLogo.x = 177*ratio;
+        containerLogo.y = 32*ratio;
+        instance.addChild(containerLogo);
+
+        var logoLeft = svg.createSvg(data.shapeLogoLeft,"#808285");
+        var logoRight = svg.createSvg(data.shapeLogoRight,"#8ec640");
+
+        logoRight.x = 45*ratio
+        logoRight.y = 2*ratio
+        containerLogo.addChild(logoLeft);
+        containerLogo.addChild(logoRight);
+
         for (var i=0;i<data.menu.length;i++){
             
             var titleQuickMenu = new createjs.Text();
@@ -169,8 +183,7 @@
         TweenMax.from(instance.getChildByName("bgCalendar"), 1, {delay:0.5,scaleX:0,ease:Expo.easeInOut});
         TweenMax.from(instance.getChildByName("calendarIcon"), 1, {delay:1,alpha:0,ease:Expo.easeInOut});
         TweenMax.from(instance.getChildByName("titleCalendar"), 1, {delay:1.25,alpha:0,ease:Expo.easeInOut});
-        TweenMax.from(instance.getChildByName("containerBurger"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
-        TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut,onComplete:addHits()});
+        TweenMax.from(instance.getChildByName("containerBurger"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut,onComplete:addHits()});
 
     }
 
@@ -270,13 +283,16 @@
     p.hide = function() {
         instance.getChildByName("containerQuickMenu").visible = false;
         instance.getChildByName("bgQuickMenu").visible = false;
+        instance.getChildByName("containerLogo").visible = false;
     }
 
     p.show = function() {
         instance.getChildByName("containerQuickMenu").visible = true;
         instance.getChildByName("bgQuickMenu").visible = true;
+        instance.getChildByName("containerLogo").visible = true;
         TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerLogo"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
     }
 
     p.animate = function() {

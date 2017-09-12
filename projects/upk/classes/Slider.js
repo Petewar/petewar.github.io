@@ -270,6 +270,7 @@
             break;
 
             case "button":
+                if(playSlider)TweenMax.pauseAll(true, true)
                 TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:1,ease:Expo.easeInOut})
             break;
         }
@@ -289,6 +290,7 @@
 
             case "button":
                 TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:0,ease:Expo.easeInOut})
+                if(playSlider)TweenMax.resumeAll(true, true)
             break;
         }
 
