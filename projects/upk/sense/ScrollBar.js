@@ -74,17 +74,17 @@
     function createScroll(){
 
         viewerW = stage.canvas.width
-        viewerH = stage.canvas.height;
-        var scrollW = 12*ratio;
+        viewerH = stage.canvas.height-4*ratio;
+        var scrollW = 5*ratio;
 
         // width, height, label, color, rollColor, borderColor, borderThickness, corner, shadowColor, shadowBlur, hitPadding
         button2 = new zim.Button({
             width:scrollW,
             height:viewerH/contentScrollY*viewerH, /// note the proportion of viewable height / total height (then * viewable height)
             label:"",
-            color:"#333333",
-            rollColor:"#8EC640",
-            corner:scrollW*.1,
+            color:"#838383",
+            rollColor:"#333333",
+            corner:scrollW*0.6,
             shadowBlur:false,
         })
 

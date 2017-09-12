@@ -135,7 +135,8 @@
 
         var scrollBar = new ScrollBar(ratio,instance.getChildByName("containerContent").y,instance,instance.getChildByName("containerContent"),totalHeight,0.15);
         scrollBar.name = "scrollBar";
-        scrollBar.x = stage.canvas.width-10*ratio
+        scrollBar.y = 2*ratio
+        scrollBar.x = stage.canvas.width-7*ratio
         dispatchInstance.addChild(scrollBar);
 
     }
@@ -165,7 +166,8 @@
         totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()
 
         if(dispatchInstance.getChildByName("scrollBar")){
-            dispatchInstance.getChildByName("scrollBar").x = stage.canvas.width-10*ratio
+            dispatchInstance.getChildByName("scrollBar").y = 2*ratio
+            dispatchInstance.getChildByName("scrollBar").x = stage.canvas.width-7*ratio
             dispatchInstance.getChildByName("scrollBar").updateResize(totalHeight,instance.getChildByName("containerContent").x,instance.getChildByName("containerContent").y);
         }
 
