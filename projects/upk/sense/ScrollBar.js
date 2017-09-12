@@ -88,6 +88,8 @@
             shadowBlur:false,
         })
 
+        button2.visible = false
+
         // min, max, step, button, barLength, barWidth, barColor, vertical, useTicks, inside
         scrollbar2 = new zim.Slider({
             min:0,

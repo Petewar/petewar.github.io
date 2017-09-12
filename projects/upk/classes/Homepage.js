@@ -113,7 +113,7 @@
         containerContent.name = "containerContent";
         instance.addChild(containerContent);
 
-        var slider = new Slider(ratio,imageSlider,data.titleSlider,data.headerSlider,svg.createSvg(data.shapePlay,"#333333"),svg.createSvg(data.shapePause,"#333333"),aspectRatio);
+        var slider = new Slider(ratio,imageSlider,data.titleSlider,data.headerSlider,data.button,svg.createSvg(data.shapePlay,"#333333"),svg.createSvg(data.shapePause,"#333333"),aspectRatio);
         slider.name = "slider";
 
         var servicosHome = new ServicosHome(ratio,imageServices,aspectRatio,slider.getHeight());

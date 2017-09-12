@@ -1,11 +1,12 @@
 (function () {
 
-    function Slider(Iratio,Images,Ititles,Iheaders,IshapePlay,IshapePause,IaspectRatio) {
+    function Slider(Iratio,Images,Ititles,Iheaders,IviewMore,IshapePlay,IshapePause,IaspectRatio) {
         this.Container_constructor();
         this.images = Images
         this.ratio = Iratio;
         this.titles = Ititles;
         this.headers = Iheaders;
+        this.buttonTitle = IviewMore;
         this.shapePlay = IshapePlay;
         this.shapePause = IshapePause;
         this.aspectRatio = IaspectRatio;
@@ -17,6 +18,7 @@
     var images;
     var titles;
     var headers;
+    var buttonTitle;
     var nav;
     var shapePlay;
     var shapePause;
@@ -34,7 +36,8 @@
         headers = this.headers;
         shapePlay = this.shapePlay;
         shapePause = this.shapePause;
-        aspectRatio = this.aspectRatio
+        aspectRatio = this.aspectRatio;
+        buttonTitle = this.buttonTitle;
 
         addElements();
         addAnimation();
@@ -179,6 +182,34 @@
         titleSlider.y = headerSlider.y+headerSlider.getBounds().height*2*ratio+50*ratio;
         instance.addChild(titleSlider);
 
+        var viewMore = new createjs.Text();
+        viewMore.name = "viewMore";
+        viewMore.font = "16px BwModelica-Bold";
+        viewMore.textBaseline = "alphabetic";
+        viewMore.color = "#8EC640";
+        viewMore.text = "."
+        viewMore.scaleX = ratio;
+        viewMore.scaleY = ratio;
+        viewMore.x = 100*ratio+75*ratio
+        viewMore.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio+viewMore.getBounds().height*ratio;
+        instance.addChild(viewMore);
+
+        var strokeButton = new createjs.Shape();
+        strokeButton.name = "strokeButton"
+        strokeButton.scaleX = 0;
+        strokeButton.graphics.beginFill("#8EC640").drawRect(0, 0, 70*ratio, 4*ratio);
+        strokeButton.x = 100*ratio+75*ratio
+        strokeButton.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio+viewMore.getBounds().height*ratio+5*ratio;
+        instance.addChild(strokeButton);
+
+        var hitButton = new createjs.Shape();
+        hitButton.name = "hitButton"
+        hitButton.graphics.beginFill("#333333").drawRect(0, 0, 70*ratio, 28*ratio);
+        hitButton.alpha = 0.01;
+        hitButton.x = 100*ratio+75*ratio
+        hitButton.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio;
+        instance.addChild(hitButton);
+
     }
 
     function addAnimation(){
@@ -195,6 +226,8 @@
         
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {delay:1,alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:1.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("viewMore"), 0.75, {delay:1.5,alpha:0,y:instance.getChildByName("viewMore").y+100*ratio,ease:Expo.easeInOut})
+
     }
 
     function addHits(){
@@ -216,6 +249,12 @@
         instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("mouseout", handlerOut)
         instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("click", handlerClick);
 
+        instance.getChildByName("hitButton").cursor = "pointer";
+        instance.getChildByName("hitButton").type = "button";
+        instance.getChildByName("hitButton").addEventListener("mouseover", handlerOver);
+        instance.getChildByName("hitButton").addEventListener("mouseout", handlerOut)
+        instance.getChildByName("hitButton").addEventListener("click", handlerClick);
+
         addTimerSlider();
     }
 
@@ -228,6 +267,10 @@
 
             case "playPause":
                 
+            break;
+
+            case "button":
+                TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:1,ease:Expo.easeInOut})
             break;
         }
 
@@ -242,6 +285,10 @@
 
             case "playPause":
                 
+            break;
+
+            case "button":
+                TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:0,ease:Expo.easeInOut})
             break;
         }
 
@@ -283,6 +330,10 @@
                 }
 
             break;
+
+            case "button":
+                
+            break;
         }
     }
 
@@ -295,8 +346,7 @@
 
         instance.getChildByName("headerSlider").text = headers[nav]
         instance.getChildByName("titleSlider").text = titles[nav]
-
-        instance.getChildByName("titleSlider").text = titles[nav]
+        instance.getChildByName("viewMore").text = buttonTitle
 
     }
 
@@ -307,6 +357,7 @@
 
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:0.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("viewMore"), 0.75, {delay:0.5,alpha:0,y:instance.getChildByName("viewMore").y+100*ratio,ease:Expo.easeInOut})
 
     }
 
@@ -372,6 +423,10 @@
 
         instance.removeChild(instance.getChildByName("headerSlider"));
         instance.removeChild(instance.getChildByName("titleSlider"));
+
+        instance.removeChild(instance.getChildByName("viewMore"));
+        instance.removeChild(instance.getChildByName("strokeButton"));
+        instance.removeChild(instance.getChildByName("hitButton"));
 
         instance.removeChild(instance.getChildByName("containerNavigationSlider"));
         instance.removeChild(instance.getChildByName("containerImgSlider"));

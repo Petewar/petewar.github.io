@@ -126,7 +126,7 @@
         var containerQuickMenu = new createjs.Container();
         containerQuickMenu.name = "containerQuickMenu"
         containerQuickMenu.x = stage.canvas.width/2+100*ratio+70*ratio;
-        containerQuickMenu.y = 71*ratio;
+        containerQuickMenu.y = 77*ratio;
         instance.addChild(containerQuickMenu);
 
         for (var i=0;i<data.menu.length;i++){
@@ -295,7 +295,7 @@
         instance.getChildByName("containerBurger").y = 66*ratio
 
         instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2+100*ratio+70*ratio;
-        instance.getChildByName("containerQuickMenu").y = 71*ratio;
+        instance.getChildByName("containerQuickMenu").y = 77*ratio;
 
         instance.getChildByName("bgQuickMenu").graphics.clear();
         instance.getChildByName("bgQuickMenu").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, 142*ratio);
