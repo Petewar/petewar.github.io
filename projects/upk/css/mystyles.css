@@ -13,6 +13,11 @@
   src: url(../fonts/BwModelica-Regular.otf);
 }
 
+@font-face {
+  font-family: BwModelicaLight;
+  src: url(../fonts/BwModelicaLight.otf);
+}
+
 html, body  {
     margin: 0;
     padding: 0;

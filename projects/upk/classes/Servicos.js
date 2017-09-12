@@ -22,6 +22,7 @@
     };
 
     p.init = function() {
+        
         addElements();
         addAnimation();
 

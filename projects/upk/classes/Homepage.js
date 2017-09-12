@@ -116,7 +116,7 @@
         var slider = new Slider(ratio,imageSlider,data.titleSlider,data.headerSlider,data.button,svg.createSvg(data.shapePlay,"#333333"),svg.createSvg(data.shapePause,"#333333"),aspectRatio);
         slider.name = "slider";
 
-        var servicosHome = new ServicosHome(ratio,imageServices,aspectRatio,slider.getHeight());
+        var servicosHome = new ServicosHome(ratio,imageServices,data.titleServices,data.textServices,aspectRatio,slider.getHeight());
         servicosHome.name = "servicosHome";
 
         containerContent.addChild(servicosHome);
