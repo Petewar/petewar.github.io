@@ -108,7 +108,8 @@
         titleCalendar.textBaseline = "alphabetic";
         titleCalendar.color = "#333333";
         titleCalendar.text = data.titleCalendar;
-        titleCalendar.lineWidth = 62*ratio
+        if(ratio==1)titleCalendar.lineWidth = 62*ratio
+        if(ratio==2)titleCalendar.lineWidth = 42*ratio
         titleCalendar.scaleX = ratio;
         titleCalendar.scaleY = ratio;
         titleCalendar.x = 50*ratio-titleCalendar.getBounds().width/2*ratio
@@ -125,7 +126,7 @@
         var containerQuickMenu = new createjs.Container();
         containerQuickMenu.name = "containerQuickMenu"
         containerQuickMenu.x = stage.canvas.width/2+100*ratio+70*ratio;
-        containerQuickMenu.y = 60*ratio;
+        containerQuickMenu.y = 71*ratio;
         instance.addChild(containerQuickMenu);
 
         for (var i=0;i<data.menu.length;i++){
@@ -144,18 +145,18 @@
             var strokeQuickMenu = new createjs.Shape();
             strokeQuickMenu.name = "strokeQuickMenu"+i;
             strokeQuickMenu.graphics.beginFill("#8EC640").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio, 4*ratio);
-            strokeQuickMenu.x = (titleQuickMenu.getBounds().width*ratio+50*ratio)*i;
-            strokeQuickMenu.y = titleQuickMenu.getBounds().height/2*ratio-3*ratio;
+            strokeQuickMenu.x = Math.floor((titleQuickMenu.getBounds().width*ratio+50*ratio)*i);
+            strokeQuickMenu.y = Math.floor(titleQuickMenu.getBounds().height/2*ratio-3*ratio);
             strokeQuickMenu.scaleX = 0;
             containerQuickMenu.addChild(strokeQuickMenu);
 
             var hitQuickMenu = new createjs.Shape();
             hitQuickMenu.name = "hitQuickMenu"+i;
             hitQuickMenu.instance = i+1;
-            hitQuickMenu.graphics.beginFill("#ffffff").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio+25*ratio, titleQuickMenu.getBounds().height*ratio+25*ratio);
+            hitQuickMenu.graphics.beginFill("#333333").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio+25*ratio, titleQuickMenu.getBounds().height*ratio+25*ratio);
             hitQuickMenu.alpha = 0.01;
             hitQuickMenu.x = ((titleQuickMenu.getBounds().width*ratio+50*ratio)*i)-12*ratio;
-            hitQuickMenu.y = -titleQuickMenu.getBounds().height*ratio
+            hitQuickMenu.y = -titleQuickMenu.getBounds().height*ratio-10*ratio;
             containerQuickMenu.addChild(hitQuickMenu);
 
         }
@@ -275,7 +276,7 @@
         instance.getChildByName("containerQuickMenu").visible = true;
         instance.getChildByName("bgQuickMenu").visible = true;
         TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:1,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut})
     }
 
     p.animate = function() {
@@ -290,12 +291,14 @@
 
     p.resize = function() {
 
-
         instance.getChildByName("containerBurger").x = 50*ratio-28/2*ratio
         instance.getChildByName("containerBurger").y = 66*ratio
 
         instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2+100*ratio+70*ratio;
-        instance.getChildByName("containerQuickMenu").y = 60*ratio;
+        instance.getChildByName("containerQuickMenu").y = 71*ratio;
+
+        instance.getChildByName("bgQuickMenu").graphics.clear();
+        instance.getChildByName("bgQuickMenu").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, 142*ratio);
 
     } ; 
 
