@@ -49,7 +49,7 @@
 
         if(fontsLoaded==false){
 
-            var fonts = ["BwModelica-Bold","BwModelica-ExtraBold","BwModelica-Regular","BwModelicaLight"];
+            var fonts = ["BwModelica-Bold","BwModelica-ExtraBold","BwModelica-Regular","BwModelica-Light"];
             var fontLoader = new FontLoader(fonts, {
             
                 "fontLoaded": function(font) {},

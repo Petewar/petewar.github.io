@@ -167,7 +167,7 @@
             var hitQuickMenu = new createjs.Shape();
             hitQuickMenu.name = "hitQuickMenu"+i;
             hitQuickMenu.instance = i+1;
-            hitQuickMenu.graphics.beginFill("#333333").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio+25*ratio, titleQuickMenu.getBounds().height*ratio+25*ratio);
+            hitQuickMenu.graphics.beginFill("#FFFFFF").drawRect(0, 0, titleQuickMenu.getBounds().width*ratio+25*ratio, titleQuickMenu.getBounds().height*ratio+25*ratio);
             hitQuickMenu.alpha = 0.01;
             hitQuickMenu.x = ((titleQuickMenu.getBounds().width*ratio+50*ratio)*i)-12*ratio;
             hitQuickMenu.y = -titleQuickMenu.getBounds().height*ratio-10*ratio;

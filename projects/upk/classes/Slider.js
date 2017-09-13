@@ -172,8 +172,8 @@
         titleSlider.font = "58px BwModelica-ExtraBold";
         titleSlider.textBaseline = "alphabetic";
         titleSlider.color = "#333333";
-        if(ratio==1)titleSlider.lineWidth = stage.canvas.width/2-200*ratio
-        if(ratio==2)titleSlider.lineWidth = stage.canvas.width/2-400*ratio
+        if(ratio==1)titleSlider.lineWidth = stage.canvas.width/2
+        if(ratio==2)titleSlider.lineWidth = stage.canvas.width/2-300*ratio
         titleSlider.lineHeight = 70;
         titleSlider.text = "."
         titleSlider.scaleX = ratio;
@@ -181,6 +181,12 @@
         titleSlider.x = 100*ratio+75*ratio
         titleSlider.y = headerSlider.y+headerSlider.getBounds().height*2*ratio+50*ratio;
         instance.addChild(titleSlider);
+
+        var containerViewMore = new createjs.Container();
+        containerViewMore.name = "containerViewMore"
+        containerViewMore.x = 100*ratio+75*ratio
+        containerViewMore.y = titleSlider.y+titleSlider.getBounds().height*ratio+50*ratio;
+        instance.addChild(containerViewMore);
 
         var viewMore = new createjs.Text();
         viewMore.name = "viewMore";
@@ -190,25 +196,21 @@
         viewMore.text = "."
         viewMore.scaleX = ratio;
         viewMore.scaleY = ratio;
-        viewMore.x = 100*ratio+75*ratio
-        viewMore.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio+viewMore.getBounds().height*ratio;
-        instance.addChild(viewMore);
+        viewMore.y = viewMore.getBounds().height*ratio;
+        containerViewMore.addChild(viewMore);
 
         var strokeButton = new createjs.Shape();
         strokeButton.name = "strokeButton"
         strokeButton.scaleX = 0;
         strokeButton.graphics.beginFill("#8EC640").drawRect(0, 0, 70*ratio, 4*ratio);
-        strokeButton.x = 100*ratio+75*ratio
-        strokeButton.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio+viewMore.getBounds().height*ratio+5*ratio;
-        instance.addChild(strokeButton);
+        strokeButton.y = viewMore.getBounds().height*ratio+5*ratio;
+        containerViewMore.addChild(strokeButton);
 
         var hitButton = new createjs.Shape();
         hitButton.name = "hitButton"
-        hitButton.graphics.beginFill("#333333").drawRect(0, 0, 70*ratio, 28*ratio);
+        hitButton.graphics.beginFill("#FFFFFF").drawRect(0, 0, 70*ratio, 28*ratio);
         hitButton.alpha = 0.01;
-        hitButton.x = 100*ratio+75*ratio
-        hitButton.y = titleSlider.y+titleSlider.getBounds().height*2*ratio+50*ratio;
-        instance.addChild(hitButton);
+        containerViewMore.addChild(hitButton);
 
     }
 
@@ -226,7 +228,7 @@
         
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {delay:1,alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:1.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("viewMore"), 0.75, {delay:1.5,alpha:0,y:instance.getChildByName("viewMore").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerViewMore"), 0.75, {delay:1.5,alpha:0,y:instance.getChildByName("containerViewMore").y+100*ratio,ease:Expo.easeInOut})
 
     }
 
@@ -249,11 +251,11 @@
         instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("mouseout", handlerOut)
         instance.getChildByName("containerNavigationSlider").getChildByName("hitPlayPause").addEventListener("click", handlerClick);
 
-        instance.getChildByName("hitButton").cursor = "pointer";
-        instance.getChildByName("hitButton").type = "button";
-        instance.getChildByName("hitButton").addEventListener("mouseover", handlerOver);
-        instance.getChildByName("hitButton").addEventListener("mouseout", handlerOut)
-        instance.getChildByName("hitButton").addEventListener("click", handlerClick);
+        instance.getChildByName("containerViewMore").getChildByName("hitButton").cursor = "pointer";
+        instance.getChildByName("containerViewMore").getChildByName("hitButton").type = "button";
+        instance.getChildByName("containerViewMore").getChildByName("hitButton").addEventListener("mouseover", handlerOver);
+        instance.getChildByName("containerViewMore").getChildByName("hitButton").addEventListener("mouseout", handlerOut)
+        instance.getChildByName("containerViewMore").getChildByName("hitButton").addEventListener("click", handlerClick);
 
         addTimerSlider();
     }
@@ -271,7 +273,7 @@
 
             case "button":
                 if(playSlider)TweenMax.pauseAll(true, true)
-                TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:1,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerViewMore").getChildByName("strokeButton"), 0.5, {scaleX:1,ease:Expo.easeInOut})
             break;
         }
 
@@ -289,7 +291,7 @@
             break;
 
             case "button":
-                TweenMax.to(instance.getChildByName("strokeButton"), 0.5, {scaleX:0,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerViewMore").getChildByName("strokeButton"), 0.5, {scaleX:0,ease:Expo.easeInOut})
                 if(playSlider)TweenMax.resumeAll(true, true)
             break;
         }
@@ -348,7 +350,7 @@
 
         instance.getChildByName("headerSlider").text = headers[nav]
         instance.getChildByName("titleSlider").text = titles[nav]
-        instance.getChildByName("viewMore").text = buttonTitle
+        instance.getChildByName("containerViewMore").getChildByName("viewMore").text = buttonTitle
 
     }
 
@@ -359,7 +361,7 @@
 
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:0.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("viewMore"), 0.75, {delay:0.5,alpha:0,y:instance.getChildByName("viewMore").y+100*ratio,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("containerViewMore"), 0.75, {delay:0.5,alpha:0,y:instance.getChildByName("containerViewMore").y+100*ratio,ease:Expo.easeInOut})
 
     }
 
@@ -426,9 +428,11 @@
         instance.removeChild(instance.getChildByName("headerSlider"));
         instance.removeChild(instance.getChildByName("titleSlider"));
 
-        instance.removeChild(instance.getChildByName("viewMore"));
-        instance.removeChild(instance.getChildByName("strokeButton"));
-        instance.removeChild(instance.getChildByName("hitButton"));
+        instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("viewMore"));
+        instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("strokeButton"));
+        instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("hitButton"));
+
+        instance.removeChild(instance.getChildByName("containerViewMore"));
 
         instance.removeChild(instance.getChildByName("containerNavigationSlider"));
         instance.removeChild(instance.getChildByName("containerImgSlider"));
@@ -463,8 +467,11 @@
         instance.getChildByName("containerNavigationSlider").x = stage.canvas.width-256*ratio;
         instance.getChildByName("containerNavigationSlider").y = 672*ratio
 
-        if(ratio==1)instance.getChildByName("titleSlider").lineWidth = stage.canvas.width/2-200*ratio
-        if(ratio==2)instance.getChildByName("titleSlider").lineWidth = stage.canvas.width/2-400*ratio
+        if(ratio==1)instance.getChildByName("titleSlider").lineWidth = stage.canvas.width/2
+        if(ratio==2)instance.getChildByName("titleSlider").lineWidth = stage.canvas.width/2-300*ratio
+
+        instance.getChildByName("containerViewMore").x = 100*ratio+75*ratio
+        instance.getChildByName("containerViewMore").y = instance.getChildByName("titleSlider").y+instance.getChildByName("titleSlider").getBounds().height*ratio-25*ratio;
 
     } ; 
 

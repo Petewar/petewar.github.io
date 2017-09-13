@@ -67,6 +67,7 @@
         preloadData = null;
 
         data.imagesSlider.push(data.bgServices)
+        data.imagesSlider.push(data.imgFeatureServices);
 
         loadImages(data.imagesSlider)
     }
@@ -90,7 +91,7 @@
         loader = null;
 
         imageSlider = evt.contentLoader.slice(0, 3);
-        imageServices = [evt.contentLoader[3]];
+        imageServices = [evt.contentLoader[3],evt.contentLoader[4]];
         instance = instanceRefresh;
 
         addElements();
@@ -116,7 +117,7 @@
         var slider = new Slider(ratio,imageSlider,data.titleSlider,data.headerSlider,data.button,svg.createSvg(data.shapePlay,"#333333"),svg.createSvg(data.shapePause,"#333333"),aspectRatio);
         slider.name = "slider";
 
-        var servicosHome = new ServicosHome(ratio,imageServices,data.titleServices,data.textServices,aspectRatio,slider.getHeight());
+        var servicosHome = new ServicosHome(ratio,imageServices,data.titleServices,data.textServices,data.headerFeatureServices,data.titleFeatureServices,data.textFeatureServices,data.buttonCaps,data.imgTitleFeatureServices,svg.createSvg(data.shapeArrow,"#8EC640"),aspectRatio,slider.getHeight());
         servicosHome.name = "servicosHome";
 
         containerContent.addChild(servicosHome);
