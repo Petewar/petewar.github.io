@@ -24,6 +24,7 @@
     var shapePause;
     var aspectRatio;
     var playSlider = true;
+    var timeSlider = 10
 
     var p = createjs.extend(Slider, createjs.Container);
 
@@ -158,7 +159,7 @@
         headerSlider.font = "16px BwModelica-Regular";
         headerSlider.textBaseline = "alphabetic";
         headerSlider.color = "#333333";
-        headerSlider.lineWidth = stage.canvas.width/2-200*ratio
+        headerSlider.lineWidth = stage.canvas.width/2
         headerSlider.lineHeight = 30;
         headerSlider.text = "."
         headerSlider.scaleX = ratio;
@@ -368,7 +369,7 @@
     function addTimerSlider(){
     
             instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight").scaleX = 0;
-            TweenMax.to(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"), 5, {scaleX:1,onComplete:addAutomaticNavSlider})
+            TweenMax.to(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderLight"), timeSlider, {scaleX:1,onComplete:addAutomaticNavSlider})
     }
 
     function addAutomaticNavSlider(){

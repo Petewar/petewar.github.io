@@ -53,7 +53,7 @@
         }
 
         if(IbiggerFrame=="area2"){
-            scalingFactor = scaleSize(Math.floor(stage.canvas.width-180*ratio-232*ratio-120*ratio-100*ratio),560*ratio,IcontainerW,IcontainerH);  
+            scalingFactor = scaleSize(Math.floor(stage.canvas.width-632*ratio),560*ratio,IcontainerW,IcontainerH);  
         }
 
         if(IbiggerFrame=="fullWidth"){
