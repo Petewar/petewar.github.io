@@ -21,7 +21,9 @@
 
     var data;
     var imageSlider;
+    var imageSliderLength
     var imageServices;
+    var imageSection;
     var totalHeight;
 
     var p = createjs.extend(Homepage, createjs.Container);
@@ -66,8 +68,11 @@
         preloadData.removeEventListener("fileload", preloadDataComplete);
         preloadData = null;
 
+        imageSliderLength = data.imagesSlider.length
+
         data.imagesSlider.push(data.bgServices)
         data.imagesSlider.push(data.imgFeatureServices);
+        data.imagesSlider.push(data.sectionTestimonialsImage);
 
         loadImages(data.imagesSlider)
     }
@@ -90,8 +95,9 @@
         loader.kill();
         loader = null;
 
-        imageSlider = evt.contentLoader.slice(0, 3);
-        imageServices = [evt.contentLoader[3],evt.contentLoader[4]];
+        imageSlider = evt.contentLoader.slice(0, imageSliderLength);
+        imageServices = [evt.contentLoader[imageSliderLength],evt.contentLoader[imageSliderLength+1]];
+        imageSection = [evt.contentLoader[imageSliderLength+2]]
         instance = instanceRefresh;
 
         addElements();
@@ -120,8 +126,12 @@
         var servicosHome = new ServicosHome(ratio,imageServices,data.titleServices,data.textServices,data.headerFeatureServices,data.titleFeatureServices,data.textFeatureServices,data.buttonCaps,data.imgTitleFeatureServices,svg.createSvg(data.shapeArrow,"#8EC640"),aspectRatio,slider.getHeight());
         servicosHome.name = "servicosHome";
 
+        var section = new Section(ratio,imageSection[0],data.sectionTestimonialsTitle,aspectRatio,slider.getHeight()+servicosHome.getHeight());
+        section.name = "sectionTestimonials"
+
         containerContent.addChild(servicosHome);
         containerContent.addChild(slider);
+        containerContent.addChild(section);
 
     }
 
@@ -132,7 +142,7 @@
 
     function addScroll(){
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()
 
         var scrollBar = new ScrollBar(ratio,instance.getChildByName("containerContent").y,instance,instance.getChildByName("containerContent"),totalHeight,0.15);
         scrollBar.name = "scrollBar";
@@ -163,8 +173,9 @@
         instance.getChildByName("bg").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.getChildByName("containerContent").getChildByName("slider").resize();
         instance.getChildByName("containerContent").getChildByName("servicosHome").resize();
+        instance.getChildByName("containerContent").getChildByName("sectionTestimonials").resize();
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()
 
         if(dispatchInstance.getChildByName("scrollBar")){
             dispatchInstance.getChildByName("scrollBar").y = 2*ratio

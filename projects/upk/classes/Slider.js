@@ -367,7 +367,7 @@
 
         TweenMax.from(instance.getChildByName("bgMask"), 0.75, {scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("bgColor"), 0.75, {scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:0.25,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("strokeBgMask"), 0.7, {delay:0.25,scaleX:0,ease:Expo.easeInOut})
 
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("titleSlider"), 0.75, {delay:0.25,alpha:0,y:instance.getChildByName("titleSlider").y+100*ratio,ease:Expo.easeInOut})

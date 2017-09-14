@@ -85,6 +85,7 @@
         }
 
         var hitBurger = new createjs.Shape();
+        hitBurger.mouseChildren = false
         hitBurger.name = "hitBurger";
         hitBurger.alpha = 0.01
         hitBurger.graphics.beginFill("#8EC640").drawRect(0, 0, 28*ratio, 21*ratio);
@@ -226,6 +227,8 @@
             case "calendar":
             
             break;
+
+           
         }
 
     }
@@ -244,6 +247,8 @@
             case "calendar":
             
             break;
+
+           
         }
 
     }

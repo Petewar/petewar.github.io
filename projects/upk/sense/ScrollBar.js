@@ -116,7 +116,7 @@
         instance.addChild(scrollbar2);
         
         zim.Ticker.add(function() {
-            contentScroll.y = damp.convert(desiredY);
+            contentScroll.y = Math.floor(damp.convert(desiredY));
         }, stage);
     }
 

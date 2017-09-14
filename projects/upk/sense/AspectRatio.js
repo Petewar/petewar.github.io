@@ -56,6 +56,10 @@
             scalingFactor = scaleSize(Math.floor(stage.canvas.width-632*ratio),560*ratio,IcontainerW,IcontainerH);  
         }
 
+         if(IbiggerFrame=="areaSection"){
+            scalingFactor = scaleSize(stage.canvas.width,240*ratio,IcontainerW,IcontainerH);  
+        }
+
         if(IbiggerFrame=="fullWidth"){
             scalingFactor = scaleSize(stage.canvas.width,IcontainerH,IcontainerW,IcontainerH);  
         }
