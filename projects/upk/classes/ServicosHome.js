@@ -138,6 +138,16 @@
         instance.addChild(containerButtonFeature);
 
         containerButtonFeature.addChild(featureShape);
+        featureShape.x = -20*ratio
+
+        var maskButton = new createjs.Shape();
+        maskButton.name = "maskButton"
+        maskButton.graphics.beginFill("#FFFFFF").drawRect(0, 0, 120*ratio, 28*ratio);
+        //maskButton.y = -8*ratio
+        maskButton.alpha = 0.01;
+        containerButtonFeature.addChild(maskButton);
+
+        featureShape.mask = maskButton;
 
         var buttonFeatureTitle = new createjs.Text();
         buttonFeatureTitle.name = "buttonFeatureTitle";
@@ -147,7 +157,7 @@
         buttonFeatureTitle.text = featureButton
         buttonFeatureTitle.scaleX = ratio;
         buttonFeatureTitle.scaleY = ratio;
-        buttonFeatureTitle.x = 44*ratio+15*ratio
+        buttonFeatureTitle.x = 44*ratio+15*ratio-20*ratio
         buttonFeatureTitle.y = 10*ratio
         containerButtonFeature.addChild(buttonFeatureTitle);
 
@@ -225,7 +235,8 @@
 
         switch(event.target.type){
             case "viewMore":
-                
+                TweenMax.to(instance.getChildByName("containerButtonFeature").getChildByName("buttonFeatureTitle"), 0.6, {x:44*ratio+15*ratio,ease:Expo.easeInOut})
+                TweenMax.to(featureShape, 0.5, {x:0,ease:Expo.easeInOut})
             break;
         }
 
@@ -234,7 +245,9 @@
     function handlerOut(event){
         switch(event.target.type){
             case "viewMore":
-                
+                TweenMax.to(instance.getChildByName("containerButtonFeature").getChildByName("buttonFeatureTitle"), 0.5, {x:44*ratio+15*ratio-20*ratio,ease:Expo.easeInOut})
+                TweenMax.to(featureShape, 0.6, {x:-20*ratio,ease:Expo.easeInOut})
+
             break;
         }
     }
@@ -265,6 +278,8 @@
         instance.getChildByName("containerButtonFeature").removeChild(featureShape);
         instance.getChildByName("containerButtonFeature").removeChild(instance.getChildByName("containerButtonFeature").getChildByName("buttonFeatureTitle"))
         instance.getChildByName("containerButtonFeature").removeChild(instance.getChildByName("containerButtonFeature").getChildByName("hitButton"))
+        instance.getChildByName("containerButtonFeature").removeChild(instance.getChildByName("containerButtonFeature").getChildByName("maskButton"))
+        
         instance.removeChild(instance.getChildByName("containerButtonFeature"));
 
     } ; 

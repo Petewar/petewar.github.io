@@ -2,8 +2,8 @@
 [
     {
       "imagesSlider":["images/imageSlider1.jpg","images/imageSlider2.jpg","images/imageSlider3.jpg"],
-      "headerSlider":["Destaque / Gestão e Manutenção","Destaque / Gestão e Manutenção 2","Destaque / Gestão e Manutenção 3"],
-      "titleSlider":["Sustentável consciência ambiental","Sustentável consciência ambiental 2","Sustentável consciência ambiental 3"],
+      "headerSlider":["Destaque / Gestão e Manutenção","Destaque / Gestão Energética","Destaque / Planeamento Técnico"],
+      "titleSlider":["Sustentável consciência ambiental","Flexibilidade, Dinamismo e Sucesso","Rigor, Solidez e Resilência"],
       "shapePlay":"M-0.000,3.000 C-0.000,1.903 0.652,0.970 1.559,1.584 L18.044,12.745 C18.946,13.355 18.951,14.352 18.044,14.978 L1.559,26.364 C0.657,26.987 -0.000,26.103 -0.000,25.000 L-0.000,3.000 Z",
       "shapePause":"M18.003,26.000 L11.997,26.000 C11.446,26.000 11.000,25.549 11.000,24.997 L11.000,1.003 C11.000,0.449 11.453,0.000 11.997,0.000 L18.003,0.000 C18.554,0.000 19.000,0.451 19.000,1.003 L19.000,24.997 C19.000,25.551 18.547,26.000 18.003,26.000 ZM7.003,26.000 L0.997,26.000 C0.446,26.000 -0.000,25.549 -0.000,24.997 L-0.000,1.003 C-0.000,0.449 0.453,0.000 0.997,0.000 L7.003,0.000 C7.554,0.000 8.000,0.451 8.000,1.003 L8.000,24.997 C8.000,25.551 7.547,26.000 7.003,26.000 Z",
       "button":"Ver Mais",

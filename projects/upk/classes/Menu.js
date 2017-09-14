@@ -115,9 +115,9 @@
 
     function addAnimation(){
 
-        TweenMax.from(instance.getChildByName("bg"), 1, {scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("closeIcon"), 1, {delay:1,alpha:0,rotation:180,ease:Expo.easeInOut,onComplete:addHits()});
-        TweenMax.from(imageData[0], 2, {alpha:0,ease:Expo.easeInOut});
+        TweenMax.from(instance.getChildByName("bg"), 0.75, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("closeIcon"), 1, {alpha:0,rotation:180,ease:Expo.easeInOut,onComplete:addHits()});
+        TweenMax.from(imageData[0], 1, {alpha:0,ease:Expo.easeInOut});
 
     }
 

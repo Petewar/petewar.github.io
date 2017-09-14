@@ -38,7 +38,7 @@
     }
 
     function addAnimation(){
-        TweenMax.from(instance.getChildByName("bg"), 1, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bg"), 0.75, {scaleX:0,ease:Expo.easeInOut})
     }
 
     p.kill = function() {

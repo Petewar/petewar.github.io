@@ -56,6 +56,14 @@
         bg.y = 172*ratio
         instance.addChild(bg);
 
+        var bgColor = new createjs.Shape();
+        bgColor.regX = stage.canvas.width/2
+        bgColor.name = "bgColor";
+        bgColor.graphics.beginFill("#8EC640").drawRect(0, 0, Math.floor(stage.canvas.width/2), 560*ratio);
+        bgColor.x = Math.floor(stage.canvas.width);
+        bgColor.y = 172*ratio-30*ratio
+        instance.addChild(bgColor);
+
         var containerImgSlider = new createjs.Container();
         containerImgSlider.name = "containerImgSlider";
         containerImgSlider.x = Math.floor(stage.canvas.width/2);
@@ -217,7 +225,7 @@
 
     function addAnimation(){
 
-        TweenMax.from(instance.getChildByName("bg"), 1, {delay:0.5,scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bg"), 0.5, {delay:0.5,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("bgNavigationSlider"), 1, {delay:1.5,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("strokeNavigationSliderDark"), 1, {delay:1.75,scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerNavigationSlider").getChildByName("playIcon"), 1, {delay:2,alpha:0,ease:Expo.easeInOut})
@@ -357,7 +365,8 @@
 
     function addContenSliderAnimation(){
 
-        TweenMax.from(instance.getChildByName("bgMask"), 1, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bgMask"), 0.75, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bgColor"), 0.75, {scaleX:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("strokeBgMask"), 1, {delay:0.25,scaleX:0,ease:Expo.easeInOut})
 
         TweenMax.from(instance.getChildByName("headerSlider"), 0.75, {alpha:0,y:instance.getChildByName("headerSlider").y+100*ratio,ease:Expo.easeInOut})
@@ -455,6 +464,12 @@
         instance.getChildByName("bgMask").graphics.beginFill("#8EC640").drawRect(0, 0, Math.floor(stage.canvas.width/2), 560*ratio);
         instance.getChildByName("bgMask").x = Math.floor(stage.canvas.width/2)
         instance.getChildByName("bgMask").y = 172*ratio-30*ratio
+
+        instance.getChildByName("bgColor").regX = stage.canvas.width/2
+        instance.getChildByName("bgColor").graphics.clear();
+        instance.getChildByName("bgColor").graphics.beginFill("#8EC640").drawRect(0, 0, Math.floor(stage.canvas.width/2), 560*ratio);
+        instance.getChildByName("bgColor").x = Math.floor(stage.canvas.width);
+        instance.getChildByName("bgColor").y = 172*ratio-30*ratio
 
         aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
 

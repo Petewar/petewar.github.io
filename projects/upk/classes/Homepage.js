@@ -126,8 +126,8 @@
     }
 
     function addAnimation(){
-        TweenMax.from(instance.getChildByName("bg"), 1, {scaleX:0,ease:Expo.easeInOut})
-        TweenMax.from(dispatchInstance.getChildByName("scrollBar"), 1, {delay:1,alpha:0,ease:Expo.easeInOut})
+        TweenMax.from(instance.getChildByName("bg"), 0.75, {scaleX:0,ease:Expo.easeInOut})
+        TweenMax.from(dispatchInstance.getChildByName("scrollBar"), 1, {delay:0.75,alpha:0,ease:Expo.easeInOut})
     }
 
     function addScroll(){
