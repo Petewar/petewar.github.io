@@ -12,7 +12,6 @@
     var aspectRatio;
 
     var fontsLoaded = false;
-    var firstTime = true;
 
     var homepage;
     var menu;
@@ -88,10 +87,17 @@
 
     }
 
+    function scrollChangeHandler(event){
+
+       //console.log(event.yPos)
+
+    }
+
     function createPath(){
 
         if(currentView!=null){
             currentView.kill();
+            if(currentView.hasEventListener("scrollChange"))currentView.removeEventListener("scrollChange", scrollChangeHandler);
         }
 
         instance.getChildByName("navigation").hide();
@@ -103,6 +109,7 @@
             break;
             case "/home":
                 currentView = homepage;
+                currentView.addEventListener("scrollChange", scrollChangeHandler);
                 currentView.init();
                 instance.getChildByName("content").addChild(currentView);
                 instance.getChildByName("navigation").setValue(0);
@@ -130,8 +137,6 @@
                 instance.getChildByName("navigation").setValue(2);
             break;
         }
-
-        firstTime = false;
     }
 
      function showViewHandler(event){

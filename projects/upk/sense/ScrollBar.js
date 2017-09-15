@@ -122,12 +122,13 @@
 
     function displaywheel(e){
 
-            var wheelAmount = 50;
 
             var evt=window.event || e;
             //check for detail first so Opera uses that instead of wheelDelta
             var delta=evt.detail? evt.detail*(-120) : evt.wheelDelta;
-             
+                
+            var wheelAmount = Math.abs(evt.wheelDelta);
+
             if (delta >= 0) {
                 scrollbar2.currentValue += wheelAmount;
             } else {

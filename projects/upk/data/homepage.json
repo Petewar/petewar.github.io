@@ -18,7 +18,14 @@
       "imgTitleFeatureServices":"Título da img em trabalhos",
       "shapeArrow":"M43.002,6.377 L37.354,12.005 L35.942,10.598 L39.593,6.959 L-0.002,6.959 L-0.002,4.970 L39.522,4.970 L35.942,1.402 L37.354,-0.005 L43.002,5.623 L42.623,6.000 L43.002,6.377 ZM39.935,6.618 L40.556,6.000 L39.935,5.382 L39.935,6.618 Z",
       "sectionTestimonialsImage":"images/sectionTestimonials.jpg",
-      "sectionTestimonialsTitle":"Testemunhos"
+      "sectionTestimonialsTitle":"Testemunhos",
+      "testimonialsTitles":["Testemunho Cliente 1","Testemunho Cliente 2","Testemunho Cliente 3","Testemunho Cliente 4","Testemunho Cliente 5"],
+      "testimonialsText":["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac."],
+      "testimonialsStars":["3","5","4"],
+      "shapeStar":"9.500,14.928 L3.628,18.004 L4.749,11.489 L-0.001,6.874 L6.564,6.874 L9.500,-0.005 L12.436,6.874 L19.001,6.874 L14.250,11.489 L15.372,18.004 L9.500,14.928 Z",
+      "shapeStarStroke":"M9.500,14.928 L3.628,18.004 L4.750,11.489 L-0.001,6.874 L6.564,6.874 L9.500,-0.005 L12.436,6.874 L19.001,6.874 L14.251,11.489 L15.372,18.004 L9.500,14.928 ZM9.500,13.803 L14.045,16.185 L13.177,11.141 L16.545,7.870 L11.775,7.870 L9.500,2.539 L7.225,7.870 L2.455,7.870 L5.823,11.141 L4.955,16.185 L9.500,13.803 ZM1.024,7.870 L0.290,7.157 L0.405,6.874 L1.430,6.874 L2.455,7.870 L1.024,7.870 ZM17.570,6.874 L18.595,6.874 L18.710,7.157 L17.976,7.870 L16.545,7.870 L17.570,6.874 Z",
+      "sectionTeamImage":"images/sectionTeam.jpg",
+      "sectionTeamTitle":"Equipa"
     }
 ]
 }
