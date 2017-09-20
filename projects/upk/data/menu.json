@@ -1,7 +1,7 @@
 {"menu":
 [
     {
-      "bg":"images/menuBg.jpg",
+      "bg":"images/menu/menuBg.jpg",
       "menu":["Acerca","Serviços","Destaques","Contatos"],
       "shapeClose":"M21.997,19.868 L19.868,21.997 L11.000,13.128 L2.132,21.997 L0.003,19.868 L8.871,11.000 L0.003,2.132 L2.132,0.003 L11.000,8.871 L19.868,0.003 L21.997,2.132 L13.128,11.000 L21.997,19.868 Z"
     }
