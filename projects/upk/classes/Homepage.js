@@ -130,7 +130,7 @@
         var sectionOne = new Section(ratio,imageSection[0],data.sectionTestimonialsTitle,aspectRatio,slider.getHeight()+servicosHome.getHeight());
         sectionOne.name = "sectionTestimonials"
 
-        var testimonials = new Testimonials(ratio,data.testimonialsTitles,data.testimonialsText,data.testimonialsStars,svg.createSvg(data.shapeStar,"#ECED73"),svg.createSvg(data.shapeStarStroke,"#ECED73"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight());
+        var testimonials = new Testimonials(ratio,data.testimonialsTitles,data.testimonialsText,data.testimonialsStars,data.shapeStar,data.shapeStarStroke,svg,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight());
         testimonials.name = "testimonials"
 
         var sectionTwo = new SectionColor(ratio,imageSection[1],data.sectionTeamTitle,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight());

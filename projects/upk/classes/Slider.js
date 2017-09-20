@@ -184,7 +184,8 @@
         if(ratio==1)titleSlider.lineWidth = stage.canvas.width/2
         if(ratio==2)titleSlider.lineWidth = stage.canvas.width/2-300*ratio
         titleSlider.lineHeight = 70;
-        titleSlider.text = "."
+        //titleSlider.text = "Text is for Position the Right Ypos"
+        titleSlider.text = titles[0]
         titleSlider.scaleX = ratio;
         titleSlider.scaleY = ratio;
         titleSlider.x = 100*ratio+75*ratio
@@ -194,7 +195,7 @@
         var containerViewMore = new createjs.Container();
         containerViewMore.name = "containerViewMore"
         containerViewMore.x = 100*ratio+75*ratio
-        containerViewMore.y = titleSlider.y+titleSlider.getBounds().height*ratio+50*ratio;
+        containerViewMore.y = titleSlider.y+titleSlider.getBounds().height*ratio-25*ratio
         instance.addChild(containerViewMore);
 
         var viewMore = new createjs.Text();
@@ -359,6 +360,7 @@
 
         instance.getChildByName("headerSlider").text = headers[nav]
         instance.getChildByName("titleSlider").text = titles[nav]
+        instance.getChildByName("containerViewMore").y = instance.getChildByName("titleSlider").y+instance.getChildByName("titleSlider").getBounds().height*ratio-25*ratio
         instance.getChildByName("containerViewMore").getChildByName("viewMore").text = buttonTitle
 
     }

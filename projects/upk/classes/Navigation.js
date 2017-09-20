@@ -16,6 +16,7 @@
     var preloadData;
     var data;
     var nav=0;
+    var colapse = false;
 
     var p = createjs.extend(Navigation, createjs.Container);
 
@@ -73,7 +74,7 @@
         var containerBurger = new createjs.Container();
         containerBurger.name = "containerBurger";
         containerBurger.x = 50*ratio-28/2*ratio
-        containerBurger.y = 66*ratio
+        containerBurger.y = 62*ratio
         instance.addChild(containerBurger);
 
         for(var i=0;i<3;i++){
@@ -283,6 +284,38 @@
         instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav).scaleX = 0;
         nav = Inav;
         TweenMax.to(instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav), 1, {scaleX:1,ease:Expo.easeInOut})
+    }
+
+    p.colapse = function() {
+        
+        if(colapse==false){
+            colapse = true
+            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100,ease:Expo.easeInOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:-100,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("calendarIcon"), 0.25, {alpha:0,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("titleCalendar"), 0.25, {alpha:0,ease:Expo.easeInOut});
+
+            for(var i=0;i<3;i++){
+                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.clear();
+                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#86C430").drawRect(0, 0, 28*ratio, 3*ratio);
+            }
+        }
+    }
+
+    p.expand = function() {
+        
+        if(colapse==true){
+            colapse = false
+            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:0,ease:Expo.easeInOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:0,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("calendarIcon"), 0.75, {alpha:1,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("titleCalendar"), 0.75, {alpha:1,ease:Expo.easeInOut});
+
+            for(var i=0;i<3;i++){
+                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.clear();
+                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#ffffff").drawRect(0, 0, 28*ratio, 3*ratio);
+            }
+        }
     }
 
     p.hide = function() {

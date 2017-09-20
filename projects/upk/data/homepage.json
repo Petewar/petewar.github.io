@@ -19,7 +19,7 @@
       "shapeArrow":"M43.002,6.377 L37.354,12.005 L35.942,10.598 L39.593,6.959 L-0.002,6.959 L-0.002,4.970 L39.522,4.970 L35.942,1.402 L37.354,-0.005 L43.002,5.623 L42.623,6.000 L43.002,6.377 ZM39.935,6.618 L40.556,6.000 L39.935,5.382 L39.935,6.618 Z",
       "sectionTestimonialsImage":"images/sectionTestimonials.jpg",
       "sectionTestimonialsTitle":"Testemunhos",
-      "testimonialsTitles":["Testemunho Cliente 1","Testemunho Cliente 2","Testemunho Cliente 3","Testemunho Cliente 4","Testemunho Cliente 5"],
+      "testimonialsTitles":["Testemunho Cliente 1","Testemunho Cliente 2","Testemunho Cliente 3"],
       "testimonialsText":["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac.","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc est, tempus quis imperdiet ac."],
       "testimonialsStars":["3","5","4"],
       "shapeStar":"9.500,14.928 L3.628,18.004 L4.749,11.489 L-0.001,6.874 L6.564,6.874 L9.500,-0.005 L12.436,6.874 L19.001,6.874 L14.250,11.489 L15.372,18.004 L9.500,14.928 Z",

@@ -89,7 +89,11 @@
 
     function scrollChangeHandler(event){
 
-       //console.log(event.yPos)
+       if(event.yPos<-(610*ratio)){
+            instance.getChildByName("navigation").colapse();
+       }else{
+            instance.getChildByName("navigation").expand();
+       }
 
     }
 
@@ -97,6 +101,7 @@
 
         if(currentView!=null){
             currentView.kill();
+            instance.getChildByName("navigation").expand();
             if(currentView.hasEventListener("scrollChange"))currentView.removeEventListener("scrollChange", scrollChangeHandler);
         }
 
