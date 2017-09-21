@@ -262,7 +262,7 @@
             break;
 
             case "calendar":
-                SWFAddress.setValue("/calendar");
+                SWFAddress.setValue("/agenda");
             break;
             case "hitQuickMenu":
                  switch(event.target.name){
@@ -290,8 +290,8 @@
         
         if(colapse==false){
             colapse = true
-            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100,ease:Expo.easeInOut})
-            TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:-100,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut});
             TweenMax.to(instance.getChildByName("calendarIcon"), 0.25, {alpha:0,ease:Expo.easeInOut});
             TweenMax.to(instance.getChildByName("titleCalendar"), 0.25, {alpha:0,ease:Expo.easeInOut});
 
@@ -300,6 +300,8 @@
                 instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#86C430").drawRect(0, 0, 28*ratio, 3*ratio);
             }
         }
+
+        instance.getChildByName("hitCalendar").visible = false;
     }
 
     p.expand = function() {
@@ -316,6 +318,8 @@
                 instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#ffffff").drawRect(0, 0, 28*ratio, 3*ratio);
             }
         }
+
+        instance.getChildByName("hitCalendar").visible = true;
     }
 
     p.hide = function() {

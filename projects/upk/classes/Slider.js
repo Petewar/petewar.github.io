@@ -354,7 +354,7 @@
     function addContentSlider(Ivalue){
 
         nav = Ivalue;
-        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
+        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"areaSlider")
         instance.getChildByName("containerImgSlider").addChild(images[nav]);
         instance.getChildByName("containerNavigationSlider").getChildByName("containerNavigationCircleSlider").getChildByName("fillCircle"+nav).visible = true;
 
@@ -473,7 +473,7 @@
         instance.getChildByName("bgColor").x = Math.floor(stage.canvas.width);
         instance.getChildByName("bgColor").y = 172*ratio-30*ratio
 
-        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"area")
+        aspectRatio.resize(images[nav],images[nav].getBounds().width,images[nav].getBounds().height,"areaSlider")
 
         instance.getChildByName("strokeBgMask").graphics.beginFill("#8EC640").drawRect(0, 0, Math.floor(stage.canvas.width/2), 4*ratio);
         instance.getChildByName("strokeBgMask").x = Math.floor(stage.canvas.width/2)

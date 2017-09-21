@@ -124,7 +124,7 @@
                 currentView.init();
                 instance.addChild(currentView);
             break;
-            case "/calendar":
+            case "/agenda":
                 currentView = calendar;
                 currentView.init();
                 instance.addChild(currentView);

@@ -184,6 +184,31 @@
 
     p.kill = function() {
         
+        for(var i=0;i<total;i++){
+
+            for(var j=0;j<5;j++){
+
+                instance.getChildByName("containerTestimonials").getChildByName("containerStars"+i).removeChild(instance.getChildByName("containerTestimonials").getChildByName("starStroke"+j));
+
+                if(j<testimonialsStars[i]){
+
+                    instance.getChildByName("containerTestimonials").getChildByName("containerStars"+i).removeChild(instance.getChildByName("containerTestimonials").getChildByName("star"+j))
+
+                }
+
+            }
+
+            instance.getChildByName("containerTestimonials").removeChild(instance.getChildByName("containerTestimonials").getChildByName("bg"+i))
+            instance.getChildByName("containerTestimonials").removeChild(instance.getChildByName("containerTestimonials").getChildByName("bgColor"+i))
+            
+            instance.getChildByName("containerTestimonials").removeChild(instance.getChildByName("containerTestimonials").getChildByName("titleTestimonials"+i))
+            instance.getChildByName("containerTestimonials").removeChild(instance.getChildByName("containerTestimonials").getChildByName("textTestimonials"+i))
+            instance.getChildByName("containerTestimonials").removeChild(instance.getChildByName("containerTestimonials").getChildByName("containerStars"+i))
+
+        }
+
+        instance.removeChild(instance.getChildByName("containerTestimonials"));
+
     } ; 
 
     p.getHeight = function() {

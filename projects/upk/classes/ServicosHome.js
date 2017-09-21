@@ -170,7 +170,7 @@
 
         images[1].x = 100*ratio+80*ratio+titleTextFeature.getBounds().width*ratio+120*ratio
         images[1].y = titleHeaderFeature.y-50*ratio
-        aspectRatio.resize(images[1],images[1].getBounds().width,images[1].getBounds().height,"area2")
+        aspectRatio.resize(images[1],images[1].getBounds().width,images[1].getBounds().height,"areaFeature")
         instance.addChild(images[1]);
 
         var bgMask = new createjs.Shape();
@@ -247,7 +247,6 @@
             case "viewMore":
                 TweenMax.to(instance.getChildByName("containerButtonFeature").getChildByName("buttonFeatureTitle"), 0.5, {x:44*ratio+15*ratio-20*ratio,ease:Expo.easeInOut})
                 TweenMax.to(featureShape, 0.6, {x:-20*ratio,ease:Expo.easeInOut})
-
             break;
         }
     }
@@ -255,7 +254,7 @@
     function handlerClick(event){
         switch(event.target.type){
             case "viewMore":
-                
+             SWFAddress.setValue("/servicos");
             break;
         }
     }
@@ -299,7 +298,7 @@
         if(ratio==2)instance.getChildByName("textServices").lineWidth = stage.canvas.width/2-300*ratio
 
         images[1].x = 100*ratio+80*ratio+instance.getChildByName("titleTextFeature").getBounds().width*ratio+120*ratio
-        aspectRatio.resize(images[1],images[1].getBounds().width,images[1].getBounds().height,"area2")
+        aspectRatio.resize(images[1],images[1].getBounds().width,images[1].getBounds().height,"areaFeature")
 
         instance.getChildByName("bgMask").graphics.clear()
         instance.getChildByName("bgMask").x = Math.floor(100*ratio+80*ratio+instance.getChildByName("titleTextFeature").getBounds().width*ratio+120*ratio)

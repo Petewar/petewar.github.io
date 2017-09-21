@@ -48,16 +48,20 @@
             scalingFactor = scaleSize(stage.canvas.width-Ivalue,stage.canvas.height-Ivalue,IcontainerW,IcontainerH);  
         }
 
-        if(IbiggerFrame=="area"){
+        if(IbiggerFrame=="areaSlider"){
             scalingFactor = scaleSize(stage.canvas.width/2,560*ratio,IcontainerW,IcontainerH);  
         }
 
-        if(IbiggerFrame=="area2"){
+        if(IbiggerFrame=="areaFeature"){
             scalingFactor = scaleSize(Math.floor(stage.canvas.width-632*ratio),560*ratio,IcontainerW,IcontainerH);  
         }
 
-         if(IbiggerFrame=="areaSection"){
+        if(IbiggerFrame=="areaSection"){
             scalingFactor = scaleSize(stage.canvas.width,240*ratio,IcontainerW,IcontainerH);  
+        }
+
+        if(IbiggerFrame=="areaTeam"){
+            scalingFactor = scaleSize(Ivalue,632*ratio,IcontainerW,IcontainerH);  
         }
 
         if(IbiggerFrame=="fullWidth"){
