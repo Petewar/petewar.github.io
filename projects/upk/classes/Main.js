@@ -30,9 +30,9 @@
         svg = new Svg(ratio);
         aspectRatio = new AspectRatio(ratio);
         
-        menu = new Menu(ratio,svg,aspectRatio);
-        calendar = new Calendar(ratio,svg);
-        contatos = new Contatos(ratio,svg);
+        menu = new Menu(instance,ratio,svg,aspectRatio);
+        calendar = new Calendar(instance,ratio,svg);
+        contatos = new Contatos(instance,ratio,svg);
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
         servicos = new Servicos(instance,ratio);
 
@@ -106,7 +106,7 @@
         }
 
         instance.getChildByName("navigation").hide();
-        
+        instance.visible = false
 
         switch(SWFAddress.getValue()){
             case "/":
@@ -146,6 +146,7 @@
 
      function showViewHandler(event){
         instance.getChildByName("navigation").show();
+        instance.visible = true
     }
 
     p.resize = function() {

@@ -142,7 +142,7 @@
         var sectionTwo = new SectionColor(ratio,imageSection[1],data.sectionTeamTitle,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight());
         sectionTwo.name = "sectionTeam"
 
-        var team = new Team(ratio,aspectRatio,imageTeam,data.teamNames,data.teamPosition,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight());
+        var team = new Team(ratio,aspectRatio,imageTeam,data.teamNames,data.teamPosition,svg.createSvg(data.shapeDrag,"#8EC640"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight());
         team.name = "team";
 
         containerContent.addChild(servicosHome);

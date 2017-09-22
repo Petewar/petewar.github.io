@@ -16,7 +16,7 @@
     var preloadData;
     var data;
     var nav=0;
-    var colapse = false;
+    var isColapse = false;
 
     var p = createjs.extend(Navigation, createjs.Container);
 
@@ -27,13 +27,7 @@
         svg = this.svg;
         dispatchInstance = this.dispatchInstance
 
-        if(data==null){
-            preloadDataJson("data/navigation.json")
-        }else{
-            addElements();
-            addAnimation();
-        }
-
+        preloadDataJson("data/navigation.json")
     }
 
     function preloadDataJson(Ijson){
@@ -52,7 +46,7 @@
         
         addElements();
         addAnimation();
-        
+
         var customEvent = new createjs.Event("init");
         dispatchInstance.dispatchEvent(customEvent);
 
@@ -288,8 +282,9 @@
 
     p.colapse = function() {
         
-        if(colapse==false){
-            colapse = true
+        if(isColapse==false){
+            console.log("collapse")
+            isColapse = true
             TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut})
             TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut});
             TweenMax.to(instance.getChildByName("calendarIcon"), 0.25, {alpha:0,ease:Expo.easeInOut});
@@ -306,8 +301,9 @@
 
     p.expand = function() {
         
-        if(colapse==true){
-            colapse = false
+        if(isColapse==true){
+            isColapse = false
+
             TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:0,ease:Expo.easeInOut})
             TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:0,ease:Expo.easeInOut});
             TweenMax.to(instance.getChildByName("calendarIcon"), 0.75, {alpha:1,ease:Expo.easeInOut});
@@ -326,6 +322,7 @@
         instance.getChildByName("containerQuickMenu").visible = false;
         instance.getChildByName("bgQuickMenu").visible = false;
         instance.getChildByName("containerLogo").visible = false;
+
     }
 
     p.show = function() {
@@ -335,6 +332,7 @@
         TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut})
         TweenMax.from(instance.getChildByName("containerLogo"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
+
     }
 
     p.animate = function() {

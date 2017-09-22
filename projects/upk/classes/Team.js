@@ -1,6 +1,6 @@
 (function () {
 
-    function Team(Iratio,IaspectRatio,ImagesTeam,IteamNames,IteamPosition,IposY) {
+    function Team(Iratio,IaspectRatio,ImagesTeam,IteamNames,IteamPosition,IshapeDrag,IposY) {
         this.Container_constructor();
         this.ratio = Iratio;
         this.aspectRatio = IaspectRatio;
@@ -8,6 +8,7 @@
         this.imagesTeam = ImagesTeam;
         this.teamNames = IteamNames;
         this.teamPosition = IteamPosition;
+        this.shapeDrag = IshapeDrag;
         this.posY = IposY;
         this.setup();
     }
@@ -29,6 +30,8 @@
     var oldX;
     var timer;
     var direction;
+    var frequency;
+    var shapeDrag
 
     var p = createjs.extend(Team, createjs.Container);
 
@@ -40,6 +43,7 @@
         imagesTeam = this.imagesTeam
         teamNames = this.teamNames
         teamPosition = this.teamPosition
+        shapeDrag = this.shapeDrag
         posY = this.posY
 
         addElements();
@@ -62,6 +66,11 @@
         containerTeamImages.name = "containerTeamImages"
         containerTeamImages.y = posY
         instance.addChild(containerTeamImages);
+
+        shapeDrag.name = "shapeDrag"
+        shapeDrag.x = stage.canvas.width/2-88/2*ratio
+        shapeDrag.y = posY+632*ratio+55*ratio
+        instance.addChild(shapeDrag);
 
         for(var i=0;i<imagesTeam.length;i++){
 
@@ -188,7 +197,7 @@
         //Reset
         if(instance.getChildByName("containerTeamImages").x>0)TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:0,ease:Expo.easeInOut})
         if(Math.floor(Math.abs(instance.getChildByName("containerTeamImages").x-stage.canvas.width))>totalWidth)TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:stage.canvas.width-totalWidth,ease:Expo.easeInOut})
-        
+
         //Images Anim
         for(var i=0;i<imagesTeam.length;i++){
             if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("imagesTeam"+i),0.5*(i+0.5), {x:50*ratio,ease:Expo.easeOut})   
@@ -248,6 +257,8 @@
 
          instance.getChildByName("bg").graphics.clear();
          instance.getChildByName("bg").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 632*ratio);
+
+         instance.getChildByName("shapeDrag").x = stage.canvas.width/2-88/2*ratio
 
          for(var i=0;i<imagesTeam.length;i++){
 

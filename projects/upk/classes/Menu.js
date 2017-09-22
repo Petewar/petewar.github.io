@@ -1,7 +1,8 @@
 (function () {
 
-    function Menu(Iratio,Isvg,IaspectRatio) {
+    function Menu(IdispatchInstance,Iratio,Isvg,IaspectRatio) {
         this.Container_constructor();
+        this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
         this.svg = Isvg;
         this.aspectRatio = IaspectRatio;
@@ -9,6 +10,7 @@
     }
     
     var instance;
+    var dispatchInstance;
     var instanceRefresh;
     var ratio;
     var aspectRatio;
@@ -25,6 +27,7 @@
     p.setup = function() {
 
         instance = this;
+        dispatchInstance = this.dispatchInstance;
         instanceRefresh = instance;
         ratio = this.ratio;
         aspectRatio = this.aspectRatio;
@@ -33,11 +36,16 @@
     }
 
      p.init = function() {
+
         if((imageData==null)&&(data==null)){
             preloadDataJson("data/menu.json")
         }else{
+            
             addElements();
             addAnimation();
+
+            var customEvent = new createjs.Event("show");
+            dispatchInstance.dispatchEvent(customEvent);
         }
      }
 
@@ -81,6 +89,9 @@
 
         addElements();
         addAnimation();
+
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
 
     }
 

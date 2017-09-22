@@ -1,7 +1,8 @@
 (function () {
 
-    function Contatos(Iratio,Isvg) {
+    function Contatos(IdispatchInstance,Iratio,Isvg) {
         this.Container_constructor();
+        this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
         this.svg = Isvg;
         this.setup();
@@ -9,6 +10,7 @@
     }
     
     var instance;
+    var dispatchInstance;
     var ratio;
     var svg;
 
@@ -20,6 +22,7 @@
     p.setup = function() {
 
         instance = this;
+        dispatchInstance = this.dispatchInstance
         ratio = this.ratio;
         svg = this.svg;
 
@@ -31,6 +34,9 @@
         }else{
             addElements();
             addAnimation();
+
+            var customEvent = new createjs.Event("show");
+            dispatchInstance.dispatchEvent(customEvent);
         }
      }
 
@@ -50,6 +56,9 @@
         
         addElements();
         addAnimation();
+
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
 
     }
 

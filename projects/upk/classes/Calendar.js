@@ -1,7 +1,8 @@
 (function () {
 
-    function Calendar(Iratio,Isvg) {
+    function Calendar(IdispatchInstance,Iratio,Isvg) {
         this.Container_constructor();
+        this.dispatchInstance = IdispatchInstance;
         this.ratio = Iratio;
         this.svg = Isvg;
         this.setup();
@@ -11,6 +12,7 @@
     var instance;
     var ratio;
     var svg;
+    var dispatchInstance
 
     var preloadData;
     var data;
@@ -21,6 +23,7 @@
 
         instance = this;
         ratio = this.ratio;
+        dispatchInstance = this.dispatchInstance
         svg = this.svg;
 
     }
@@ -31,6 +34,9 @@
         }else{
             addElements();
             addAnimation();
+
+             var customEvent = new createjs.Event("show");
+            dispatchInstance.dispatchEvent(customEvent);
         }
      }
 
@@ -50,6 +56,9 @@
         
         addElements();
         addAnimation();
+
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
 
     }
 
