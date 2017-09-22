@@ -26,7 +26,9 @@
       "shapeStarStroke":"M9.500,14.928 L3.628,18.004 L4.750,11.489 L-0.001,6.874 L6.564,6.874 L9.500,-0.005 L12.436,6.874 L19.001,6.874 L14.251,11.489 L15.372,18.004 L9.500,14.928 ZM9.500,13.803 L14.045,16.185 L13.177,11.141 L16.545,7.870 L11.775,7.870 L9.500,2.539 L7.225,7.870 L2.455,7.870 L5.823,11.141 L4.955,16.185 L9.500,13.803 ZM1.024,7.870 L0.290,7.157 L0.405,6.874 L1.430,6.874 L2.455,7.870 L1.024,7.870 ZM17.570,6.874 L18.595,6.874 L18.710,7.157 L17.976,7.870 L16.545,7.870 L17.570,6.874 Z",
       "sectionTeamImage":"images/home/sectionTeam.jpg",
       "sectionTeamTitle":"Equipa",
-      "imagesTeam":["images/home/memberOne.jpg","images/home/memberTwo.jpg","images/home/memberThree.jpg","images/home/memberFour.jpg","images/home/memberOne.jpg","images/home/memberTwo.jpg","images/home/memberThree.jpg","images/home/memberFour.jpg"]
+      "imagesTeam":["images/home/memberOne.jpg","images/home/memberTwo.jpg","images/home/memberThree.jpg","images/home/memberFour.jpg","images/home/memberFive.jpg","images/home/memberSix.jpg","images/home/memberSeven.jpg"],
+      "teamNames":["Marco Ribeiro","Walter Nascimento","Sandra Moreno","Jessica Vale","Marina Manuel","Diogo Sarmento","Gustavo Dias"],
+      "teamPosition":["Diretor","Logística","Administração","Marketing","Recursos Humanos","Técnico Mecânico","Técnico Eletricidade"]
     }
 ]
 }

@@ -1,10 +1,13 @@
 (function () {
 
-    function Team(Iratio,IaspectRatio,ImagesTeam,IposY) {
+    function Team(Iratio,IaspectRatio,ImagesTeam,IteamNames,IteamPosition,IposY) {
         this.Container_constructor();
         this.ratio = Iratio;
         this.aspectRatio = IaspectRatio;
         this.imagesTeam = ImagesTeam;
+        this.imagesTeam = ImagesTeam;
+        this.teamNames = IteamNames;
+        this.teamPosition = IteamPosition;
         this.posY = IposY;
         this.setup();
     }
@@ -13,6 +16,8 @@
     var ratio;
     var aspectRatio;
     var imagesTeam;
+    var teamNames;
+    var teamPosition;
     var maskWidth;
     var totalWidth;
     var posY;
@@ -23,6 +28,7 @@
     var currentPos;
     var oldX;
     var timer;
+    var direction;
 
     var p = createjs.extend(Team, createjs.Container);
 
@@ -32,6 +38,8 @@
         ratio = this.ratio
         aspectRatio = this.aspectRatio
         imagesTeam = this.imagesTeam
+        teamNames = this.teamNames
+        teamPosition = this.teamPosition
         posY = this.posY
 
         addElements();
@@ -64,6 +72,7 @@
 
             imagesTeam[i].regX = imagesTeam[i].getBounds().width/2
 
+            imagesTeam[i].name = "imagesTeam"+i
             aspectRatio.resize(imagesTeam[i],imagesTeam[i].getBounds().width,imagesTeam[i].getBounds().height,"areaTeam",maskWidth)
             containerTeamImage.addChild(imagesTeam[i]);
 
@@ -74,6 +83,40 @@
             containerTeamImage.addChild(maskImage);
 
             imagesTeam[i].mask = maskImage
+
+            var textTeamNAme = new createjs.Text();
+            textTeamNAme.name = "textTeamNAme"+i;
+            textTeamNAme.font = "24px BwModelica-Bold";
+            textTeamNAme.textBaseline = "alphabetic";
+            textTeamNAme.color = "#FFFFFF";
+            textTeamNAme.lineWidth = 100*ratio
+            textTeamNAme.lineHeight = 30;
+            textTeamNAme.text = teamNames[i]
+            textTeamNAme.scaleX = ratio;
+            textTeamNAme.scaleY = ratio;
+            textTeamNAme.x = 60*ratio
+            textTeamNAme.y = 632*ratio-170*ratio
+            containerTeamImage.addChild(textTeamNAme);
+
+            var stroke = new createjs.Shape();
+            stroke.name = "stroke"+i
+            stroke.graphics.beginFill("#ffffff").drawRect(0, 0, textTeamNAme.getBounds().width*ratio, 4*ratio);
+            stroke.x = 60*ratio
+            stroke.y = 632*ratio-140*ratio+25*ratio
+            containerTeamImage.addChild(stroke);
+
+            var textPositionName = new createjs.Text();
+            textPositionName.name = "textPositionName"+i;
+            textPositionName.font = "14px BwModelica-Regular";
+            textPositionName.textBaseline = "alphabetic";
+            textPositionName.color = "#FFFFFF";
+            textPositionName.text = teamPosition[i]
+            textPositionName.scaleX = ratio;
+            textPositionName.scaleY = ratio;
+            textPositionName.x = 60*ratio
+            textPositionName.y = 632*ratio-140*ratio+25*ratio+textPositionName.getBounds().height*ratio+25*ratio
+            containerTeamImage.addChild(textPositionName);
+
         }
     }
 
@@ -99,15 +142,37 @@
         currentPos = Math.floor(event.stageX-offset.x)
         instance.getChildByName("containerTeamImages").addEventListener("pressup", stopDrag);
 
-        TweenMax.to(instance.getChildByName("containerTeamImages"), 0.25, {x:currentPos,ease:Expo.easeOut})
+        if (stage.mouseX < oldX)direction = 0 
+        if (stage.mouseX > oldX) direction = 1
+
+        instance.getChildByName("containerTeamImages").x = currentPos;
+
+        if(instance.getChildByName("containerTeamImages").x>0)instance.getChildByName("containerTeamImages").x=0
+        if(Math.floor(Math.abs(instance.getChildByName("containerTeamImages").x-stage.canvas.width))>totalWidth)instance.getChildByName("containerTeamImages").x = stage.canvas.width-totalWidth
 
         timer = setTimeout(anim, 150);
         oldX = stage.mouseX;
         frequency = Math.abs(startX-endX);
+        
     }
 
     function stopDrag(Ianim){
 
+        //Easing Speed
+        /*if((instance.getChildByName("containerTeamImages").x<0)&&(Math.floor(Math.abs(instance.getChildByName("containerTeamImages").x-stage.canvas.width))<totalWidth)){
+            if(direction == 1)TweenMax.to(instance.getChildByName("containerTeamImages"),0.5, {x:(currentPos)+frequency*ratio})
+            if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages"), 0.5, {x:(currentPos)-frequency*ratio})
+        }*/
+
+        //Reset Images Anim
+        for(var i=0;i<imagesTeam.length;i++){
+            TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("imagesTeam"+i), 0.5, {x:0,ease:Expo.easeOut})
+            TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textTeamNAme"+i), 0.5, {x:60*ratio,ease:Expo.easeOut})
+            TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("stroke"+i), 0.5, {x:60*ratio,ease:Expo.easeOut})
+            TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textPositionName"+i), 0.5, {x:60*ratio,ease:Expo.easeOut})
+        }
+
+        direction = undefined;
         oldX = undefined;
 
         instance.getChildByName("containerTeamImages").removeEventListener("mousedown", startDrag);
@@ -115,25 +180,28 @@
         instance.getChildByName("containerTeamImages").removeEventListener("pressup", stopDrag);
 
         addDrag();
-        
-        if(currentPos>instance.getChildByName("containerTeamImages").x){
-            TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:(currentPos)+frequency/2*ratio,ease:Expo.easeOut})
-        }else{
-            TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:(currentPos)-frequency/2*ratio,ease:Expo.easeOut})
-        }
 
     }
 
     function anim(){
 
-        if(instance.getChildByName("containerTeamImages").x>0){
-            stopDrag();
-            TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:0,ease:Expo.easeOut});
-        }else{
-            if(Math.floor(Math.abs(instance.getChildByName("containerTeamImages").x-stage.canvas.width))>totalWidth){
-                stopDrag();
-                TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:stage.canvas.width-totalWidth,ease:Expo.easeOut});
-            }
+        //Reset
+        if(instance.getChildByName("containerTeamImages").x>0)TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:0,ease:Expo.easeInOut})
+        if(Math.floor(Math.abs(instance.getChildByName("containerTeamImages").x-stage.canvas.width))>totalWidth)TweenMax.to(instance.getChildByName("containerTeamImages"), 1, {x:stage.canvas.width-totalWidth,ease:Expo.easeInOut})
+        
+        //Images Anim
+        for(var i=0;i<imagesTeam.length;i++){
+            if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("imagesTeam"+i),0.5*(i+0.5), {x:50*ratio,ease:Expo.easeOut})   
+            if(direction == 1)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("imagesTeam"+i), 0.5*(i+0.5), {x:-50*ratio,ease:Expo.easeOut})
+
+            if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textTeamNAme"+i),0.5*(i+0.5), {x:70*ratio,ease:Expo.easeOut})   
+            if(direction == 1)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textTeamNAme"+i), 0.5*(i+0.5), {x:50*ratio,ease:Expo.easeOut})
+
+            if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("stroke"+i),0.5*(i+0.5), {x:80*ratio,ease:Expo.easeOut})   
+            if(direction == 1)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("stroke"+i), 0.5*(i+0.5), {x:40*ratio,ease:Expo.easeOut}) 
+
+            if(direction == 0)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textPositionName"+i),0.5*(i+0.5), {x:90*ratio,ease:Expo.easeOut})   
+            if(direction == 1)TweenMax.to(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textPositionName"+i), 0.5*(i+0.5), {x:30*ratio,ease:Expo.easeOut}) 
         }
     }
 
@@ -155,8 +223,11 @@
 
         for(var i=0;i<imagesTeam.length;i++){
 
-            instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(imagesTeam[i])
             instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("maskImage"+i))
+            instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("imagesTeam"+i))
+            instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textTeamNAme"+i))
+            instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("stroke"+i))
+            instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i).getChildByName("textPositionName"+i))
             instance.getChildByName("containerTeamImages").removeChild(instance.getChildByName("containerTeamImages").getChildByName("containerTeamImage"+i))
         }
 
