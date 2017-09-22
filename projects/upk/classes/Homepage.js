@@ -26,6 +26,7 @@
     var imageSection;
     var imageTeam;
     var imageTeamLength;
+    var imageClient;
     var totalHeight;
 
     var p = createjs.extend(Homepage, createjs.Container);
@@ -77,6 +78,7 @@
         data.imagesSlider.push(data.imgFeatureServices);
         data.imagesSlider.push(data.sectionTestimonialsImage);
         data.imagesSlider.push(data.sectionTeamImage);
+        data.imagesSlider.push(data.clientImage);
 
         var imagesToLoad = data.imagesSlider.concat(data.imagesTeam)
 
@@ -104,9 +106,9 @@
         imageSlider = evt.contentLoader.slice(0, imageSliderLength);
         imageServices = [evt.contentLoader[imageSliderLength],evt.contentLoader[imageSliderLength+1]];
         imageSection = [evt.contentLoader[imageSliderLength+2],evt.contentLoader[imageSliderLength+3]]
-        imageTeam = evt.contentLoader.slice(imageSliderLength+4, evt.contentLoader.length);
+        imageClient = evt.contentLoader[imageSliderLength+4]
+        imageTeam = evt.contentLoader.slice(imageSliderLength+5, imageSliderLength+5+imageTeamLength);
         instance = instanceRefresh;
-
         addElements();
         addScroll();
         addAnimation();
@@ -145,12 +147,20 @@
         var team = new Team(ratio,aspectRatio,imageTeam,data.teamNames,data.teamPosition,svg.createSvg(data.shapeDrag,"#8EC640"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight());
         team.name = "team";
 
+        var clients = new Clients(ratio,imageClient,data.titleClients,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight());
+        clients.name = "clients";
+
+        var footer = new Footer(ratio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight()+clients.getHeight());
+        footer.name = "footer"
+
         containerContent.addChild(servicosHome);
         containerContent.addChild(slider);
         containerContent.addChild(sectionOne);
         containerContent.addChild(testimonials);
         containerContent.addChild(sectionTwo);
         containerContent.addChild(team);
+        containerContent.addChild(clients);
+        containerContent.addChild(footer);
 
     }
 
@@ -161,7 +171,7 @@
 
     function addScroll(){
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTeam").getHeight()+instance.getChildByName("containerContent").getChildByName("team").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTeam").getHeight()+instance.getChildByName("containerContent").getChildByName("team").getHeight()+instance.getChildByName("containerContent").getChildByName("clients").getHeight()+instance.getChildByName("containerContent").getChildByName("footer").getHeight()
 
         var scrollBar = new ScrollBar(ratio,instance.getChildByName("containerContent").y,instance,instance.getChildByName("containerContent"),totalHeight,0.15);
         scrollBar.name = "scrollBar";
@@ -182,6 +192,8 @@
         instance.getChildByName("containerContent").getChildByName("testimonials").kill();
         instance.getChildByName("containerContent").getChildByName("sectionTeam").kill();
         instance.getChildByName("containerContent").getChildByName("team").kill();
+        instance.getChildByName("containerContent").getChildByName("clients").kill();
+        instance.getChildByName("containerContent").getChildByName("footer").kill();
 
         dispatchInstance.getChildByName("scrollBar").kill()
         dispatchInstance.removeChild(dispatchInstance.getChildByName("scrollBar"))
@@ -194,14 +206,17 @@
 
         instance.getChildByName("bg").graphics.clear();
         instance.getChildByName("bg").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
+        
         instance.getChildByName("containerContent").getChildByName("slider").resize();
         instance.getChildByName("containerContent").getChildByName("servicosHome").resize();
         instance.getChildByName("containerContent").getChildByName("sectionTestimonials").resize();
         instance.getChildByName("containerContent").getChildByName("testimonials").resize();
         instance.getChildByName("containerContent").getChildByName("sectionTeam").resize();
         instance.getChildByName("containerContent").getChildByName("team").resize();
+        instance.getChildByName("containerContent").getChildByName("clients").resize();
+        instance.getChildByName("containerContent").getChildByName("footer").resize();
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTeam").getHeight()+instance.getChildByName("containerContent").getChildByName("team").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTeam").getHeight()+instance.getChildByName("containerContent").getChildByName("team").getHeight()+instance.getChildByName("containerContent").getChildByName("clients").getHeight()+instance.getChildByName("containerContent").getChildByName("footer").getHeight()
 
         if(dispatchInstance.getChildByName("scrollBar")){
             dispatchInstance.getChildByName("scrollBar").y = 2*ratio

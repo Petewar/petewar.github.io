@@ -58,7 +58,7 @@
 
         var bg = new createjs.Shape();
         bg.name = "bg";
-        bg.graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 632*ratio);
+        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 756*ratio);
         bg.y = posY
         instance.addChild(bg);
 
@@ -242,6 +242,7 @@
 
         instance.removeChild(instance.getChildByName("containerTeamImages"))
         instance.removeChild(instance.getChildByName("bg"))
+        instance.removeChild(instance.getChildByName("shapeDrag"))
         
     } ; 
 
@@ -256,7 +257,7 @@
          totalWidth = maskWidth*imagesTeam.length
 
          instance.getChildByName("bg").graphics.clear();
-         instance.getChildByName("bg").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 632*ratio);
+         instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 756*ratio);
 
          instance.getChildByName("shapeDrag").x = stage.canvas.width/2-88/2*ratio
 

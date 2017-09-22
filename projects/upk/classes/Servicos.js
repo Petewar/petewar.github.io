@@ -33,7 +33,7 @@
     function addElements(){
         var bg = new createjs.Shape();
         bg.name = "bg";
-        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
+        bg.graphics.beginFill("#FFFFFF").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
         instance.addChild(bg);
     }
 
@@ -49,7 +49,7 @@
     p.resize = function() {
 
         instance.getChildByName("bg").graphics.clear();
-        instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
+        instance.getChildByName("bg").graphics.beginFill("#FFFFFF").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
 
     } ; 
 

@@ -17,6 +17,7 @@
     var data;
     var nav=0;
     var isColapse = false;
+    var widthMenu
 
     var p = createjs.extend(Navigation, createjs.Container);
 
@@ -121,7 +122,7 @@
 
         var containerQuickMenu = new createjs.Container();
         containerQuickMenu.name = "containerQuickMenu"
-        containerQuickMenu.x = stage.canvas.width/2+100*ratio+70*ratio;
+        
         containerQuickMenu.y = 77*ratio;
         instance.addChild(containerQuickMenu);
 
@@ -171,6 +172,8 @@
 
         }
 
+        widthMenu = hitQuickMenu.x+titleQuickMenu.getBounds().width*ratio+100*ratio
+        containerQuickMenu.x = stage.canvas.width/2+45*ratio
     }
 
     function addAnimation(){
@@ -283,7 +286,7 @@
     p.colapse = function() {
         
         if(isColapse==false){
-            console.log("collapse")
+            
             isColapse = true
             TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut})
             TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut});
@@ -350,7 +353,7 @@
         instance.getChildByName("containerBurger").x = 50*ratio-28/2*ratio
         instance.getChildByName("containerBurger").y = 66*ratio
 
-        instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2+100*ratio+70*ratio;
+        instance.getChildByName("containerQuickMenu").x = stage.canvas.width/2+45*ratio
         instance.getChildByName("containerQuickMenu").y = 77*ratio;
 
         instance.getChildByName("bgQuickMenu").graphics.clear();
