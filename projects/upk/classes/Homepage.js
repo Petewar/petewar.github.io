@@ -109,6 +109,7 @@
         imageClient = evt.contentLoader[imageSliderLength+4]
         imageTeam = evt.contentLoader.slice(imageSliderLength+5, imageSliderLength+5+imageTeamLength);
         instance = instanceRefresh;
+
         addElements();
         addScroll();
         addAnimation();

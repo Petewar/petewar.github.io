@@ -222,6 +222,8 @@
         hitButton.alpha = 0.01;
         containerViewMore.addChild(hitButton);
 
+        stage.setBounds(stage.canvas.width,stage.canvas.heigh)
+
     }
 
     function addAnimation(){

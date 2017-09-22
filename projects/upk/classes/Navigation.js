@@ -293,16 +293,12 @@
         if(isColapse==false){
             
             isColapse = true
-            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:-100*ratio,ease:Expo.easeInOut})
-            TweenMax.to(instance.getChildByName("bgCalendar"), 1, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("calendarIcon"),1, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("titleCalendar"), 1, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {y:-732*ratio+142*ratio,ease:Expo.easeOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("calendarIcon"),0.75, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("titleCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
-            for(var i=0;i<3;i++){
-                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.clear();
-                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#86C430").drawRect(0, 0, 28*ratio, 3*ratio);
-            }
         }
 
     }
@@ -314,16 +310,12 @@
         if(isColapse==true){
             isColapse = false
 
-            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {x:0,ease:Expo.easeInOut})
-            TweenMax.to(instance.getChildByName("bgCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("calendarIcon"),0.75, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("titleCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("bgSideBar"), 1, {y:0,ease:Expo.easeInOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 1, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("calendarIcon"),1, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("titleCalendar"), 1, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
-            for(var i=0;i<3;i++){
-                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.clear();
-                instance.getChildByName("containerBurger").getChildByName("shapeBurger"+i).graphics.beginFill("#ffffff").drawRect(0, 0, 28*ratio, 3*ratio);
-            }
         }
     }
 
