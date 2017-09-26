@@ -38,7 +38,7 @@
         return scalingFactor
     }
 
-    p.resize = function (Icontainer,IcontainerW,IcontainerH,IbiggerFrame,Ivalue){
+    p.resize = function (Icontainer,IcontainerW,IcontainerH,IbiggerFrame,Ivalue,Ivalue2){
 
         if(IbiggerFrame=="more"){
             scalingFactor = scaleSize(stage.canvas.width+Ivalue,stage.canvas.height+Ivalue,IcontainerW,IcontainerH);  
@@ -62,6 +62,10 @@
 
         if(IbiggerFrame=="areaTeam"){
             scalingFactor = scaleSize(Ivalue,632*ratio,IcontainerW,IcontainerH);  
+        }
+
+        if(IbiggerFrame=="areaMenu"){
+            scalingFactor = scaleSize(Ivalue+50*ratio,Ivalue2+50*ratio,IcontainerW,IcontainerH);  
         }
 
         if(IbiggerFrame=="areaClient"){

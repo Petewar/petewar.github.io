@@ -293,10 +293,10 @@
         if(isColapse==false){
             
             isColapse = true
-            TweenMax.to(instance.getChildByName("bgSideBar"), 0.5, {y:-732*ratio+142*ratio,ease:Expo.easeOut})
-            TweenMax.to(instance.getChildByName("bgCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("calendarIcon"),0.75, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
-            TweenMax.to(instance.getChildByName("titleCalendar"), 0.75, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("bgSideBar"), 1, {y:-732*ratio+142*ratio,ease:Expo.easeOut})
+            TweenMax.to(instance.getChildByName("bgCalendar"), 0.5, {y:deafaultCalendarPos-122*ratio,ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("calendarIcon"),0.5, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
+            TweenMax.to(instance.getChildByName("titleCalendar"), 0.5, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
         }
