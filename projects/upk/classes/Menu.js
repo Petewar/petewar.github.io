@@ -23,7 +23,7 @@
     var bImage;
     var heightFactor
     var heightFactorTwo
-    var maxWidth = 500;
+    var maxWidth
     var currentWidth;
     var parallax;
 
@@ -35,6 +35,7 @@
         dispatchInstance = this.dispatchInstance;
         instanceRefresh = instance;
         ratio = this.ratio;
+        maxWidth = 500*ratio
         aspectRatio = this.aspectRatio;
         svg = this.svg;
 
@@ -149,6 +150,11 @@
             bg.compositeOperation = "multiply";
             bg.name = "bg"+i;
 
+            var bgStroke = new createjs.Shape();
+            bgStroke.graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+            bgStroke.scaleX = 0;
+            bgStroke.name = "bgStroke"+i;
+
             var titleMenu = new createjs.Text();
             titleMenu.name = "titleMenu"+i;
             titleMenu.font = "36px BwModelica-ExtraBold";
@@ -185,6 +191,8 @@
                 bg.graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
                 bg.y = 160*ratio
 
+                bgStroke.y = 160*ratio
+
                 titleMenu.color = "#8EC640";
                 titleMenu.x = 40*ratio
                 titleMenu.y = bg.y+177*ratio-40*ratio
@@ -220,6 +228,8 @@
 
                 bg.graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
                 bg.y = 160*ratio+177*ratio+50*ratio
+
+                bgStroke.y = 160*ratio+177*ratio+50*ratio
 
                 titleMenu.color = "#ffffff";
                 titleMenu.x = 40*ratio
@@ -259,6 +269,9 @@
                 bg.x = currentWidth+50*ratio
                 bg.y = 50*ratio
 
+                bgStroke.x = currentWidth+50*ratio
+                bgStroke.y = 50*ratio
+
                 titleMenu.color = "#FFFFFF";
                 titleMenu.x = currentWidth+50*ratio+40*ratio
                 titleMenu.y = bg.y+heightFactorTwo-100*ratio
@@ -295,6 +308,9 @@
                 bg.x = currentWidth+50*ratio
                 bg.y = stage.canvas.height-177*ratio-50*ratio
                 
+                bgStroke.x = currentWidth+50*ratio
+                bgStroke.y = stage.canvas.height-177*ratio-50*ratio
+
                 titleMenu.color = "#8EC640";
                 titleMenu.x = currentWidth+50*ratio+40*ratio
                 titleMenu.y = stage.canvas.height-100*ratio
@@ -323,6 +339,7 @@
             containerMenu.addChild(headerMenu);
             containerMenu.addChild(arrow);
             containerMenu.addChild(maskArrow);
+            containerMenu.addChild(bgStroke);
 
             imageMenu[i].mask = menu;
 
@@ -391,8 +408,9 @@
             instance.getChildByName("containerMenu").getChildByName("bg"+i).cursor = "pointer";
             instance.getChildByName("containerMenu").getChildByName("bg"+i).type = "menu";
             instance.getChildByName("containerMenu").getChildByName("bg"+i).instance = i;
-            instance.getChildByName("containerMenu").getChildByName("bg"+i).defaultScaleX = instance.getChildByName("containerMenu").getChildByName("bg"+i).scaleX
-            instance.getChildByName("containerMenu").getChildByName("bg"+i).defaultScaleY = instance.getChildByName("containerMenu").getChildByName("bg"+i).scaleY
+            instance.getChildByName("containerMenu").getChildByName("bg"+i).arrowPosX = instance.getChildByName("containerMenu").getChildByName("arrow"+i).x
+            instance.getChildByName("containerMenu").getChildByName("bg"+i).headerPosX = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x
+            instance.getChildByName("containerMenu").getChildByName("bg"+i).scale = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).scaleX
             instance.getChildByName("containerMenu").getChildByName("bg"+i).addEventListener("mouseover", handlerOver);
             instance.getChildByName("containerMenu").getChildByName("bg"+i).addEventListener("mouseout", handlerOut)
             instance.getChildByName("containerMenu").getChildByName("bg"+i).addEventListener("click", handlerClick);
@@ -413,7 +431,10 @@
             break;
 
             case "menu":
-                
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("bgStroke"+event.target.instance), 0.75, {scaleX:1,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("arrow"+event.target.instance), 0.5, {x:event.target.arrowPosX+20*ratio,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("headerMenu"+event.target.instance), 0.6, {x:event.target.headerPosX+20*ratio,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("imageMenu"+event.target.instance), 0.6, {scaleX:event.target.scale+0.1,scaleY:event.target.scale+0.1,ease:Expo.easeInOut})
             break;
 
         }
@@ -431,7 +452,10 @@
             break;
 
             case "menu":
-                
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("bgStroke"+event.target.instance), 0.75, {scaleX:0,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("arrow"+event.target.instance), 0.75, {x:event.target.arrowPosX,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("headerMenu"+event.target.instance), 0.6, {x:event.target.headerPosX,ease:Expo.easeInOut})
+                TweenMax.to(instance.getChildByName("containerMenu").getChildByName("imageMenu"+event.target.instance), 0.6, {scaleX:event.target.scale,scaleY:event.target.scale,ease:Expo.easeInOut})
             break;
         }
     }
@@ -445,6 +469,30 @@
 
             case "close":
                 SWFAddress.setValue("/home");
+            break;
+
+            case "menu":
+                
+                for(var i=0;i<imageMenu.length;i++){
+
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("mouseover", handlerOver);
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("mouseout", handlerOut)
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("click", handlerClick);
+
+                }
+
+                switch(event.target.instance){
+
+                    case 1:
+                        SWFAddress.setValue("/servicos");
+                    break;
+
+                    case 3:
+                        SWFAddress.setValue("/contatos");
+                    break;
+    
+                }
+
             break;
         }
     }
@@ -474,6 +522,7 @@
 
             instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.clear();
             instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.clear();
+            instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.clear();
 
             instance.getChildByName("containerMenu").removeChild(instance.getChildByName("containerMenu").getChildByName("menu"+i))
             instance.getChildByName("containerMenu").removeChild(instance.getChildByName("containerMenu").getChildByName("bg"+i))
@@ -485,6 +534,8 @@
             instance.getChildByName("containerMenu").removeChild(instance.getChildByName("containerMenu").getChildByName("arrow"+i))
 
             instance.getChildByName("containerMenu").removeChild(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i))
+
+            instance.getChildByName("containerMenu").removeChild(instance.getChildByName("containerMenu").getChildByName("bgStroke"+i))
 
         }
 
@@ -523,6 +574,7 @@
 
             instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.clear();
             instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.clear();
+            instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.clear();
 
             if(i==0){
                 instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
@@ -530,6 +582,9 @@
 
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio
+
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio
 
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+177*ratio-40*ratio
@@ -558,6 +613,9 @@
 
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio+177*ratio+50*ratio
+
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio+177*ratio+50*ratio
 
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactor-100*ratio
@@ -590,6 +648,10 @@
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 50*ratio
 
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 50*ratio
+
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactorTwo-100*ratio
 
@@ -619,6 +681,10 @@
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
                 instance.getChildByName("containerMenu").getChildByName("bg"+i).y = stage.canvas.height-177*ratio-50*ratio
+
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = stage.canvas.height-177*ratio-50*ratio
 
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
                 instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = stage.canvas.height-100*ratio

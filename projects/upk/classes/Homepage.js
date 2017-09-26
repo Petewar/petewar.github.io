@@ -151,7 +151,7 @@
         var clients = new Clients(ratio,imageClient,data.titleClients,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight());
         clients.name = "clients";
 
-        var footer = new Footer(ratio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight()+clients.getHeight());
+        var footer = new Footer(ratio,data.titleFooter,data.headerFooter,data.buttonFooter,data.yearFooter,svg.createSvg(data.certificationOne,"#ffffff"),svg.createSvg(data.certificationTwo,"#ffffff"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight()+clients.getHeight());
         footer.name = "footer"
 
         containerContent.addChild(servicosHome);

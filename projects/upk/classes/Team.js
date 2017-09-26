@@ -98,7 +98,7 @@
             textTeamNAme.font = "24px BwModelica-Bold";
             textTeamNAme.textBaseline = "alphabetic";
             textTeamNAme.color = "#FFFFFF";
-            textTeamNAme.lineWidth = 100*ratio
+            textTeamNAme.lineWidth = 100
             textTeamNAme.lineHeight = 30;
             textTeamNAme.text = teamNames[i]
             textTeamNAme.scaleX = ratio;
