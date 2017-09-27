@@ -164,8 +164,6 @@
         oldX = stage.mouseX;
         frequency = Math.abs(startX-endX);
         
-        var customEvent = new createjs.Event("goToGalleryPos");
-        dispatchInstance.dispatchEvent(customEvent);
     }
 
     function stopDrag(Ianim){
@@ -189,7 +187,6 @@
                 }
             }
         }
-
         
 
         TweenMax.to(instance.getChildByName("containerGalleryImages"), 0.5, {x:(-maskWidth)*nav,ease:Expo.easeOut})
@@ -202,6 +199,9 @@
         instance.getChildByName("containerGalleryImages").removeEventListener("pressup", stopDrag);
 
         addDrag();
+
+        var customEvent = new createjs.Event("goToGalleryPos");
+        dispatchInstance.dispatchEvent(customEvent);
 
     }
 
