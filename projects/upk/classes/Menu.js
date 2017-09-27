@@ -26,6 +26,7 @@
     var maxWidth
     var currentWidth;
     var parallax;
+    var timer
 
     var p = createjs.extend(Menu, createjs.Container);
 
@@ -51,10 +52,15 @@
             addAnimation();
             addParallax();
 
-            var customEvent = new createjs.Event("show");
-            dispatchInstance.dispatchEvent(customEvent);
+             timer = setTimeout(show, 10);
+            
         }
-     }
+    }
+
+    function show(){
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
+    }
 
     function preloadDataJson(Ijson){
 

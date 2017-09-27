@@ -34,7 +34,7 @@
         calendar = new Calendar(instance,ratio,svg);
         contatos = new Contatos(instance,ratio,svg);
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
-        servicos = new Servicos(instance,ratio);
+        servicos = new Servicos(instance,ratio,aspectRatio,svg);
 
         var content = new createjs.Container();
         content.name = "content";
@@ -88,7 +88,7 @@
     }
 
     function scrollChangeHandler(event){
-
+        
        if(event.yPos<-(610*ratio)){
             instance.getChildByName("navigation").colapse();
        }else{
@@ -131,6 +131,7 @@
             break;
              case "/servicos":
                 currentView = servicos;
+                currentView.addEventListener("scrollChange", scrollChangeHandler);
                 currentView.init();
                 instance.getChildByName("content").addChild(currentView);
                 instance.getChildByName("navigation").setValue(1);

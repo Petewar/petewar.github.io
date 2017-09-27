@@ -1,8 +1,9 @@
 (function () {
 
-    function Team(Iratio,IaspectRatio,ImagesTeam,IteamNames,IteamPosition,IshapeDrag,IposY) {
+    function Team(IdispatchInstance,Iratio,IaspectRatio,ImagesTeam,IteamNames,IteamPosition,IshapeDrag,IposY) {
         this.Container_constructor();
         this.ratio = Iratio;
+        this.dispatchInstance = IdispatchInstance;
         this.aspectRatio = IaspectRatio;
         this.imagesTeam = ImagesTeam;
         this.imagesTeam = ImagesTeam;
@@ -14,6 +15,7 @@
     }
     
     var instance;
+    var dispatchInstance;
     var ratio;
     var aspectRatio;
     var imagesTeam;
@@ -38,6 +40,7 @@
     p.setup = function() {
 
         instance = this;
+        dispatchInstance = this.dispatchInstance
         ratio = this.ratio
         aspectRatio = this.aspectRatio
         imagesTeam = this.imagesTeam
@@ -162,6 +165,9 @@
         timer = setTimeout(anim, 150);
         oldX = stage.mouseX;
         frequency = Math.abs(startX-endX);
+
+         var customEvent = new createjs.Event("goToTeamPos");
+        dispatchInstance.dispatchEvent(customEvent);
         
     }
 

@@ -28,6 +28,7 @@
     var imageTeamLength;
     var imageClient;
     var totalHeight;
+    var timer
 
     var p = createjs.extend(Homepage, createjs.Container);
 
@@ -52,9 +53,14 @@
             addScroll();
             addAnimation();
 
-            var customEvent = new createjs.Event("show");
-            dispatchInstance.dispatchEvent(customEvent);
+            timer = setTimeout(show, 10);
+            
         }
+    }
+
+    function show(){
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
     }
 
     function preloadDataJson(Ijson){
@@ -145,7 +151,7 @@
         var sectionTwo = new SectionColor(ratio,imageSection[1],data.sectionTeamTitle,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight());
         sectionTwo.name = "sectionTeam"
 
-        var team = new Team(ratio,aspectRatio,imageTeam,data.teamNames,data.teamPosition,svg.createSvg(data.shapeDrag,"#8EC640"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight());
+        var team = new Team(instance,ratio,aspectRatio,imageTeam,data.teamNames,data.teamPosition,svg.createSvg(data.shapeDrag,"#8EC640"),slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight());
         team.name = "team";
 
         var clients = new Clients(ratio,imageClient,data.titleClients,aspectRatio,slider.getHeight()+servicosHome.getHeight()+sectionOne.getHeight()+testimonials.getHeight()+sectionTwo.getHeight()+team.getHeight());
@@ -172,6 +178,8 @@
 
     function addScroll(){
 
+        instance.addEventListener("goToTeamPos", goToTeamPosHandler);
+
         totalHeight = instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTeam").getHeight()+instance.getChildByName("containerContent").getChildByName("team").getHeight()+instance.getChildByName("containerContent").getChildByName("clients").getHeight()+instance.getChildByName("containerContent").getChildByName("footer").getHeight()
 
         var scrollBar = new ScrollBar(ratio,instance.getChildByName("containerContent").y,instance,instance.getChildByName("containerContent"),totalHeight,0.15);
@@ -182,7 +190,13 @@
 
     }
 
+    function goToTeamPosHandler(event){
+        dispatchInstance.getChildByName("scrollBar").updatePos(-(instance.getChildByName("containerContent").getChildByName("slider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicosHome").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionTestimonials").getHeight()+instance.getChildByName("containerContent").getChildByName("testimonials").getHeight()-140*ratio))
+    }
+
     p.kill = function() {
+
+        instance.removeEventListener("goToTeamPos", goToTeamPosHandler);
 
         instance.getChildByName("bg").graphics.clear();
         instance.removeChild(instance.getChildByName("bg"));

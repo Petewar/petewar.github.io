@@ -281,6 +281,7 @@
     }
 
      p.setValue = function(Inav) {
+
         instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav).scaleX = 0;
         nav = Inav;
         TweenMax.to(instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav), 1, {scaleX:1,ease:Expo.easeInOut})
@@ -299,6 +300,12 @@
             TweenMax.to(instance.getChildByName("titleCalendar"), 0.5, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
+            if(nav==1){
+                instance.getChildByName("bgQuickMenu").visible = true;
+                instance.getChildByName("containerLogo").visible = true;
+                TweenMax.from(instance.getChildByName("bgQuickMenu"), 0.5, {alpha:0,ease:Expo.easeInOut})
+                TweenMax.from(instance.getChildByName("containerLogo"), 0.5, {alpha:0,ease:Expo.easeInOut});
+            }
         }
 
     }
@@ -308,6 +315,7 @@
         deafaultCalendarPos = 732*ratio
 
         if(isColapse==true){
+
             isColapse = false
 
             TweenMax.to(instance.getChildByName("bgSideBar"), 1, {y:0,ease:Expo.easeInOut})
@@ -315,6 +323,11 @@
             TweenMax.to(instance.getChildByName("calendarIcon"),1, {y:Math.floor(deafaultCalendarPos-122*ratio+30*ratio),ease:Expo.easeInOut});
             TweenMax.to(instance.getChildByName("titleCalendar"), 1, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
+
+            if(nav==1){
+                instance.getChildByName("bgQuickMenu").visible = false;
+                instance.getChildByName("containerLogo").visible = false;
+            }
 
         }
     }
@@ -327,12 +340,20 @@
     }
 
     p.show = function() {
-        instance.getChildByName("containerQuickMenu").visible = true;
-        instance.getChildByName("bgQuickMenu").visible = true;
-        instance.getChildByName("containerLogo").visible = true;
-        TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut})
-        TweenMax.from(instance.getChildByName("containerLogo"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
+
+        if(nav==1){
+
+            instance.getChildByName("containerQuickMenu").visible = true;
+            TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
+
+        }else{
+            instance.getChildByName("containerQuickMenu").visible = true;
+            instance.getChildByName("bgQuickMenu").visible = true;
+            instance.getChildByName("containerLogo").visible = true;
+            TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})
+            TweenMax.from(instance.getChildByName("bgQuickMenu"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut})
+            TweenMax.from(instance.getChildByName("containerLogo"), 1, {delay:0.5,alpha:0,ease:Expo.easeInOut});
+        }
 
     }
 

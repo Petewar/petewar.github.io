@@ -35,21 +35,33 @@
 
     function addElements(){
         
-        image.regX = image.getBounds().width/2
-        image.regY = image.getBounds().height/2
-        image.x = stage.canvas.width/2
-        image.y = posY+240/2*ratio
-        aspectRatio.resize(image,image.getBounds().width,image.getBounds().height,"areaSection")
-        instance.addChild(image);
+        if(image!=null){
 
-        var bgMask = new createjs.Shape();
-        bgMask.name = "bgMask";
-        bgMask.alpha = 0.01
-        bgMask.graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 240*ratio);
-        bgMask.y = posY
-        instance.addChild(bgMask);
+            image.regX = image.getBounds().width/2
+            image.regY = image.getBounds().height/2
+            image.x = stage.canvas.width/2
+            image.y = posY+240/2*ratio
+            aspectRatio.resize(image,image.getBounds().width,image.getBounds().height,"areaSection")
+            instance.addChild(image);
 
-        image.mask = bgMask
+            var bgMask = new createjs.Shape();
+            bgMask.name = "bgMask";
+            bgMask.alpha = 0.01
+            bgMask.graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 240*ratio);
+            bgMask.y = posY
+            instance.addChild(bgMask);
+
+            image.mask = bgMask
+
+        }else{
+
+            var bg = new createjs.Shape();
+            bg.name = "bg";
+            bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 240*ratio);
+            bg.y = posY
+            instance.addChild(bg);
+
+        }
 
         var titleSection = new createjs.Text();
         titleSection.name = "titleSection";
@@ -82,8 +94,14 @@
 
 
     p.kill = function() {
-        instance.removeChild(image)
-        instance.removeChild(instance.getChildByName("bgMask"))
+
+        if(image!=null){
+            instance.removeChild(image)
+            instance.removeChild(instance.getChildByName("bgMask"))
+        }else{
+            instance.removeChild(instance.getChildByName("bg"))
+        }
+
         instance.removeChild(instance.getChildByName("titleSection"))
         instance.removeChild(instance.getChildByName("strokeTestimonial"))
     } ; 
@@ -94,15 +112,23 @@
 
     p.resize = function() {
 
-        image.regX = image.getBounds().width/2
-        image.regY = image.getBounds().height/2
-        image.x = stage.canvas.width/2
-        image.y = posY+240/2*ratio
-        aspectRatio.resize(image,image.getBounds().width,image.getBounds().height,"areaSection")
+        if(image!=null){
+            image.regX = image.getBounds().width/2
+            image.regY = image.getBounds().height/2
+            image.x = stage.canvas.width/2
+            image.y = posY+240/2*ratio
+            aspectRatio.resize(image,image.getBounds().width,image.getBounds().height,"areaSection")
 
-        instance.getChildByName("bgMask").graphics.clear();
-        instance.getChildByName("bgMask").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 240*ratio);
-        instance.getChildByName("bgMask").y = posY
+            instance.getChildByName("bgMask").graphics.clear();
+            instance.getChildByName("bgMask").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 240*ratio);
+            instance.getChildByName("bgMask").y = posY
+        }else{
+
+            instance.getChildByName("bg").graphics.clear();
+            instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 240*ratio);
+            instance.getChildByName("bg").y = posY
+
+        }
 
         instance.getChildByName("titleSection").x = stage.canvas.width/2-instance.getChildByName("titleSection").getBounds().width/2*ratio
         instance.getChildByName("titleSection").y = posY+instance.getChildByName("titleSection").getBounds().height*ratio-20*ratio+80*ratio

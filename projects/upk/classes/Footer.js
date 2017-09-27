@@ -194,7 +194,7 @@
     p.resize = function() {
 
         instance.getChildByName("bg").graphics.clear();
-        instance.getChildByName("bg").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 500*ratio);
+        instance.getChildByName("bg").graphics.beginFill("#333333").drawRect(0, 0, stage.canvas.width, 505*ratio);
 
         instance.getChildByName("containerInfo").x = stage.canvas.width/2-totalWidth/2;
     

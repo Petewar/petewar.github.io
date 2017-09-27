@@ -16,6 +16,7 @@
 
     var preloadData;
     var data;
+    var timer
 
     var p = createjs.extend(Calendar, createjs.Container);
 
@@ -35,10 +36,15 @@
             addElements();
             addAnimation();
 
-             var customEvent = new createjs.Event("show");
-            dispatchInstance.dispatchEvent(customEvent);
+            timer = setTimeout(show, 10);
+            
         }
-     }
+    }
+
+    function show(){
+        var customEvent = new createjs.Event("show");
+        dispatchInstance.dispatchEvent(customEvent);
+    }
 
     function preloadDataJson(Ijson){
 

@@ -64,6 +64,10 @@
             scalingFactor = scaleSize(Ivalue,632*ratio,IcontainerW,IcontainerH);  
         }
 
+        if(IbiggerFrame=="areaGallery"){
+            scalingFactor = scaleSize(stage.canvas.width,408*ratio,IcontainerW,IcontainerH);  
+        }
+
         if(IbiggerFrame=="areaMenu"){
             scalingFactor = scaleSize(Ivalue+50*ratio,Ivalue2+50*ratio,IcontainerW,IcontainerH);  
         }
@@ -74,6 +78,10 @@
 
         if(IbiggerFrame=="fullWidth"){
             scalingFactor = scaleSize(stage.canvas.width,IcontainerH,IcontainerW,IcontainerH);  
+        }
+
+        if(IbiggerFrame=="areaServices"){
+            scalingFactor = scaleSize(stage.canvas.width,512*ratio,IcontainerW,IcontainerH);  
         }
 
         if(IbiggerFrame==undefined){
