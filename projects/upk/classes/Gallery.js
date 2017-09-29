@@ -1,6 +1,6 @@
 (function () {
 
-    function Gallery(IdispatchInstance,Iratio,IaspectRatio,ImagesGallery,IgalleryTitle,IgalleryDesc,IshapeDrag,IposY) {
+    function Gallery(IdispatchInstance,Iratio,IaspectRatio,ImagesGallery,IgalleryTitle,IgalleryDesc,IshapeDrag,IposY,Iheight) {
         this.Container_constructor();
         this.dispatchInstance = IdispatchInstance
         this.ratio = Iratio;
@@ -10,6 +10,7 @@
         this.galleryDesc = IgalleryDesc;
         this.shapeDrag = IshapeDrag;
         this.posY = IposY;
+        this.galleryHeight = Iheight;
         this.setup();
     }
     
@@ -23,6 +24,7 @@
     var maskWidth;
     var totalWidth;
     var posY;
+    var galleryHeight
     
     var offSet;
     var startX;
@@ -49,6 +51,7 @@
         galleryDesc = this.galleryDesc
         shapeDrag = this.shapeDrag
         posY = this.posY
+        galleryHeight = this.galleryHeight
 
         addElements();
         addAnimation();
@@ -62,7 +65,7 @@
 
         var bg = new createjs.Shape();
         bg.name = "bg";
-        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 920*ratio);
+        bg.graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, galleryHeight);
         bg.y = posY
         instance.addChild(bg);
 
@@ -78,57 +81,61 @@
 
         for(var i=0;i<imagesGallery.length;i++){
 
-            var containerGalleryImage = new createjs.Container();
-            containerGalleryImage.name = "containerGalleryImage"+i
-            containerGalleryImage.x = maskWidth*i
-            containerGalleryImages.addChild(containerGalleryImage);
+                var containerGalleryImage = new createjs.Container();
+                containerGalleryImage.name = "containerGalleryImage"+i
+                containerGalleryImage.x = maskWidth*i
+                containerGalleryImages.addChild(containerGalleryImage);
 
-            imagesGallery[i].regY = imagesGallery[i].getBounds().height/2
+                imagesGallery[i].regY = imagesGallery[i].getBounds().height/2
 
-            imagesGallery[i].name = "imagesGallery"+i
-            aspectRatio.resize(imagesGallery[i],imagesGallery[i].getBounds().width,imagesGallery[i].getBounds().height,"areaGallery")
-            containerGalleryImage.addChild(imagesGallery[i]);
+                imagesGallery[i].name = "imagesGallery"+i
+                aspectRatio.resize(imagesGallery[i],imagesGallery[i].getBounds().width,imagesGallery[i].getBounds().height,"areaGallery")
+                containerGalleryImage.addChild(imagesGallery[i]);
 
-            var maskImage = new createjs.Shape();
-            maskImage.name = "maskImage"+i
-            maskImage.alpha = 0.01;
-            maskImage.graphics.beginFill("#ffffff").drawRect(0, 0, maskWidth, 408*ratio);
-            containerGalleryImage.addChild(maskImage);
+                var maskImage = new createjs.Shape();
+                maskImage.name = "maskImage"+i
+                maskImage.alpha = 0.01;
+                maskImage.graphics.beginFill("#ffffff").drawRect(0, 0, maskWidth, 408*ratio);
+                containerGalleryImage.addChild(maskImage);
 
-            imagesGallery[i].mask = maskImage
+                imagesGallery[i].mask = maskImage
+
+            }
+
+        if((galleryTitle!=null)&&(galleryDesc!=null)){
+
+            var containerTitleDesc = new createjs.Container();
+            containerTitleDesc.name = "containerTitleDesc";
+            containerTitleDesc.x = stage.canvas.width/2
+            containerTitleDesc.y = shapeDrag.y+24*ratio+28*ratio+50*ratio
+            instance.addChild(containerTitleDesc);
+
+            var titleGallery = new createjs.Text();
+            titleGallery.name = "titleGallery";
+            titleGallery.font = "36px BwModelica-ExtraBold";
+            titleGallery.textBaseline = "alphabetic";
+            titleGallery.textAlign = "center"
+            titleGallery.color = "#333333";
+            titleGallery.text = galleryTitle[nav];
+            titleGallery.scaleX = ratio;
+            titleGallery.scaleY = ratio;
+            containerTitleDesc.addChild(titleGallery);
+
+            var descGallery = new createjs.Text();
+            descGallery.name = "descGallery";
+            descGallery.font = "14px BwModelica-Regular";
+            descGallery.textBaseline = "alphabetic";
+            descGallery.textAlign = "center"
+            descGallery.color = "#333333";
+            descGallery.lineWidth = stage.canvas.width/2
+            descGallery.lineHeight = 30;
+            descGallery.y = 20*ratio+50*ratio
+            descGallery.text = galleryDesc[nav];
+            descGallery.scaleX = ratio;
+            descGallery.scaleY = ratio;
+            containerTitleDesc.addChild(descGallery);
 
         }
-
-        var containerTitleDesc = new createjs.Container();
-        containerTitleDesc.name = "containerTitleDesc";
-        containerTitleDesc.x = stage.canvas.width/2
-        containerTitleDesc.y = shapeDrag.y+24*ratio+28*ratio+50*ratio
-        instance.addChild(containerTitleDesc);
-
-        var titleGallery = new createjs.Text();
-        titleGallery.name = "titleGallery";
-        titleGallery.font = "36px BwModelica-ExtraBold";
-        titleGallery.textBaseline = "alphabetic";
-        titleGallery.textAlign = "center"
-        titleGallery.color = "#333333";
-        titleGallery.text = galleryTitle[nav];
-        titleGallery.scaleX = ratio;
-        titleGallery.scaleY = ratio;
-        containerTitleDesc.addChild(titleGallery);
-
-        var descGallery = new createjs.Text();
-        descGallery.name = "descGallery";
-        descGallery.font = "14px BwModelica-Regular";
-        descGallery.textBaseline = "alphabetic";
-        descGallery.textAlign = "center"
-        descGallery.color = "#333333";
-        descGallery.lineWidth = stage.canvas.width/2
-        descGallery.lineHeight = 30;
-        descGallery.y = 20*ratio+50*ratio
-        descGallery.text = galleryDesc[nav];
-        descGallery.scaleX = ratio;
-        descGallery.scaleY = ratio;
-        containerTitleDesc.addChild(descGallery);
     }
 
     function addDrag(){
@@ -177,13 +184,13 @@
                 if(nav<imagesGallery.length){
                     if(Math.floor(Math.abs(instance.getChildByName("containerGalleryImages").x-stage.canvas.width))<totalWidth){
                         nav++ 
-                        updateInfo();
+                        if((galleryTitle!=null)&&(galleryDesc!=null))updateInfo();
                     }
                 }
             }else if(direction == 1){
                 if(nav>0){
                     nav--
-                    updateInfo()
+                    if((galleryTitle!=null)&&(galleryDesc!=null))updateInfo()
                 }
             }
         }
@@ -243,8 +250,11 @@
             instance.getChildByName("containerGalleryImages").removeChild(instance.getChildByName("containerGalleryImages").getChildByName("containerGalleryImage"+i))
         }
 
-        instance.getChildByName("containerTitleDesc").removeChild(instance.getChildByName("containerTitleDesc").getChildByName("descGallery"))
-        instance.getChildByName("containerTitleDesc").removeChild(instance.getChildByName("containerTitleDesc").getChildByName("titleGallery"))
+        if((galleryTitle!=null)&&(galleryDesc!=null)){
+            instance.getChildByName("containerTitleDesc").removeChild(instance.getChildByName("containerTitleDesc").getChildByName("descGallery"))
+            instance.getChildByName("containerTitleDesc").removeChild(instance.getChildByName("containerTitleDesc").getChildByName("titleGallery"))    
+        }
+        
 
         instance.removeChild(instance.getChildByName("containerTitleDesc"))
         instance.removeChild(instance.getChildByName("containerGalleryImages"))
@@ -256,7 +266,7 @@
 
     p.getHeight = function() {
 
-        return 920*ratio;        
+        return galleryHeight;        
     }
 
     p.resize = function() {
@@ -265,7 +275,7 @@
          totalWidth = maskWidth*imagesGallery.length
 
          instance.getChildByName("bg").graphics.clear();
-         instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, 920*ratio);
+         instance.getChildByName("bg").graphics.beginFill("#F1F3F0").drawRect(0, 0, stage.canvas.width, galleryHeight);
 
          for(var i=0;i<imagesGallery.length;i++){
 
@@ -278,8 +288,11 @@
         }
 
         instance.getChildByName("shapeDrag").x = stage.canvas.width/2-88/2*ratio
-        instance.getChildByName("containerTitleDesc").x = stage.canvas.width/2
-        instance.getChildByName("containerTitleDesc").getChildByName("descGallery").lineWidth = stage.canvas.width/2
+        
+        if((galleryTitle!=null)&&(galleryDesc!=null)){
+            instance.getChildByName("containerTitleDesc").x = stage.canvas.width/2
+            instance.getChildByName("containerTitleDesc").getChildByName("descGallery").lineWidth = stage.canvas.width/2
+        }
 
         nav=0
         instance.getChildByName("containerGalleryImages").x = (-maskWidth)*nav

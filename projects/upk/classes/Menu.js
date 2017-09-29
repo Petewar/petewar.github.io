@@ -478,8 +478,7 @@
             break;
 
             case "menu":
-                
-                console.log(event.target.instance)
+            
 
                 if(event.target.instance!=2){
 

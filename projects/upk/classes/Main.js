@@ -90,13 +90,25 @@
     }
 
     function scrollChangeHandler(event){
-        
-       if(event.yPos<-(610*ratio)){
-            instance.getChildByName("navigation").colapse();
-            if(instance.getChildByName("navigation").getNav()==-1)instance.getChildByName("navigation").changeToDark();
+
+       if(instance.getChildByName("navigation").getNav()==-1){
+            
+            if(event.yPos<-(190*ratio)){
+                instance.getChildByName("navigation").colapse();
+                instance.getChildByName("navigation").changeToDark();
+            }else{
+                instance.getChildByName("navigation").expand();
+                instance.getChildByName("navigation").changeToLight();
+            }
+
        }else{
-            instance.getChildByName("navigation").expand();
-            if(instance.getChildByName("navigation").getNav()==-1)instance.getChildByName("navigation").changeToLight();
+
+            if(event.yPos<-(410*ratio)){
+                instance.getChildByName("navigation").colapse();
+            
+            }else{
+                instance.getChildByName("navigation").expand();
+            }
        }
 
     }

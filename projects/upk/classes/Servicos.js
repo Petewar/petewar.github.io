@@ -134,7 +134,7 @@
         var sectionOne = new Section(ratio,null,data.sectionServicesTitle,aspectRatio,headerSlider.getHeight()+servicesQuote.getHeight());
         sectionOne.name = "sectionServices"
 
-        var gallery = new Gallery(instance,ratio,aspectRatio,imageGallery,data.galleryTitle,data.galleryDesc,svg.createSvg(data.shapeDrag,"#8EC640"),headerSlider.getHeight()+servicesQuote.getHeight()+sectionOne.getHeight());
+        var gallery = new Gallery(instance,ratio,aspectRatio,imageGallery,data.galleryTitle,data.galleryDesc,svg.createSvg(data.shapeDrag,"#8EC640"),headerSlider.getHeight()+servicesQuote.getHeight()+sectionOne.getHeight(),920*ratio);
         gallery.name = "gallery";
 
         var clients = new Clients(ratio,imageClient,data.titleClients,aspectRatio,headerSlider.getHeight()+servicesQuote.getHeight()+sectionOne.getHeight()+gallery.getHeight());

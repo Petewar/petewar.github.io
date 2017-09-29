@@ -20,6 +20,7 @@
     var bgImage;
     var acercaImage;
     var imageGallery;
+    var imageSection;
     var aspectRatio;
     var svg;
     var timer;
@@ -75,7 +76,7 @@
 
         imageGalleryLength = data.imagesGallery.length
 
-        var imagesToLoad = [data.headerImage,data.acercaImage].concat(data.imagesGallery)
+        var imagesToLoad = [data.headerImage,data.acercaImage,data.sectionImageInstalacoes].concat(data.imagesGallery)
 
         loadImages(imagesToLoad)
     }
@@ -100,7 +101,8 @@
 
         bgImage = evt.contentLoader[0]
         acercaImage = evt.contentLoader[1]
-        imageGallery = evt.contentLoader.slice(2, 2+imageGalleryLength);
+        imageSection = evt.contentLoader[2]
+        imageGallery = evt.contentLoader.slice(3, 3+imageGalleryLength);
         instance = instanceRefresh;
 
         addElements();
@@ -126,28 +128,27 @@
         var headerSlider = new HeaderSlider(ratio,bgImage,data.headerTitle,data.titleSlider,aspectRatio,false);
         headerSlider.name = "headerSlider";
 
-        var acercaInfo = new AcercaInfo(ratio,acercaImage,data.titleInstitucional,data.descInstitucional,data.titleRecursos,data.descRecursos,svg.createSvg(data.shapeArrow,"#8EC640"),aspectRatio,0);
+        var acercaInfo = new AcercaInfo(ratio,acercaImage,data.titleInstitucional,data.descInstitucional,data.titleRecursos,data.descRecursos,svg.createSvg(data.shapeArrow,"#8EC640"),data.buttonEmprego,data.buttonCE,aspectRatio,0);
         acercaInfo.name = "acercaInfo";
         
-        /*
-        var sectionOne = new Section(ratio,null,data.sectionServicesTitle,aspectRatio,0+servicesQuote.getHeight());
-        sectionOne.name = "sectionServices"
-
-        var gallery = new Gallery(instance,ratio,aspectRatio,imageGallery,data.galleryTitle,data.galleryDesc,svg.createSvg(data.shapeDrag,"#8EC640"),0+servicesQuote.getHeight()+sectionOne.getHeight());
+        var sectionOne = new Section(ratio,imageSection,data.sectionTitleInstalacoes,aspectRatio,acercaInfo.getHeight());
+        sectionOne.name = "sectionInstalacoes"
+        
+        var gallery = new Gallery(instance,ratio,aspectRatio,imageGallery,null,null,svg.createSvg(data.shapeDrag,"#8EC640"),0+acercaInfo.getHeight()+sectionOne.getHeight(),535*ratio);
         gallery.name = "gallery";
 
-        var clients = new Clients(ratio,imageClient,data.titleClients,aspectRatio,0+servicesQuote.getHeight()+sectionOne.getHeight()+gallery.getHeight());
-        clients.name = "clients";
+        var acercaHistory = new AcercaHistory(ratio,0+acercaInfo.getHeight()+sectionOne.getHeight()+gallery.getHeight());
+        acercaHistory.name = "acercaHistory";
 
-        var footer = new Footer(ratio,data.titleFooter,data.headerFooter,data.buttonFooter,data.yearFooter,svg.createSvg(data.certificationOne,"#ffffff"),svg.createSvg(data.certificationTwo,"#ffffff"),0+servicesQuote.getHeight()+sectionOne.getHeight()+gallery.getHeight()+clients.getHeight());
-        footer.name = "footer"*/
+        var footer = new Footer(ratio,data.titleFooter,data.headerFooter,data.buttonFooter,data.yearFooter,svg.createSvg(data.certificationOne,"#ffffff"),svg.createSvg(data.certificationTwo,"#ffffff"),0+acercaInfo.getHeight()+sectionOne.getHeight()+gallery.getHeight()+acercaHistory.getHeight());
+        footer.name = "footer"
 
         containerContent.addChild(acercaInfo)
         containerContent.addChild(headerSlider)
-        /*containerContent.addChild(sectionOne)
+        containerContent.addChild(sectionOne)
         containerContent.addChild(gallery)
-        containerContent.addChild(clients)
-        containerContent.addChild(footer)*/
+        containerContent.addChild(acercaHistory)
+        containerContent.addChild(footer)
         
     }
 
@@ -158,9 +159,9 @@
 
     function addScroll(){
 
-        //instance.addEventListener("goToGalleryPos", goToGalleryPosHandler);
+        instance.addEventListener("goToGalleryPos", goToGalleryPosHandler);
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("acercaInfo").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("acercaInfo").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionInstalacoes").getHeight()+instance.getChildByName("containerContent").getChildByName("gallery").getHeight()+instance.getChildByName("containerContent").getChildByName("acercaHistory").getHeight()+instance.getChildByName("containerContent").getChildByName("footer").getHeight()
 
         var scrollBar = new ScrollBar(ratio,instance.getChildByName("containerContent").y,instance,instance.getChildByName("containerContent"),totalHeight,0.15);
         scrollBar.name = "scrollBar";
@@ -172,23 +173,22 @@
 
 
     function goToGalleryPosHandler(event){
-        //dispatchInstance.getChildByName("scrollBar").updatePos(-(instance.getChildByName("containerContent").getChildByName("headerSlider").getHeight()+instance.getChildByName("containerContent").getChildByName("servicesQuote").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionServices").getHeight()-140*ratio))
+        dispatchInstance.getChildByName("scrollBar").updatePos(-(instance.getChildByName("containerContent").getChildByName("acercaInfo").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionInstalacoes").getHeight()-140*ratio))
     }
 
     p.kill = function() {
 
-        //instance.removeEventListener("goToGalleryPos", goToGalleryPosHandler);
+        instance.removeEventListener("goToGalleryPos", goToGalleryPosHandler);
 
         instance.getChildByName("bg").graphics.clear();
         instance.removeChild(instance.getChildByName("bg"));
 
         instance.getChildByName("containerContent").getChildByName("headerSlider").kill();
         instance.getChildByName("containerContent").getChildByName("acercaInfo").kill();
-        /*instance.getChildByName("containerContent").getChildByName("servicesQuote").kill();
-        instance.getChildByName("containerContent").getChildByName("sectionServices").kill();
+        instance.getChildByName("containerContent").getChildByName("sectionInstalacoes").kill();
         instance.getChildByName("containerContent").getChildByName("gallery").kill();
-        instance.getChildByName("containerContent").getChildByName("clients").kill();
-        instance.getChildByName("containerContent").getChildByName("footer").kill();*/
+        instance.getChildByName("containerContent").getChildByName("acercaHistory").kill();
+        instance.getChildByName("containerContent").getChildByName("footer").kill();
 
         dispatchInstance.getChildByName("scrollBar").kill()
         dispatchInstance.removeChild(dispatchInstance.getChildByName("scrollBar"))
@@ -203,13 +203,12 @@
         
         instance.getChildByName("containerContent").getChildByName("headerSlider").resize();
         instance.getChildByName("containerContent").getChildByName("acercaInfo").resize();
-        /*instance.getChildByName("containerContent").getChildByName("servicesQuote").resize();
-        instance.getChildByName("containerContent").getChildByName("sectionServices").resize();
+        instance.getChildByName("containerContent").getChildByName("sectionInstalacoes").resize();
         instance.getChildByName("containerContent").getChildByName("gallery").resize();
-        instance.getChildByName("containerContent").getChildByName("clients").resize();
-        instance.getChildByName("containerContent").getChildByName("footer").resize();*/
+        instance.getChildByName("containerContent").getChildByName("acercaHistory").resize();
+        instance.getChildByName("containerContent").getChildByName("footer").resize();
 
-        totalHeight = instance.getChildByName("containerContent").getChildByName("acercaInfo").getHeight()
+        totalHeight = instance.getChildByName("containerContent").getChildByName("acercaInfo").getHeight()+instance.getChildByName("containerContent").getChildByName("sectionInstalacoes").getHeight()+instance.getChildByName("containerContent").getChildByName("gallery").getHeight()+instance.getChildByName("containerContent").getChildByName("acercaHistory").getHeight()+instance.getChildByName("containerContent").getChildByName("footer").getHeight()
 
         if(dispatchInstance.getChildByName("scrollBar")){
             dispatchInstance.getChildByName("scrollBar").y = 2*ratio
