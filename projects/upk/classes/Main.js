@@ -18,6 +18,7 @@
     var calendar;
     var contatos;
     var servicos;
+    var acerca;
     var currentView;
 
     var p = createjs.extend(Main, createjs.Container);
@@ -35,6 +36,7 @@
         contatos = new Contatos(instance,ratio,svg);
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
         servicos = new Servicos(instance,ratio,aspectRatio,svg);
+        acerca = new Acerca(instance,ratio,aspectRatio,svg);
 
         var content = new createjs.Container();
         content.name = "content";
@@ -91,8 +93,10 @@
         
        if(event.yPos<-(610*ratio)){
             instance.getChildByName("navigation").colapse();
+            if(instance.getChildByName("navigation").getNav()==-1)instance.getChildByName("navigation").changeToDark();
        }else{
             instance.getChildByName("navigation").expand();
+            if(instance.getChildByName("navigation").getNav()==-1)instance.getChildByName("navigation").changeToLight();
        }
 
     }
@@ -118,6 +122,7 @@
                 currentView.init();
                 instance.getChildByName("content").addChild(currentView);
                 instance.getChildByName("navigation").setValue(0);
+                instance.getChildByName("navigation").changeToDark();
             break;
             case "/menu":
                 currentView = menu;
@@ -135,12 +140,22 @@
                 currentView.init();
                 instance.getChildByName("content").addChild(currentView);
                 instance.getChildByName("navigation").setValue(1);
+                instance.getChildByName("navigation").changeToDark();
             break;
              case "/contatos":
                 currentView = contatos;
                 currentView.init();
                 instance.addChild(currentView);
                 instance.getChildByName("navigation").setValue(2);
+                instance.getChildByName("navigation").changeToDark();
+            break;
+             case "/acerca":
+                currentView = acerca;
+                currentView.addEventListener("scrollChange", scrollChangeHandler);
+                currentView.init();
+                instance.getChildByName("content").addChild(currentView);
+                instance.getChildByName("navigation").setValue(-1);
+                instance.getChildByName("navigation").changeToLight();
             break;
         }
     }
