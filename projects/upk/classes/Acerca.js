@@ -137,7 +137,7 @@
         var gallery = new Gallery(instance,ratio,aspectRatio,imageGallery,null,null,svg.createSvg(data.shapeDrag,"#8EC640"),0+acercaInfo.getHeight()+sectionOne.getHeight(),535*ratio);
         gallery.name = "gallery";
 
-        var acercaHistory = new AcercaHistory(ratio,0+acercaInfo.getHeight()+sectionOne.getHeight()+gallery.getHeight());
+        var acercaHistory = new AcercaHistory(ratio,data.certificationOne,data.certificationTwo,data.qualidadeTitle,data.qualidadeDesc,data.historiaTitle,data.historiaDesc,data.totalServices,data.totalServicesTitles,data.year,data.percentDiagramColors,data.percentDiagramTitle,data.percentDesc,data.diagramPieces,data.certificadosTitle,svg,0+acercaInfo.getHeight()+sectionOne.getHeight()+gallery.getHeight());
         acercaHistory.name = "acercaHistory";
 
         var footer = new Footer(ratio,data.titleFooter,data.headerFooter,data.buttonFooter,data.yearFooter,svg.createSvg(data.certificationOne,"#ffffff"),svg.createSvg(data.certificationTwo,"#ffffff"),0+acercaInfo.getHeight()+sectionOne.getHeight()+gallery.getHeight()+acercaHistory.getHeight());
