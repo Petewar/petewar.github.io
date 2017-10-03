@@ -478,36 +478,29 @@
             break;
 
             case "menu":
-            
 
-                if(event.target.instance!=2){
-
-                    for(var i=0;i<imageMenu.length;i++){
+                 for(var i=0;i<imageMenu.length;i++){
 
                         instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("mouseover", handlerOver);
                         instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("mouseout", handlerOut)
                         instance.getChildByName("containerMenu").getChildByName("bg"+i).removeEventListener("click", handlerClick);
 
                     }
-
-
+                    
                     switch(event.target.instance){
-
                         case 0:
                             SWFAddress.setValue("/acerca");
                         break;
-
                         case 1:
                             SWFAddress.setValue("/servicos");
                         break;
-
+                         case 2:
+                            SWFAddress.setValue("/destaques/"+0);
+                        break;
                         case 3:
                             SWFAddress.setValue("/contatos");
                         break;
-        
                     }
-
-                }
 
             break;
         }

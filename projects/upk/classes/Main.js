@@ -20,6 +20,8 @@
     var servicos;
     var acerca;
     var currentView;
+    var destaques;
+    var destaqueValue;
 
     var p = createjs.extend(Main, createjs.Container);
 
@@ -37,6 +39,7 @@
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
         servicos = new Servicos(instance,ratio,aspectRatio,svg);
         acerca = new Acerca(instance,ratio,aspectRatio,svg);
+        destaque = new Destaques(instance,ratio,aspectRatio,svg);
 
         var content = new createjs.Container();
         content.name = "content";
@@ -99,6 +102,14 @@
             }else{
                 instance.getChildByName("navigation").expand();
                 instance.getChildByName("navigation").changeToLight();
+            }
+
+       }else if(instance.getChildByName("navigation").getNav()==-2){
+            
+            if(event.yPos<-(190*ratio)){
+                instance.getChildByName("navigation").colapse();
+            }else{
+                instance.getChildByName("navigation").expand();
             }
 
        }else{
@@ -168,6 +179,22 @@
                 instance.getChildByName("content").addChild(currentView);
                 instance.getChildByName("navigation").setValue(-1);
                 instance.getChildByName("navigation").changeToLight();
+            break;
+
+        }
+
+        switch(SWFAddress.getValue().search("destaques")==1){
+            case true:
+                
+                destaqueValue = SWFAddress.getValue().split("destaques/")[1]
+
+                currentView = destaque;
+                currentView.addEventListener("scrollChange", scrollChangeHandler);
+                currentView.init(destaqueValue);
+                instance.getChildByName("content").addChild(currentView);
+                instance.getChildByName("navigation").setValue(-2);
+                instance.getChildByName("navigation").changeToDark();
+
             break;
         }
     }

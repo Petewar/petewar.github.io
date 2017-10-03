@@ -286,9 +286,9 @@
 
     p.setValue = function(Inav) {
 
-        if(nav!=-1)instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav).scaleX = 0;
+        if(nav!=-1)if(nav!=-2)instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav).scaleX = 0;
         nav = Inav;
-        if(nav!=-1)TweenMax.to(instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav), 1, {scaleX:1,ease:Expo.easeInOut})
+        if(nav!=-1)if(nav!=-2)TweenMax.to(instance.getChildByName("containerQuickMenu").getChildByName("strokeQuickMenu"+nav), 1, {scaleX:1,ease:Expo.easeInOut})
     
     }
 
@@ -305,7 +305,7 @@
             TweenMax.to(instance.getChildByName("titleCalendar"), 0.5, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
-            if((nav==1)||(nav==-1)){
+            if((nav==1)||(nav==-1)||(nav==-2)){
                 
                 instance.getChildByName("bgQuickMenu").visible = true;
                 instance.getChildByName("containerLogo").visible = true;
@@ -330,7 +330,7 @@
             TweenMax.to(instance.getChildByName("titleCalendar"), 1, {y:deafaultCalendarPos-122*ratio+30*ratio+36*ratio+7*ratio+10*ratio,ease:Expo.easeInOut});
             instance.getChildByName("hitCalendar").y = deafaultCalendarPos-122*ratio;
 
-            if((nav==1)||(nav==-1)){
+            if((nav==1)||(nav==-1)||(nav==-2)){
 
                 instance.getChildByName("bgQuickMenu").visible = false;
                 instance.getChildByName("containerLogo").visible = false;
@@ -349,7 +349,7 @@
 
     p.show = function() {
 
-        if((nav==1)||(nav==-1)){
+        if((nav==1)||(nav==-1)||(nav==-2)){
 
             instance.getChildByName("containerQuickMenu").visible = true;
             TweenMax.from(instance.getChildByName("containerQuickMenu"), 1, {alpha:0,ease:Expo.easeInOut})

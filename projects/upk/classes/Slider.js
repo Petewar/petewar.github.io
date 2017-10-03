@@ -346,6 +346,14 @@
             break;
 
             case "button":
+
+                instance.getChildByName("containerViewMore").getChildByName("hitButton").cursor = "auto";
+                instance.getChildByName("containerViewMore").getChildByName("hitButton").type = "button";
+                instance.getChildByName("containerViewMore").getChildByName("hitButton").removeEventListener("mouseover", handlerOver);
+                instance.getChildByName("containerViewMore").getChildByName("hitButton").removeEventListener("mouseout", handlerOut)
+                instance.getChildByName("containerViewMore").getChildByName("hitButton").removeEventListener("click", handlerClick);
+
+                SWFAddress.setValue("/destaques/"+nav);
                 
             break;
         }
@@ -442,7 +450,7 @@
 
         instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("viewMore"));
         instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("strokeButton"));
-        instance.removeChild(instance.getChildByName("containerViewMore").getChildByName("hitButton"));
+        
 
         instance.removeChild(instance.getChildByName("containerViewMore"));
 
