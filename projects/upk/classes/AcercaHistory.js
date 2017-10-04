@@ -253,7 +253,7 @@
             percentDescText.textBaseline = "alphabetic";
             percentDescText.color = percentDiagramColors[i]
             if(ratio==1)percentDescText.lineWidth = 138*ratio
-            if(ratio==2)percentDescText.lineWidth = stage.canvas.width/2-300*ratio
+            if(ratio==2)percentDescText.lineWidth = 50*ratio
             percentDescText.lineHeight = 18;
             percentDescText.text = percentDesc[i];
             percentDescText.scaleX = ratio;

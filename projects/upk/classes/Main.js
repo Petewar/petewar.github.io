@@ -34,7 +34,7 @@
         aspectRatio = new AspectRatio(ratio);
         
         menu = new Menu(instance,ratio,svg,aspectRatio);
-        calendar = new Calendar(instance,ratio,svg);
+        calendar = new Calendar(instance,ratio,aspectRatio,svg);
         contatos = new Contatos(instance,ratio,svg);
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
         servicos = new Servicos(instance,ratio,aspectRatio,svg);

@@ -1,6 +1,6 @@
 (function () {
 
-    function DestaqueNews(Iratio,Inav,InavLength,IshapeArrow,Image,Inews,IaspectRatio,IposY) {
+    function DestaqueNews(Iratio,Inav,InavLength,IshapeArrow,Image,Inews,Inext,IaspectRatio,IposY) {
         this.Container_constructor();
         this.ratio = Iratio;
         this.image = Image
@@ -10,6 +10,7 @@
         this.posY = IposY;
         this.nav = Inav;
         this.navLength = InavLength
+        this.next = Inext
         this.setup();
     }
     
@@ -21,6 +22,7 @@
     var shapeArrow;
     var posY;
     var nav;
+    var next;
     var navLength;
 
     var p = createjs.extend(DestaqueNews, createjs.Container);
@@ -36,6 +38,7 @@
         posY = this.posY;
         nav = this.nav
         navLength = this.navLength
+        next = this.next
 
         addElements();
         addAnimation();
@@ -95,6 +98,18 @@
 
         shapeArrow.mask = maskButton;
 
+        var titleServices = new createjs.Text();
+        titleServices.name = "titleServices";
+        titleServices.font = "11px BwModelica-Bold";
+        titleServices.textBaseline = "alphabetic";
+        titleServices.color = "#8EC640"
+        titleServices.text = next;
+        titleServices.scaleX = ratio;
+        titleServices.scaleY = ratio;
+        titleServices.x = greenCircle.x-titleServices.getBounds().width/2*ratio
+        titleServices.y = greenCircle.y+38*ratio+20*ratio
+        containerButton.addChild(titleServices);
+
     }
 
     function addAnimation(){
@@ -108,16 +123,16 @@
     function handlerOver(event){
 
         TweenMax.to(instance.getChildByName("containerButton").getChildByName("greenCircle"), 0.5, {scaleX:1.2,scaleY:1.2,ease:Expo.easeInOut})
-        TweenMax.to(instance.getChildByName("containerButton").getChildByName("containerButtonFeature"), 0.6, {x:-40*ratio,scaleY:1.2,ease:Expo.easeInOut})
+        TweenMax.to(instance.getChildByName("containerButton").getChildByName("containerButtonFeature"), 0.5, {x:-36*ratio,scaleY:1.2,ease:Expo.easeInOut})
         TweenMax.to(shapeArrow, 0.5, {x:0,ease:Expo.easeInOut})
 
     }
 
     function handlerOut(event){
 
-        TweenMax.to(instance.getChildByName("containerButton").getChildByName("greenCircle"), 0.6, {scaleX:1,scaleY:1,ease:Expo.easeInOut})
-        TweenMax.to(instance.getChildByName("containerButton").getChildByName("containerButtonFeature"), 0.6, {x:-30*ratio,scaleY:1.2,ease:Expo.easeInOut})
-        TweenMax.to(shapeArrow, 0.6, {x:-20*ratio,ease:Expo.easeInOut})
+        TweenMax.to(instance.getChildByName("containerButton").getChildByName("greenCircle"), 0.5, {scaleX:1,scaleY:1,ease:Expo.easeInOut})
+        TweenMax.to(instance.getChildByName("containerButton").getChildByName("containerButtonFeature"), 0.5, {x:-30*ratio,scaleY:1.2,ease:Expo.easeInOut})
+        TweenMax.to(shapeArrow, 0.5, {x:-20*ratio,ease:Expo.easeInOut})
     }
 
     function handlerClick(event){
@@ -146,7 +161,8 @@
         instance.removeChild(shapeArrow);
         instance.removeChild(instance.getChildByName("news"));
         instance.getChildByName("containerButton").getChildByName("containerButtonFeature").removeChild(instance.getChildByName("containerButton").getChildByName("containerButtonFeature").getChildByName("maskButton"));
-        instance.getChildByName("containerButton").removeChild(instance.getChildByName("containerButton").getChildByName("containerButtonFeature"));
+        instance.getChildByName("containerButton").removeChild(instance.getChildByName("containerButton").getChildByName("titleServices"));
+        instance.getChildByName("containerButton").removeChild(instance.getChildByName("containerButton").getChildByName("titleServices"));
         instance.removeChild(instance.getChildByName("containerButton"));
 
     } ; 

@@ -2,6 +2,7 @@
 [
       {
       "clientImage":"images/home/clientes.jpg",
+      "next":"PRÓXIMO DESTAQUE",
       "titleClients":"Clientes",
       "titleFooter":["Contato","Certificações"],
       "headerFooter":"Entre em contato connosco hoje para saber mais sobre os nossos serviços.",

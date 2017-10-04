@@ -126,7 +126,7 @@
         var headerSlider = new HeaderSlider(ratio,bgImage,data.headerTitle,data.titleSlider,aspectRatio,true);
         headerSlider.name = "headerSlider";
 
-        var destaqueNews = new DestaqueNews(ratio,nav,newsLength,svg.createSvg(comumData.shapeArrow,"#ffffff"),destaqueImage,data.destaqueItem,aspectRatio,headerSlider.getHeight());
+        var destaqueNews = new DestaqueNews(ratio,nav,newsLength,svg.createSvg(comumData.shapeArrow,"#ffffff"),destaqueImage,data.destaqueItem,comumData.next,aspectRatio,headerSlider.getHeight());
         destaqueNews.name = "destaqueNews";
 
         var sectionOne = new Section(ratio,null,data.sectionGalleryTitle,aspectRatio,headerSlider.getHeight()+destaqueNews.getHeight());

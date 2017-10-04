@@ -425,6 +425,17 @@
 
     }
 
+
+    function refreshHitMenu(){
+
+        for(var i=0;i<imageMenu.length;i++){
+
+            instance.getChildByName("containerMenu").getChildByName("bg"+i).arrowPosX = instance.getChildByName("containerMenu").getChildByName("arrow"+i).x
+            instance.getChildByName("containerMenu").getChildByName("bg"+i).headerPosX = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x
+
+        }
+    }
+
     function handlerOver(event){
 
         switch(event.target.type){
@@ -458,6 +469,7 @@
             break;
 
             case "menu":
+
                 TweenMax.to(instance.getChildByName("containerMenu").getChildByName("bgStroke"+event.target.instance), 0.75, {scaleX:0,ease:Expo.easeInOut})
                 TweenMax.to(instance.getChildByName("containerMenu").getChildByName("arrow"+event.target.instance), 0.75, {x:event.target.arrowPosX,ease:Expo.easeInOut})
                 TweenMax.to(instance.getChildByName("containerMenu").getChildByName("headerMenu"+event.target.instance), 0.6, {x:event.target.headerPosX,ease:Expo.easeInOut})
@@ -586,6 +598,7 @@
             instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.clear();
 
             if(i==0){
+
                 instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
                 instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 160*ratio
 
@@ -612,6 +625,8 @@
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
                 aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
+
+             
             }
 
             if(i==1){
@@ -643,6 +658,8 @@
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactor-50*ratio)/2
                 aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactor-50*ratio)
+                
+               
             }
 
             if(i==2){
@@ -679,6 +696,8 @@
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactorTwo-50*ratio)/2
                 aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactorTwo-50*ratio)
 
+                
+                
             }
 
             if(i==3){
@@ -713,9 +732,12 @@
                 instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
                 aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
                 
+              
             }
 
         }
+
+        refreshHitMenu();
 
         instance.getChildByName("containerMenu").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
         instance.getChildByName("containerLogo").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
