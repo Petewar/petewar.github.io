@@ -52,6 +52,10 @@
             scalingFactor = scaleSize(stage.canvas.width/2,560*ratio,IcontainerW,IcontainerH);  
         }
 
+        if(IbiggerFrame=="areaCalendar"){
+            scalingFactor = scaleSize(stage.canvas.width/2,stage.canvas.width/2,IcontainerW,IcontainerH);  
+        }
+
         if(IbiggerFrame=="areaFeature"){
             scalingFactor = scaleSize(Math.floor(stage.canvas.width-632*ratio),560*ratio,IcontainerW,IcontainerH);  
         }
