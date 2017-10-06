@@ -35,7 +35,7 @@
         
         menu = new Menu(instance,ratio,svg,aspectRatio);
         calendar = new Calendar(instance,ratio,aspectRatio,svg);
-        contatos = new Contatos(instance,ratio,svg);
+        contatos = new Contatos(instance,ratio,svg,aspectRatio);
         homepage = new Homepage(instance,ratio,aspectRatio,svg);
         servicos = new Servicos(instance,ratio,aspectRatio,svg);
         acerca = new Acerca(instance,ratio,aspectRatio,svg);

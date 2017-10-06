@@ -84,6 +84,10 @@
             scalingFactor = scaleSize(stage.canvas.width,IcontainerH,IcontainerW,IcontainerH);  
         }
 
+        if(IbiggerFrame=="halfFullWidth"){
+            scalingFactor = scaleSize(stage.canvas.width/2,stage.canvas.height,IcontainerW,IcontainerH);  
+        }
+
         if(IbiggerFrame=="areaServices"){
             scalingFactor = scaleSize(stage.canvas.width,512*ratio,IcontainerW,IcontainerH);  
         }

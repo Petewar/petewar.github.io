@@ -84,7 +84,7 @@
     function loadImages(iFiles){
         
         //New Loader
-        loader = new Loader(iFiles);
+        loader = new Loader(iFiles,ratio);
         loader.register(instance)
         instance.addEventListener("loaderComplete", loadImagesComplete);
 
