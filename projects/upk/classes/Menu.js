@@ -11,7 +11,6 @@
     
     var instance;
     var dispatchInstance;
-    var instanceRefresh;
     var ratio;
     var aspectRatio;
     var svg;
@@ -34,7 +33,6 @@
 
         instance = this;
         dispatchInstance = this.dispatchInstance;
-        instanceRefresh = instance;
         ratio = this.ratio;
         maxWidth = 500*ratio
         aspectRatio = this.aspectRatio;
@@ -83,25 +81,24 @@
     function loadImages(iFiles){
         
         //New Loader
-        loader = new Loader(iFiles,ratio);
-        loader.register(instance)
+        loader = new Loader(instance,ratio,iFiles);
+        instance.addChild(loader);
         instance.addEventListener("loaderComplete", loadImagesComplete);
 
     }
 
     function loadImagesComplete(evt) {
 
-        console.log("Loader Images: "+evt.contentLoader.length);
+        //console.log("Loader Images: "+evt.contentLoader.length);
         
         //remove Loader
         instance.removeEventListener("loaderComplete", loadImagesComplete);
         loader.kill();
+        instance.removeChild(loader);
         loader = null;
 
         bImage = evt.contentLoader[0];
         imageMenu = evt.contentLoader.slice(1,data.menu.length+1)
-
-        instance = instanceRefresh;
 
         addElements();
         addAnimation();
@@ -567,181 +564,186 @@
 
     p.resize = function() {
 
-        if(parallax!=undefined){
-            parallax.dispose();
-            parallax = undefined
-            timer = setTimeout(addParallax, 500);
-        }
-
-        instance.getChildByName("bg").graphics.clear();
-        instance.getChildByName("bg").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
-
-        instance.getChildByName("closeIcon").x = 40*ratio
-        instance.getChildByName("closeIcon").y = 66*ratio
-
-        instance.getChildByName("closeIconHit").x = 40*ratio
-        instance.getChildByName("closeIconHit").y = 66*ratio
+        if(loader)loader.resize();
         
-        bImage.x.regX = 1690/2;
-        bImage.y.regY = 1050/2;
-        bImage.x = stage.canvas.width/2
-        bImage.y = stage.canvas.height/2
-        aspectRatio.resize(bImage,1680,1050,"more",100*ratio);
+        if(instance.getChildByName("bg")){
 
-        currentWidth = stage.canvas.width-75*ratio-600*ratio-50*ratio;
-        if(currentWidth>maxWidth)currentWidth = maxWidth
-
-        for(var i=0;i<imageMenu.length;i++){
-
-            instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.clear();
-            instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.clear();
-            instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.clear();
-
-            if(i==0){
-
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 160*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+177*ratio-40*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = 80*ratio
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
-
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = 40*ratio
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(40*ratio-20*ratio);
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
-
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
-                aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
-
-             
+            if(parallax!=undefined){
+                parallax.dispose();
+                parallax = undefined
+                timer = setTimeout(addParallax, 500);
             }
 
-            if(i==1){
+            instance.getChildByName("bg").graphics.clear();
+            instance.getChildByName("bg").graphics.beginFill("#ffffff").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
 
-                heightFactor = stage.canvas.height-(160*ratio+177*ratio+50*ratio)
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 160*ratio+177*ratio+50*ratio
+            instance.getChildByName("closeIcon").x = 40*ratio
+            instance.getChildByName("closeIcon").y = 66*ratio
 
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio+177*ratio+50*ratio
+            instance.getChildByName("closeIconHit").x = 40*ratio
+            instance.getChildByName("closeIconHit").y = 66*ratio
+            
+            bImage.x.regX = 1690/2;
+            bImage.y.regY = 1050/2;
+            bImage.x = stage.canvas.width/2
+            bImage.y = stage.canvas.height/2
+            aspectRatio.resize(bImage,1680,1050,"more",100*ratio);
 
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio+177*ratio+50*ratio
+            currentWidth = stage.canvas.width-75*ratio-600*ratio-50*ratio;
+            if(currentWidth>maxWidth)currentWidth = maxWidth
 
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactor-100*ratio
+            for(var i=0;i<imageMenu.length;i++){
 
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = 80*ratio
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
+                instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.clear();
+                instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.clear();
+                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.clear();
 
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = 40*ratio
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
+                if(i==0){
 
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(40*ratio-20*ratio);
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 160*ratio
 
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactor-50*ratio)/2
-                aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactor-50*ratio)
-                
-               
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+177*ratio-40*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = 80*ratio
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
+
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = 40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(40*ratio-20*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
+
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
+                    aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
+
+                 
+                }
+
+                if(i==1){
+
+                    heightFactor = stage.canvas.height-(160*ratio+177*ratio+50*ratio)
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 160*ratio+177*ratio+50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactor-50*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 160*ratio+177*ratio+50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 160*ratio+177*ratio+50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = 40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactor-100*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = 80*ratio
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
+
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = 40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(40*ratio-20*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
+
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = currentWidth/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactor-50*ratio)/2
+                    aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactor-50*ratio)
+                    
+                   
+                }
+
+                if(i==2){
+
+                    heightFactorTwo = stage.canvas.height-100*ratio-177*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0, currentWidth, heightFactorTwo-50*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactorTwo-50*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactorTwo-100*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = currentWidth+50*ratio+80*ratio
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
+
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = currentWidth+50*ratio+40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(currentWidth+50*ratio+40*ratio-20*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
+
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY= instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = instance.getChildByName("containerMenu").getChildByName("menu"+i).x+currentWidth/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactorTwo-50*ratio)/2
+                    aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactorTwo-50*ratio)
+
+                    
+                    
+                }
+
+                if(i==3){
+                   
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("menu"+i).y = stage.canvas.height-177*ratio-50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("bg"+i).y = stage.canvas.height-177*ratio-50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
+                    instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = stage.canvas.height-177*ratio-50*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = stage.canvas.height-100*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = currentWidth+50*ratio+80*ratio
+                    instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
+
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = currentWidth+50*ratio+40*ratio
+                    instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
+
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(currentWidth+50*ratio+40*ratio-20*ratio);
+                    instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
+
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY= instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = instance.getChildByName("containerMenu").getChildByName("menu"+i).x+currentWidth/2
+                    instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
+                    aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
+                    
+                  
+                }
+
             }
 
-            if(i==2){
+            refreshHitMenu();
 
-                heightFactorTwo = stage.canvas.height-100*ratio-177*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0, currentWidth, heightFactorTwo-50*ratio);
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).y = 50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#333333").drawRect(0, 0, currentWidth, heightFactorTwo-50*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).y = 50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = 50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("bg"+i).y+heightFactorTwo-100*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = currentWidth+50*ratio+80*ratio
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
-
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = currentWidth+50*ratio+40*ratio
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(currentWidth+50*ratio+40*ratio-20*ratio);
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
-
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY= instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = instance.getChildByName("containerMenu").getChildByName("menu"+i).x+currentWidth/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(heightFactorTwo-50*ratio)/2
-                aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,heightFactorTwo-50*ratio)
-
-                
-                
-            }
-
-            if(i==3){
-               
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("menu"+i).y = stage.canvas.height-177*ratio-50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).graphics.beginFill("#ffffff").drawRect(0, 0,  currentWidth, 177*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("bg"+i).y = stage.canvas.height-177*ratio-50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).graphics.beginFill("#8EC640").drawRect(0, 0,  currentWidth, 4*ratio);
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).x = currentWidth+50*ratio
-                instance.getChildByName("containerMenu").getChildByName("bgStroke"+i).y = stage.canvas.height-177*ratio-50*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).x = currentWidth+50*ratio+40*ratio
-                instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y = stage.canvas.height-100*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).x = currentWidth+50*ratio+80*ratio
-                instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).y-instance.getChildByName("containerMenu").getChildByName("titleMenu"+i).getBounds().height*ratio-5*ratio;
-
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).x = currentWidth+50*ratio+40*ratio
-                instance.getChildByName("containerMenu").getChildByName("maskArrow"+i).y = instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-35/2*ratio
-
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).x = Math.floor(currentWidth+50*ratio+40*ratio-20*ratio);
-                instance.getChildByName("containerMenu").getChildByName("arrow"+i).y = Math.floor(instance.getChildByName("containerMenu").getChildByName("headerMenu"+i).y-9*ratio)
-
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regX = instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).regY= instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).x = instance.getChildByName("containerMenu").getChildByName("menu"+i).x+currentWidth/2
-                instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).y = instance.getChildByName("containerMenu").getChildByName("menu"+i).y+(177*ratio)/2
-                aspectRatio.resize(instance.getChildByName("containerMenu").getChildByName("imageMenu"+i),instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().width,instance.getChildByName("containerMenu").getChildByName("imageMenu"+i).getBounds().height,"areaMenu",currentWidth,177*ratio)
-                
-              
-            }
-
+            instance.getChildByName("containerMenu").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
+            instance.getChildByName("containerLogo").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
+        
         }
-
-        refreshHitMenu();
-
-        instance.getChildByName("containerMenu").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
-        instance.getChildByName("containerLogo").x = Math.floor(stage.canvas.width/2-currentWidth-25*ratio)
-    
 
     } ; 
 
