@@ -1,0 +1,39 @@
+{"news":
+[
+    {
+    	"date":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. - 01 / 03", 
+    	"title":"Sed sollicitudin euismod varius",
+    	"image":"images/news1.jpg",
+    	"video":""
+    },
+
+    {
+        "date":"Sed in hendrerit tortor, at pulvinar urna. Mauris cursus luctus massa - 02 / 03", 
+        "title":"Quisque accumsan ut dui ut tincidunt...",
+        "image":"video/video2.jpg",
+        "video":"video/video2.mp4"
+    },
+
+     {
+        "date":"Nam molestie quis sem quis scelerisque . 03 / 04", 
+        "title":"Quisque accumsan ut dui ut tincidunt. Cras nec tincidunt risus.",
+        "image":"images/news3.jpg",
+        "video":""
+    },
+
+    {
+        "date":"Nunc nibh diam, lobortis eu molestie vitae - 04 / 04", 
+        "title":"Etiam sapien velit, mollis et metus ut",
+        "image":"images/news4.jpg",
+        "video":""
+    },
+
+    {
+        "date":"Nunc nibh diam, lobortis eu molestie vitae 05 / 05", 
+        "title":"Ut ut tellus pulvinar, pulvinar augue sed",
+        "image":"video/video1.jpg",
+        "video":"video/video1.mp4"
+    }
+
+]
+}
