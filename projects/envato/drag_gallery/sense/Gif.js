@@ -47,16 +47,16 @@
    
     out = new createjs.Sprite(ss); 
     out.alpha = 0.2
-    out.x = 25*ratio
+    out.x = 26*ratio
     out.y = 60*ratio
     out.scaleX = ratio/2
     out.scaleY = ratio/2
 
     textLoading = new createjs.Text();
-    textLoading.font = "bold 10px PT Sans";
+    textLoading.font = "9px Montserrat";
     textLoading.scaleX = ratio;
     textLoading.scaleY = ratio;
-    textLoading.text = "L O A D I N G ...";
+    textLoading.text = "L O A D I N G";
     textLoading.textAlign = "center"
     textLoading.x = 50*ratio
     textLoading.y = 125*ratio

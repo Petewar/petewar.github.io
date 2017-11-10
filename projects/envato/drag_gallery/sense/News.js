@@ -118,7 +118,7 @@
     function createBoxNews(){
 
         dateField = new createjs.Text();
-        dateField.font = "bold 12px PT Sans";
+        dateField.font = "12px Montserrat";
         dateField.color = "#FFFFFF";
         dateField.text = dateNews[nav];
         dateField.scaleX = ratio;
@@ -136,7 +136,7 @@
         instance.addChild(line);
 
         titleField = new createjs.Text();
-        titleField.font = "bold 72px PT Serif";
+        titleField.font = "72px Montserrat";
         titleField.color = "#FFFFFF";
         titleField.lineHeight = 75;
         titleField.lineWidth = (stage.canvas.width/2)/ratio;
@@ -153,6 +153,7 @@
         instance.addChild(button)
 
         buttonShape = new createjs.Shape();
+        buttonShape.alpha = 0.7
         buttonShape.graphics.beginFill("#080808").drawRect(0, 0, 50*ratio,50*ratio);
         button.addChild(buttonShape);
 
@@ -162,6 +163,7 @@
         button.addChild(buttonShapeWhite);
 
         buttonShape2 = new createjs.Shape();
+        buttonShape2.alpha = 0.7
         buttonShape2.graphics.beginFill("#080808").drawRect(0, 0, 50*ratio,50*ratio);
         buttonShape2.x = 50*ratio+5*ratio;
         button.addChild(buttonShape2);
@@ -225,7 +227,7 @@
 
             var circleBlue = new createjs.Shape();
             circleBlue.name = "circleBlue"+i;
-            circleBlue.graphics.beginFill("#080808").drawCircle(0,0,5*ratio);
+            circleBlue.graphics.beginFill("#080808").drawCircle(0,0,2*ratio);
             circleBlue.x = i*(20*ratio+10*ratio);
             containerCircleNav.addChild(circleBlue);
 
